@@ -6,7 +6,12 @@ export default class Session extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Hello World</h1>
+          <section>
+              <div className="container-fluid">
+                  <h1>Hello World</h1>
+              </div>
+          </section>
+
       </div>
     )
   }

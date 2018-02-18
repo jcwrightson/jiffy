@@ -1,9 +1,37 @@
+* {
+  box-sizing: border-box;
+  user-select: none;
+  outline: none;
+  transition: all 200ms ease-in-out; }
+
 section {
   width: 100%; }
 
 .container-fluid {
   max-width: 1260px;
-  width: 100%; }
+  width: 100%;
+  margin: auto; }
+
+p {
+  user-select: text; }
+
+ul, li {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+input, button, textarea {
+  border: 1px solid #a1a1a1;
+  font-size: 16px; }
+
+input, textarea {
+  width: 100%;
+  margin: 1em 0;
+  padding: 1em; }
+
+button {
+  padding: .5em 2em;
+  text-transform: uppercase; }
 
 body {
   font-size: 100%;
