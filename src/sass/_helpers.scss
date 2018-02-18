@@ -1,0 +1,22 @@
+
+section {
+  position: relative;
+}
+
+.abs {
+  position: absolute;
+
+  &.middle {
+    top:50%;
+    left:50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &.left {
+    left:0;
+  }
+
+  &.right {
+    right:0;
+  }
+}
