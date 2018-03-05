@@ -13,6 +13,7 @@ section {
   max-width: $app-width;
   width: 100%;
   margin: auto;
+  position: relative;
 }
 
 p {
@@ -37,6 +38,14 @@ input, textarea {
 }
 
 button {
-  padding: .5em 2em;
+  padding: .8em 2em;
   text-transform: uppercase;
+  width: 180px;
+  margin-right: 1em;
+  border: none;
+  font-size: .8em;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 100ms ease;
+  background-color: #e8e8e8;
 }

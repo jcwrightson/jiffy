@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
 * {
   box-sizing: border-box;
   user-select: none;
@@ -10,7 +11,8 @@ section {
 .container-fluid {
   max-width: 1260px;
   width: 100%;
-  margin: auto; }
+  margin: auto;
+  position: relative; }
 
 p {
   user-select: text; }
@@ -30,12 +32,20 @@ input, textarea {
   padding: 1em; }
 
 button {
-  padding: .5em 2em;
-  text-transform: uppercase; }
+  padding: .8em 2em;
+  text-transform: uppercase;
+  width: 180px;
+  margin-right: 1em;
+  border: none;
+  font-size: .8em;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 100ms ease;
+  background-color: #e8e8e8; }
 
 body {
   font-size: 100%;
-  font-family: Consolas, sans-serif; }
+  font-family: 'Roboto', sans-serif; }
 
 section {
   position: relative; }
@@ -50,5 +60,15 @@ section {
     left: 0; }
   .abs.right {
     right: 0; }
+  .abs.middle.right {
+    right: 0;
+    left: unset;
+    top: 50%;
+    transform: translate(0, -50%); }
+  .abs.middle.left {
+    left: 0;
+    right: unset;
+    top: 50%;
+    transform: translate(0, -50%); }
 
 /*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,28 @@
+.project {
+  opacity: 1;
+  position: relative;
+  width: 100%; }
+  .project .duration {
+    text-align: center;
+    width: 100%;
+    padding: 1em;
+    margin: auto; }
+
+.tracker {
+  flex-wrap: nowrap;
+  padding: 1em 0;
+  position: relative;
+  width: 100%;
+  margin: 1em 0; }
+  .tracker ul li {
+    display: inline-block; }
+
+button.running {
+  background-color: #00bcd4;
+  color: white; }
+
+button.delete {
+  background-color: #ff7043;
+  color: white; }
+
+/*# sourceMappingURL=project.css.map */
