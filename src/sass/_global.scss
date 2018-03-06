@@ -2,11 +2,17 @@
   box-sizing: border-box;
   user-select: none;
   outline: none;
-  transition: all 200ms ease-in-out;
+  //transition: all 200ms ease-in-out;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
 section {
   width: 100%;
+
 }
 
 .container-fluid {
@@ -28,7 +34,7 @@ ul, li {
 
 input, button, textarea {
   border: 1px solid $border-color;
-  font-size: 16px;
+  font-size: 1em;
 }
 
 input, textarea {
@@ -40,12 +46,31 @@ input, textarea {
 button {
   padding: .8em 2em;
   text-transform: uppercase;
-  width: 180px;
-  margin-right: 1em;
+  width: 140px;
+  margin-left: 1em;
   border: none;
   font-size: .8em;
   cursor: pointer;
   border-radius: 2px;
   transition: all 100ms ease;
   background-color: #e8e8e8;
+}
+
+.circle {
+  border-radius: 50%;
+  background-color: #919191;
+  width: 2em;
+  height: 2em;
+  position: relative;
+  cursor: pointer;
+  margin-top: 2em;
+
+  i{
+    //position: ;
+    color: white;
+  }
+}
+
+hr {
+  border: .5px solid rgba(171, 171, 171, 0.29);
 }

@@ -1,28 +1,86 @@
 .project {
   opacity: 1;
   position: relative;
-  width: 100%; }
+  margin-bottom: 4em;
+  flex-basis: 49%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 3em;
+  transition: all 300ms ease-in-out; }
+  .project ul.meta li.time {
+    margin-left: 2em; }
+    .project ul.meta li.time.running,
+    .project ul.meta li.time span.running i {
+      color: #00bcd4; }
   .project .duration {
     text-align: center;
     width: 100%;
     padding: 1em;
     margin: auto; }
+  .project .top {
+    width: 100%;
+    padding-top: -2em;
+    height: 1em;
+    margin-bottom: 3em; }
+    .project .top i {
+      top: 2px; }
+
+span {
+  position: relative;
+  color: black; }
+  span.running {
+    color: #00bcd4; }
+
+i {
+  position: absolute;
+  top: -5px;
+  left: -28px; }
+
+i.inline {
+  left: -28px;
+  top: -2px;
+  font-size: 22px; }
+
+i.button {
+  top: -5px;
+  left: -28px; }
+
+.bottom {
+  padding: 2em 0 0 0;
+  position: relative; }
+  .bottom button {
+    margin-right: 1em;
+    margin-left: 0; }
+  .bottom i.crop {
+    top: 5px;
+    cursor: pointer;
+    font-size: 28px;
+    color: #86adc1; }
 
 .tracker {
   flex-wrap: nowrap;
-  padding: 1em 0;
   position: relative;
   width: 100%;
-  margin: 1em 0; }
+  height: 3.5em;
+  border-bottom: 0.5px solid rgba(171, 171, 171, 0.29); }
+  .tracker label {
+    font-weight: 100; }
+  .tracker label.running {
+    color: #00bcd4; }
   .tracker ul li {
     display: inline-block; }
 
+button.running,
 button.running {
   background-color: #00bcd4;
   color: white; }
 
 button.delete {
-  background-color: #ff7043;
+  background-color: #37474f;
   color: white; }
+
+button span {
+  color: inherit; }
 
 /*# sourceMappingURL=project.css.map */

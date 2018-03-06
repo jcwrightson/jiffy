@@ -45,21 +45,31 @@ export default class ProjectsContainer extends Component {
         const { projects } = this.props
 
         return (
-
-                <section>
+                <div>
+                <section className="header">
                     <ProjectModal visible={this.state.modal} toggleModal={this.toggleModal.bind(this)}/>
                     <div className="container-fluid">
-                        <h1>My Projects</h1>
+                        <h2>Time Tracking</h2>
 
-                        <button onClick={()=>{this.handleAdd()}}>Add +</button>
+                        <div className="abs middle right">
+                            <button className="add" onClick={()=>{this.handleAdd()}}>New</button>
+                        </div>
 
-                        <div className="projects-container">
-                            {projects.map((project, i) => {
-                                return <Project key={i} project={project} remove={this.remove}/>
-                            })}
+
+                    </div>
+                </section>
+
+                <section className="projects">
+                    <div className="container-fluid">
+                    <div className="projects-container">
+
+                        {projects.map((project, i) => {
+                            return <Project key={i} project={project} remove={this.remove}/>
+                        })}
                         </div>
                     </div>
                 </section>
+                </div>
 
 
         )

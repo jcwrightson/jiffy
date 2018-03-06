@@ -1,10 +1,33 @@
 .project {
   opacity: 1;
   position: relative;
-  width: 100%;
+  //width: 100%;
+  margin-bottom: 4em;
+
+  flex-basis: 49%;
+  display: flex;
+  flex-direction: column;
+  //margin-right: 1em;
+
+  background-color: white;
+  padding: 3em;
+
+  transition: all 300ms ease-in-out;
 
   ul li{
     //display: inline-block;
+  }
+
+  ul.meta {
+    li.time{
+      margin-left: 2em;
+
+      &.running,
+      span.running i{
+        color: #00bcd4;
+      }
+
+    }
   }
 
   
@@ -15,26 +38,104 @@
     margin: auto;
   }
 
+  .top{
+    width: 100%;
+    padding-top: -2em;
+    height: 1em;
+    margin-bottom: 3em;
+
+    i {
+      top:2px;
+    }
+
+
+
+
+
+  }
+
+}
+
+span {
+  position: relative;
+  color: black;
+
+  &.running{
+   color: #00bcd4;
+  }
+
+}
+
+i {
+  position: absolute;
+  top:-5px;
+  left: -28px;
+}
+
+i.inline{
+  left: -28px;
+  top:-2px;
+  font-size: 22px;
+}
+
+i.button{
+  top:-5px;
+  left: -28px;
+
+}
+
+
+
+.bottom{
+  padding: 2em 0 0 0;
+  position: relative;
+  button{
+    margin-right: 1em;
+    margin-left: 0;
+  }
+
+  i.crop {
+    top: 5px;
+    cursor: pointer;
+    font-size: 28px;
+    color: #86adc1;
+  }
 }
 
 .tracker{
   flex-wrap: nowrap;
-  padding: 1em 0;
+  //padding: 2em 0;
   position: relative;
   width: 100%;
-  margin: 1em 0;
+  //margin: 3em 0;
+  height: 3.5em;
+  border-bottom: .5px solid rgba(171, 171, 171, 0.29);
+
+  label {
+    font-weight: 100;
+  }
+  label.running {
+    color: #00bcd4;
+    //font-size: 1.4em;
+  }
+
 
   ul li {
     display: inline-block;
   }
 }
 
-button.running {
+button.running,
+button.running{
   background-color: #00bcd4;
   color: white;
 }
 
 button.delete{
-  background-color: #ff7043;
+  background-color: #37474f;
   color: white;
+}
+
+button span {
+  color: inherit;
 }

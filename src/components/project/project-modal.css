@@ -14,9 +14,13 @@
     opacity: 1;
     visibility: visible; }
   .modal .inner {
-    width: 500px;
+    width: 400px;
     background-color: white;
     border-radius: 3px;
     padding: 2em; }
+  .modal button {
+    width: 100%;
+    margin: 0;
+    height: 4em; }
 
 /*# sourceMappingURL=project-modal.css.map */

@@ -31,10 +31,32 @@ export default class Project extends Component {
         if(!this.props.tracker.running){
 
             store.dispatch({type: 'TOGGLE_RUNNING', payload: {project: project, tracker: tracker}})
+            let midnight = false
 
             this.ticker = setInterval(()=>{
 
-                store.dispatch({type:'UPDATE_TRACKER', payload: {project: project, tracker: tracker, time: 1000}})
+                const time = new Date(Date.now())
+
+
+                if(time.getHours() + time.getMinutes() === 0 && !midnight){
+
+                    clearInterval(this.ticker)
+                    midnight = true
+
+                    setTimeout(()=>{
+                        midnight = false
+                    }, 60000)
+
+                    store.dispatch({type: 'TOGGLE_RUNNING', payload: {project: project, tracker: tracker}})
+
+                    tracker = Date.now()
+                    store.dispatch({type:'ADD_TRACKER', payload: {project:project, created: tracker}})
+                    this.start(project, tracker)
+
+                }else {
+
+                    store.dispatch({type: 'UPDATE_TRACKER', payload: {project: project, tracker: tracker, time: 1000}})
+                }
 
 
             }, 1000)
@@ -81,12 +103,13 @@ export default class Project extends Component {
         const day = date.getDay()
         const dayOfMonth = date.getDate()
         const month = date.getMonth() + 1
+        const year = date.getFullYear()
         const minutes = "0" + date.getMinutes()
 
         const seconds = "0" + date.getSeconds()
 
         const formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-        const dateTime = `${dayOfWeekfromNum(day).short} ${dayOfMonth} ${month}`
+        const dateTime = `${dayOfWeekfromNum(day).short} ${dayOfMonth}/${month}/${year}`
         return dateTime
 
 
@@ -99,48 +122,52 @@ export default class Project extends Component {
 
         const { project, tracker, index } = this.props
 
+        const isToday = ()=>{
+            const date = new Date(tracker.created)
+            const today = new Date(Date.now())
+
+            return today.getDate() + today.getMonth() === date.getDate() + date.getMonth()
+
+        }
+
         return(
             <div className="tracker" id={tracker.created} ref={(e)=>{if(e){this.tracker = e}}}>
-                <ul className="abs middle left">
-                    <li>{this.DateTimeFilter(tracker.created)}</li>
-                    <li>{timeFilter(tracker.time)}</li>
+                <ul className="meta abs middle left">
+                    <li><label className={`${tracker.running ? 'running': ''}`}>{isToday() ? 'Today' : this.DateTimeFilter(tracker.created)}</label></li>
+                    <li className="time"><label><span className={`${tracker.running ? 'running': ''}`} ><i className={`material-icons inline`}>schedule</i>{timeFilter(tracker.time)}</span></label></li>
                 </ul>
+
+                {/*<ul className="abs middle">*/}
+                    {/*<li><label className={`${tracker.running ? 'running': ''}`}><span className={`${tracker.running ? 'running': ''}`}><i className={`material-icons inline`}>schedule</i></span>{timeFilter(tracker.time)}</label></li>*/}
+                {/*</ul>*/}
 
                 <ul className="abs middle right">
                 {!tracker.running ?
                     <li>
-                        <button onClick={() => {
+                        <button disabled={isToday()? false : true} onClick={() => {
                             this.start(project.created, tracker.created)
-                        }}>Start
+                        }}><span><i className="material-icons button">play_arrow</i>Start</span>
                         </button>
                     </li>
                     :
                     <li>
                         <button className="running" onClick={() => {
                             this.stop(project.created, tracker.created)
-                        }}>Stop
+                        }}><span><i className="material-icons button">stop</i>Stop</span>
                         </button>
                     </li>
                 }
 
-
-                {index > 0 ?
                     <li>
-                        <button title="Remove" className="delete" onClick={() => {
-                            this.handleRemove(project.created, tracker.created)
-                        }}>Delete
-                        </button>
-                    </li>
-                    :
-                    <li>
-                        <button disabled={tracker.time > 0 ? false : true} title="Clear" onClick={() => {
+                        <button disabled={tracker.time > 0 && isToday() ? false : true} title="Clear" onClick={() => {
                             this.reset(project.created, tracker.created)
-                        }}>Reset
+                        }}><span><i className="material-icons button">restore</i>Reset</span>
                         </button>
                     </li>
-                }
 
                 </ul>
+
+
 
             </div>
         )

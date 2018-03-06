@@ -1,9 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 * {
   box-sizing: border-box;
   user-select: none;
-  outline: none;
-  transition: all 200ms ease-in-out; }
+  outline: none; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9; }
 
 section {
   width: 100%; }
@@ -24,7 +29,7 @@ ul, li {
 
 input, button, textarea {
   border: 1px solid #a1a1a1;
-  font-size: 16px; }
+  font-size: 1em; }
 
 input, textarea {
   width: 100%;
@@ -34,8 +39,8 @@ input, textarea {
 button {
   padding: .8em 2em;
   text-transform: uppercase;
-  width: 180px;
-  margin-right: 1em;
+  width: 140px;
+  margin-left: 1em;
   border: none;
   font-size: .8em;
   cursor: pointer;
@@ -43,9 +48,32 @@ button {
   transition: all 100ms ease;
   background-color: #e8e8e8; }
 
+.circle {
+  border-radius: 50%;
+  background-color: #919191;
+  width: 2em;
+  height: 2em;
+  position: relative;
+  cursor: pointer;
+  margin-top: 2em; }
+  .circle i {
+    color: white; }
+
+hr {
+  border: 0.5px solid rgba(171, 171, 171, 0.29); }
+
 body {
   font-size: 100%;
   font-family: 'Roboto', sans-serif; }
+
+h1 {
+  margin: 0;
+  font-weight: 300;
+  font-size: 2em; }
+
+h2 {
+  margin: 0;
+  font-weight: 300; }
 
 section {
   position: relative; }
@@ -70,5 +98,12 @@ section {
     right: unset;
     top: 50%;
     transform: translate(0, -50%); }
+
+button.add {
+  background-color: #607d8b;
+  color: white; }
+
+.header {
+  background-color: white; }
 
 /*# sourceMappingURL=styles.css.map */

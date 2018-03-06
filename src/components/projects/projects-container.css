@@ -1,7 +1,15 @@
 .projects-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between; }
+
+.header {
+  padding: 1.6em;
+  position: fixed;
+  z-index: 10; }
+
+.projects {
+  padding-top: 8em; }
 
 /*# sourceMappingURL=projects-container.css.map */

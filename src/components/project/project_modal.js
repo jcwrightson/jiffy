@@ -19,12 +19,12 @@ export default class ProjectModal extends Component {
         })
     }
 
-    handleCreate(){
+    handleCreate(e){
 
         if(this.state.title) {
             store.dispatch({type: 'NEW_PROJECT', payload: this.state})
 
-            this.props.toggleModal()
+            this.props.toggleModal(e)
 
 
             this.setState({
@@ -35,16 +35,26 @@ export default class ProjectModal extends Component {
 
     handleKeyPress(e){
         if(e.which === 13 && this.state.title){
-            this.handleCreate()
+            this.handleCreate(e)
         }
+    }
+
+    handleClick(e){
+        e.preventDefault()
+
+        if(e.target.classList.contains('modal')){
+            this.props.toggleModal()
+        }
+
     }
 
 
 
     render(){
         return(
-            <div className={`modal ${this.props.visible ? 'js-active' : ''}`}>
+            <div className={`modal ${this.props.visible ? 'js-active' : ''}`} onClick={this.handleClick.bind(this)}>
                 <div className="inner abs middle">
+                    <h2>New Project</h2>
                     <input type="text" value={this.state.title} onChange={this.handleChange.bind(this)} onFocus={(e)=>{if (e){e.target.select()}}} onKeyDown={this.handleKeyPress.bind(this)}/>
                     <button onClick={this.handleCreate.bind(this)}>Create</button>
                 </div>

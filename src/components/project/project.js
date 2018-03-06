@@ -21,7 +21,6 @@ export default class Project extends Component {
 
         this.start = this.start.bind(this)
         this.stop = this.stop.bind(this)
-        // this.addTracker = this.addTracker.bind(this)
 
     }
 
@@ -57,47 +56,46 @@ export default class Project extends Component {
         if(this.ticker) {
             this.stop(created)
         }
-        //
-        // setTimeout(()=>{
-        //     this.setState({style: {opacity: 0, visibility: 'hidden'}})
-        // }, 100)
-
-        // this.setState({style: {opacity: 0, visibility: 'hidden'}})
-
-        // this.project.style['opacity'] = 0
-        // console.log(this.project)
-
-        // setTimeout(()=>{
-        //     store.dispatch({type:'REMOVE_PROJECT', payload: created})
-        // }, 500)
 
         store.dispatch({type:'REMOVE_PROJECT', payload: created})
-        // let mountNode = ReactDOM.findDOMNode(this.project);
-        // let unmount = ReactDOM.unmountComponentAtNode(mountNode);
-
-        // this.props.remove(created)
-
-        // this.setState({time: 0})
-
 
     }
-
-    componentWillUnmount(){
-        console.log('Unmounting...')
-    }
-
 
     addTracker(project){
         store.dispatch({type:'ADD_TRACKER', payload:{project:project}})
     }
 
-    componentDidMount(){
-        setTimeout(()=>{
-            this.setState({style: {opacity: 1}})
-        }, 10)
+    toggleFullWidth(project){
+        store.dispatch({type: 'TOGGLE_FULL_WIDTH', payload: project})
+
+        // this.setState({
+        //     style: {
+        //         opacity: 1,
+        //         flexBasis: this.props.project.fullWidth ? '100%' : '49%'
+        //     }})
+
     }
 
+    componentDidMount(){
 
+
+        const isToday = (tracker)=>{
+            const date = new Date(tracker.created)
+            const today = new Date(Date.now())
+
+            return today.getDate() + today.getMonth() === date.getDate() + date.getMonth()
+
+        }
+
+
+        if (this.props.project.trackers.filter(tracker => {
+                return isToday(tracker)
+            }).length === 0){
+            store.dispatch({type: 'ADD_TRACKER', payload: {project: this.props.project.created}})
+        }
+
+
+    }
 
     render(){
 
@@ -107,21 +105,44 @@ export default class Project extends Component {
             return total + tracker.time
         }, 0)
 
-        return(
-            <div className="project" style={this.state.style} id={project.created} ref={(e)=>{if(e){this.project = e}}}>
-                <ul className="meta">
-                    <li><h1>{project.title}</h1></li>
-                    <li><h2>{timeFilter(totalTime)}</h2></li>
-                    <li><button tooltip="Remove" onClick={()=>{this.handleRemove(project.created)}}>Delete</button></li>
-                </ul>
+        const trackerRunning = ()=>{
+           if (project.trackers.filter(tracker=>{
+                return tracker.running === true
+            }).length > 0){
+               return true
+            }
+        }
 
+        const fullWidth = ()=>{
+            if (project.fullWidth) {
+                return {
+                    flexBasis: '100%'
+                }
+            }
+        }
+
+        return(
+            <div className="project" style={fullWidth()} id={project.created} ref={(e)=>{if(e){this.project = e}}}>
+                <div className="top" style={{position:'relative'}}>
+                    <h1 className="abs middle left">{project.title}</h1>
+                    <h2 className="abs middle right"><span className={`${trackerRunning() ? 'running' : ''}`}><i className={`material-icons schedule `}>schedule</i>{timeFilter(totalTime)}</span></h2>
+                </div>
+
+
+
+                <hr/>
 
                 {project.trackers.map((tracker, i)=>{
                     return <Tracker key={i} index={i} project={project} tracker={tracker}/>
                 })}
 
-
-                <button onClick={()=>{this.addTracker(project.created)}}>Add Tracker</button>
+                <div className="bottom">
+                    {/*<button onClick={()=>{this.addTracker(project.created)}}><span><i className="material-icons button">add</i>Tracker</span></button>*/}
+                    <button onClick={()=>{this.handleRemove(project.created)}}><span><i className="material-icons button">delete</i>Project</span></button>
+                    <span className="abs middle right" onClick={()=>{this.toggleFullWidth(project)}}><i className="material-icons crop">{project.fullWidth ? 'crop_3_2' : 'crop_7_5'}</i></span>
+                </div>
+                    {/*<hr/>*/}
+                {/*<div className="circle" onClick={()=>{this.addTracker(project.created)}}><i className="material-icons abs middle">add</i></div>*/}
 
 
 
