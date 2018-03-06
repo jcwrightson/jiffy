@@ -34,7 +34,7 @@ input, button, textarea {
 input, textarea {
   width: 100%;
   margin: 1em 0;
-  padding: 1em; }
+  padding: .8em; }
 
 button {
   padding: .8em 2em;

@@ -17,10 +17,14 @@
     width: 400px;
     background-color: white;
     border-radius: 3px;
-    padding: 2em; }
+    padding: 3em 2em; }
+    .modal .inner h2 {
+      font-size: 1.3em; }
   .modal button {
     width: 100%;
     margin: 0;
-    height: 4em; }
+    height: 4em;
+    color: white;
+    background-color: #2f7ebb; }
 
 /*# sourceMappingURL=project-modal.css.map */

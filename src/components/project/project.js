@@ -57,8 +57,22 @@ export default class Project extends Component {
             this.stop(created)
         }
 
-        store.dispatch({type:'REMOVE_PROJECT', payload: created})
+        if(this.project.id == created) {
+            this.project.style['opacity'] = 0
+        }
 
+        setTimeout(()=>{
+            this.deleteProject(created)
+        }, 400)
+
+        console.log(this.project.id, created)
+
+
+
+    }
+
+    deleteProject(created){
+        store.dispatch({type:'REMOVE_PROJECT', payload: created})
     }
 
     addTracker(project){
@@ -95,9 +109,16 @@ export default class Project extends Component {
         }
 
 
+
+
+
     }
 
     render(){
+
+        setTimeout(()=>{
+            this.project.style['opacity'] = 1
+        }, 200)
 
         const { project } = this.props
 
@@ -113,16 +134,23 @@ export default class Project extends Component {
             }
         }
 
-        const fullWidth = ()=>{
+        const doStyle = ()=>{
+            let style = {
+                // opacity: 1,
+            }
             if (project.fullWidth) {
                 return {
+                    ...style,
                     flexBasis: '100%'
                 }
+            }else {
+                return style
             }
+
         }
 
         return(
-            <div className="project" style={fullWidth()} id={project.created} ref={(e)=>{if(e){this.project = e}}}>
+            <div className="project" style={doStyle()} id={project.created} ref={(e)=>{if(e){this.project = e}}}>
                 <div className="top" style={{position:'relative'}}>
                     <h1 className="abs middle left">{project.title}</h1>
                     <h2 className="abs middle right"><span className={`${trackerRunning() ? 'running' : ''}`}><i className={`material-icons schedule `}>schedule</i>{timeFilter(totalTime)}</span></h2>
@@ -138,8 +166,8 @@ export default class Project extends Component {
 
                 <div className="bottom">
                     {/*<button onClick={()=>{this.addTracker(project.created)}}><span><i className="material-icons button">add</i>Tracker</span></button>*/}
-                    <button onClick={()=>{this.handleRemove(project.created)}}><span><i className="material-icons button">delete</i>Project</span></button>
-                    <span className="abs middle right" onClick={()=>{this.toggleFullWidth(project)}}><i className="material-icons crop">{project.fullWidth ? 'crop_3_2' : 'crop_7_5'}</i></span>
+                    <span onClick={()=>{this.handleRemove(project.created)}} title="Delete Project"><i className="material-icons delete">delete</i></span>
+                    <span className="abs middle right" title={project.fullWidth ? 'Minimise' : 'Maximise'} onClick={()=>{this.toggleFullWidth(project)}}><i className="material-icons crop">{project.fullWidth ? 'crop_3_2' : 'crop_7_5'}</i></span>
                 </div>
                     {/*<hr/>*/}
                 {/*<div className="circle" onClick={()=>{this.addTracker(project.created)}}><i className="material-icons abs middle">add</i></div>*/}

@@ -18,13 +18,20 @@
     width: 400px;
     background-color: white;
     border-radius: 3px;
-    padding: 2em;
+    padding: 3em 2em;
+
+
+    h2 {
+      font-size: 1.3em;
+    }
   }
 
   button {
     width: 100%;
     margin: 0;
     height: 4em;
+    color: white;
+    background-color: #2f7ebb;
   }
 
 }

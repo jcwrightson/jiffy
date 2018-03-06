@@ -1,8 +1,8 @@
 .project {
-  opacity: 1;
+  opacity: 0;
   position: relative;
   //width: 100%;
-  margin-bottom: 4em;
+  margin-bottom: 1.5em;
 
   flex-basis: 49%;
   display: flex;
@@ -12,7 +12,7 @@
   background-color: white;
   padding: 3em;
 
-  transition: all 300ms ease-in-out;
+  transition: opacity 300ms ease-in-out, flex 10ms ease-in-out;
 
   ul li{
     //display: inline-block;
@@ -96,9 +96,24 @@ i.button{
 
   i.crop {
     top: 5px;
+    //font-size: 24px;
+    left: -21px
+
+
+  }
+
+  i.crop,
+  i.delete{
+    color: #d9d9d9;
     cursor: pointer;
-    font-size: 28px;
-    color: #86adc1;
+    transition: all 200ms ease;
+    &:hover{
+      color: black;
+    }
+  }
+
+  i.delete{
+    left: 0;
   }
 }
 

@@ -66,6 +66,7 @@ export default class Project extends Component {
 
     stop(project, tracker){
         clearInterval(this.ticker)
+        this.ticker = null
 
         store.dispatch({type: 'TOGGLE_RUNNING', payload: {project: project, tracker: tracker}})
 
@@ -142,24 +143,24 @@ export default class Project extends Component {
                 {/*</ul>*/}
 
                 <ul className="abs middle right">
-                {!tracker.running ?
+                {!this.ticker ?
                     <li>
-                        <button disabled={isToday()? false : true} onClick={() => {
+                        <button title="Start Tracking" disabled={isToday()? false : true} onClick={() => {
                             this.start(project.created, tracker.created)
-                        }}><span><i className="material-icons button">play_arrow</i>Start</span>
+                        }}><span ><i className="material-icons button">play_arrow</i>Start</span>
                         </button>
                     </li>
                     :
                     <li>
-                        <button className="running" onClick={() => {
+                        <button title="Stop Tracking" className="running" onClick={() => {
                             this.stop(project.created, tracker.created)
-                        }}><span><i className="material-icons button">stop</i>Stop</span>
+                        }}><span ><i className="material-icons button">stop</i>Stop</span>
                         </button>
                     </li>
                 }
 
                     <li>
-                        <button disabled={tracker.time > 0 && isToday() ? false : true} title="Clear" onClick={() => {
+                        <button disabled={tracker.time > 0 && isToday() ? false : true} title="Reset" onClick={() => {
                             this.reset(project.created, tracker.created)
                         }}><span><i className="material-icons button">restore</i>Reset</span>
                         </button>
