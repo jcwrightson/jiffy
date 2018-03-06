@@ -23,29 +23,34 @@ export default class Project extends Component {
         this.start = this.start.bind(this)
         this.stop = this.stop.bind(this)
         this.reset = this.reset.bind(this)
+        this.midnight = false
 
     }
 
     start(project, tracker){
 
+
+
         if(!this.props.tracker.running){
 
             store.dispatch({type: 'TOGGLE_RUNNING', payload: {project: project, tracker: tracker}})
-            let midnight = false
+
 
             this.ticker = setInterval(()=>{
 
                 const time = new Date(Date.now())
 
 
-                if(time.getHours() + time.getMinutes() === 0 && !midnight){
+                if((time.getHours() + time.getMinutes()) === 0 && !this.midnight){
 
                     clearInterval(this.ticker)
-                    midnight = true
+                    this.midnight = true
 
                     setTimeout(()=>{
-                        midnight = false
+                        this.midnight = false
                     }, 60000)
+
+
 
                     store.dispatch({type: 'TOGGLE_RUNNING', payload: {project: project, tracker: tracker}})
 
@@ -165,6 +170,14 @@ export default class Project extends Component {
                         }}><span><i className="material-icons button">restore</i>Reset</span>
                         </button>
                     </li>
+
+
+                    {/*<li>*/}
+                        {/*<button title="Reset" onClick={() => {*/}
+                            {/*this.handleRemove(project.created, tracker.created)*/}
+                        {/*}}><span><i className="material-icons button">delete</i>Delete</span>*/}
+                        {/*</button>*/}
+                    {/*</li>*/}
 
                 </ul>
 
