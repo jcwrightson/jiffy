@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 
-import {dayOfWeekfromNum, timeFilter} from "../../functions";
+import {dayOfWeekfromNum, timeFilter, isToday} from "../../functions";
 
 
 import store from '../../store'
@@ -128,18 +128,18 @@ export default class Project extends Component {
 
         const { project, tracker, index } = this.props
 
-        const isToday = ()=>{
-            const date = new Date(tracker.created)
-            const today = new Date(Date.now())
-
-            return today.getDate() + today.getMonth() === date.getDate() + date.getMonth()
-
-        }
+        // const isToday = ()=>{
+        //     const date = new Date(tracker.created)
+        //     const today = new Date(Date.now())
+        //
+        //     return today.getDate() + today.getMonth() === date.getDate() + date.getMonth()
+        //
+        // }
 
         return(
             <div className="tracker" id={tracker.created} ref={(e)=>{if(e){this.tracker = e}}}>
                 <ul className="meta abs middle left">
-                    <li><label className={`${tracker.running ? 'running': ''}`}>{isToday() ? 'Today' : this.DateTimeFilter(tracker.created)}</label></li>
+                    <li><label className={`${tracker.running ? 'running': ''}`}>{isToday(tracker) ? 'Today' : this.DateTimeFilter(tracker.created)}</label></li>
                     <li className="time"><label><span className={`${tracker.running ? 'running': ''}`} ><i className={`material-icons inline`}>schedule</i>{timeFilter(tracker.time)}</span></label></li>
                 </ul>
 
@@ -148,9 +148,9 @@ export default class Project extends Component {
                 {/*</ul>*/}
 
                 <ul className="abs middle right">
-                {!this.ticker ?
+                {!this.ticker && isToday(tracker) ?
                     <li>
-                        <button title="Start Tracking" disabled={isToday()? false : true} onClick={() => {
+                        <button title="Start Tracking" onClick={() => {
                             this.start(project.created, tracker.created)
                         }}><span ><i className="material-icons button">play_arrow</i>Start</span>
                         </button>
@@ -165,7 +165,7 @@ export default class Project extends Component {
                 }
 
                     <li>
-                        <button disabled={tracker.time > 0 && isToday() ? false : true} title="Reset" onClick={() => {
+                        <button disabled={tracker.time > 0} title="Reset" onClick={() => {
                             this.reset(project.created, tracker.created)
                         }}><span><i className="material-icons button">restore</i>Reset</span>
                         </button>

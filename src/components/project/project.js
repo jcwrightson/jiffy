@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Tracker from './tracker'
 
-import {timeFilter} from '../../functions'
+import {timeFilter, getHiddenProp} from '../../functions'
 
 import store from '../../store'
 
@@ -110,7 +110,25 @@ export default class Project extends Component {
 
 
 
+        const isHidden = ()=>{
+            const prop = getHiddenProp();
+            if (!prop) return false;
+            return document[prop];
+        }
 
+        let visProp = getHiddenProp();
+        if (visProp) {
+            const evtname = visProp.replace(/[H|h]idden/,'') + 'visibilitychange';
+            document.addEventListener(evtname, ()=>{
+                if (!isHidden()) {
+                    if (this.props.project.trackers.filter(tracker => {
+                            return isToday(tracker)
+                        }).length === 0){
+                        store.dispatch({type: 'ADD_TRACKER', payload: {project: this.props.project.created}})
+                    }
+                }
+            });
+        }
 
     }
 
