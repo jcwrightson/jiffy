@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import './sass/styles.css'
 
 import store from './store'
+import {getHiddenProp, isToday} from "./functions";
+import {projects} from "./components/projects/projects.reducer";
 
 
 @connect((store)=>{
@@ -32,6 +34,31 @@ export default class Session extends Component {
 
         if(projects){
             store.dispatch({type:'BOOTSTRAP', payload:projects})
+        }
+
+        const isHidden = ()=>{
+            const prop = getHiddenProp();
+            if (!prop) return false;
+            return document[prop];
+        }
+
+        let visProp = getHiddenProp();
+        if (visProp) {
+            const evtname = visProp.replace(/[H|h]idden/,'') + 'visibilitychange';
+            document.addEventListener(evtname, ()=>{
+                if (!isHidden()) {
+                    this.props.projects.map(project =>{
+                        if (project.trackers.filter(tracker => {
+                                return isToday(tracker)
+                            }).length === 0){
+                            store.dispatch({type: 'ADD_TRACKER', payload: {project: project.created}})
+                        }
+                    })
+
+                }else {
+                    localStorage.setItem('tracker', JSON.stringify(this.props.projects))
+                }
+            });
         }
     }
 

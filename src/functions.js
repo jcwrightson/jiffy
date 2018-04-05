@@ -2,9 +2,9 @@ export function timeFilter(stamp){
 
     const date = new Date(stamp);
 
+    const days = date.getDate() - 1
 
-
-    const hours = date.getHours() - 1;
+    const hours = (days * 24) + date.getHours() -1;
 
 
     const minutes = "0" + date.getMinutes();
@@ -12,10 +12,8 @@ export function timeFilter(stamp){
     const seconds = "0" + date.getSeconds();
 
 
-    const formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 
-
-    return formattedTime
 
 }
 

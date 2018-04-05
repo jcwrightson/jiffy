@@ -128,61 +128,13 @@ export default class Project extends Component {
 
         const { project, tracker, index } = this.props
 
-        // const isToday = ()=>{
-        //     const date = new Date(tracker.created)
-        //     const today = new Date(Date.now())
-        //
-        //     return today.getDate() + today.getMonth() === date.getDate() + date.getMonth()
-        //
-        // }
 
         return(
             <div className="tracker" id={tracker.created} ref={(e)=>{if(e){this.tracker = e}}}>
-                <ul className="meta abs middle left">
-                    <li><label className={`${tracker.running ? 'running': ''}`}>{isToday(tracker) ? 'Today' : this.DateTimeFilter(tracker.created)}</label></li>
-                    <li className="time"><label><span className={`${tracker.running ? 'running': ''}`} ><i className={`material-icons inline`}>schedule</i>{timeFilter(tracker.time)}</span></label></li>
+                <ul className="meta">
+                    <li><label className={`${tracker.running && isToday(tracker) ? 'running': ''}`}>{isToday(tracker) ? 'Today' : this.DateTimeFilter(tracker.created)}</label></li>
+                    <li className="time"><label><span className={`${tracker.running && isToday(tracker) ? 'running': ''}`} >{timeFilter(tracker.time)}</span></label></li>
                 </ul>
-
-                {/*<ul className="abs middle">*/}
-                    {/*<li><label className={`${tracker.running ? 'running': ''}`}><span className={`${tracker.running ? 'running': ''}`}><i className={`material-icons inline`}>schedule</i></span>{timeFilter(tracker.time)}</label></li>*/}
-                {/*</ul>*/}
-
-                <ul className="abs middle right">
-                {!this.ticker && isToday(tracker) ?
-                    <li>
-                        <button title="Start Tracking" onClick={() => {
-                            this.start(project.created, tracker.created)
-                        }}><span ><i className="material-icons button">play_arrow</i>Start</span>
-                        </button>
-                    </li>
-                    :
-                    <li>
-                        <button title="Stop Tracking" className="running" onClick={() => {
-                            this.stop(project.created, tracker.created)
-                        }}><span ><i className="material-icons button">stop</i>Stop</span>
-                        </button>
-                    </li>
-                }
-
-                    <li>
-                        <button disabled={tracker.time > 0} title="Reset" onClick={() => {
-                            this.reset(project.created, tracker.created)
-                        }}><span><i className="material-icons button">restore</i>Reset</span>
-                        </button>
-                    </li>
-
-
-                    {/*<li>*/}
-                        {/*<button title="Reset" onClick={() => {*/}
-                            {/*this.handleRemove(project.created, tracker.created)*/}
-                        {/*}}><span><i className="material-icons button">delete</i>Delete</span>*/}
-                        {/*</button>*/}
-                    {/*</li>*/}
-
-                </ul>
-
-
-
             </div>
         )
     }

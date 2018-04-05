@@ -8,11 +8,17 @@
   background-color: white;
   padding: 3em;
   transition: opacity 300ms ease-in-out, flex 10ms ease-in-out; }
+  .project.running h1 {
+    color: #00bcd4; }
   .project ul.meta li.time {
     margin-left: 2em; }
     .project ul.meta li.time.running,
     .project ul.meta li.time span.running i {
       color: #00bcd4; }
+  .project ul.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; }
   .project .duration {
     text-align: center;
     width: 100%;
@@ -66,18 +72,24 @@ i.button {
   .bottom i.delete {
     left: 0; }
 
+.trackers {
+  display: flex;
+  flex-direction: column; }
+
 .tracker {
   flex-wrap: nowrap;
   position: relative;
   width: 100%;
-  height: 3.5em;
+  padding: 1em 0;
   border-bottom: 0.5px solid rgba(171, 171, 171, 0.29); }
   .tracker label {
     font-weight: 100; }
   .tracker label.running {
     color: #00bcd4; }
-  .tracker ul li {
-    display: inline-block; }
+  .tracker ul.meta {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; }
 
 button.running,
 button.running {

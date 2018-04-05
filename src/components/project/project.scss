@@ -14,11 +14,16 @@
 
   transition: opacity 300ms ease-in-out, flex 10ms ease-in-out;
 
-  ul li{
-    //display: inline-block;
+  &.running {
+
+    h1 {
+      color: #00bcd4;
+    }
   }
 
+
   ul.meta {
+
     li.time{
       margin-left: 2em;
 
@@ -28,6 +33,12 @@
       }
 
     }
+  }
+
+  ul.controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   
@@ -117,13 +128,19 @@ i.button{
   }
 }
 
+.trackers{
+  display: flex;
+  flex-direction: column;
+}
+
 .tracker{
   flex-wrap: nowrap;
   //padding: 2em 0;
   position: relative;
   width: 100%;
   //margin: 3em 0;
-  height: 3.5em;
+  //height: 3.5em;
+  padding: 1em 0;
   border-bottom: .5px solid rgba(171, 171, 171, 0.29);
 
   label {
@@ -136,7 +153,14 @@ i.button{
 
 
   ul li {
-    display: inline-block;
+    //display: inline-block;
+  }
+
+  ul.meta{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
   }
 }
 
