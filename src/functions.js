@@ -1,3 +1,5 @@
+import  moment  from 'moment'
+
 export function timeFilter(stamp){
 
     const date = new Date(stamp);
@@ -34,10 +36,8 @@ export function getHiddenProp(){
 }
 
 export function isToday(tracker){
-    const date = new Date(tracker.created)
-    const today = new Date(Date.now())
 
-    return (today.getDate() + today.getMonth() + today.getFullYear()) === (date.getDate() + date.getMonth() + date.getFullYear())
+    return moment().format('YYMMDD') === moment(tracker.created).format('YYMMDD')
 
 }
 export function dayOfWeekfromNum(day) {
