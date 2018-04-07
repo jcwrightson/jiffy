@@ -37,7 +37,7 @@ export function isToday(tracker){
     const date = new Date(tracker.created)
     const today = new Date(Date.now())
 
-    return today.getDate() + today.getMonth() === date.getDate() + date.getMonth()
+    return (today.getDate() + today.getMonth() + today.getFullYear()) === (date.getDate() + date.getMonth() + date.getFullYear())
 
 }
 export function dayOfWeekfromNum(day) {
