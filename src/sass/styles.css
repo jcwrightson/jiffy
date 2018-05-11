@@ -29,7 +29,9 @@ ul, li {
 
 input, button, textarea {
   border: 1px solid #a1a1a1;
-  font-size: 1em; }
+  font-size: 1em;
+  margin: 0;
+  position: relative; }
 
 input, textarea {
   width: 100%;
@@ -60,6 +62,19 @@ button {
 
 hr {
   border: 0.5px solid rgba(171, 171, 171, 0.29); }
+
+.popup {
+  display: none;
+  width: 150px;
+  border: solid 1px #a1a1a1;
+  z-index: 10; }
+  .popup.js-active {
+    display: block; }
+
+.drop-shadow {
+  -webkit-box-shadow: 0px 5px 11px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 5px 11px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 5px 11px -8px rgba(0, 0, 0, 0.75); }
 
 body {
   font-size: 100%;

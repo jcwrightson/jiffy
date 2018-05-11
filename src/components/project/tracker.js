@@ -25,6 +25,8 @@ export default class Project extends Component {
         // this.reset = this.reset.bind(this)
         this.midnight = false
 
+        this.handleRemove = this.handleRemove.bind(this)
+
     }
 
     // start(project, tracker){
@@ -89,17 +91,15 @@ export default class Project extends Component {
     //     console.log('ended')
     // }
     //
-    // handleRemove(project, tracker){
-    //
-    //     if(this.ticker) {
-    //         this.stop(tracker)
-    //     }
-    //
-    //     store.dispatch({type:'REMOVE_TRACKER', payload: {project: project, tracker:tracker}})
-    //
-    //
+    handleRemove(project, tracker){
 
-    // }
+        if(this.ticker) {
+            this.stop(tracker)
+        }
+
+        store.dispatch({type:'REMOVE_TRACKER', payload: {project: project, tracker:tracker}})
+
+    }
 
 
     DateTimeFilter(stamp){
@@ -131,7 +131,7 @@ export default class Project extends Component {
 
         return(
             <div className="tracker" id={tracker.created} ref={(e)=>{if(e){this.tracker = e}}}>
-                <ul className="meta">
+                <ul className="flex row justify-between align-center">
                     <li><label className={`${tracker.running && isToday(tracker) ? 'running': ''}`}>{isToday(tracker) ? 'Today' : this.DateTimeFilter(tracker.created)}</label></li>
                     <li className="time"><label><span className={`${tracker.running && isToday(tracker) ? 'running': ''}`} >{timeFilter(tracker.time)}</span></label></li>
                     {/*<li onClick={()=>{this.handleRemove(project, tracker)}}>x</li>*/}

@@ -1,106 +1,27 @@
 .project {
-  opacity: 0;
-  position: relative;
-  margin-bottom: 1.5em;
-  flex-basis: 49%;
-  display: flex;
-  flex-direction: column;
+  flex-basis: 100%;
   background-color: white;
-  padding: 3em;
-  transition: opacity 300ms ease-in-out, flex 10ms ease-in-out; }
-  .project.running h1 {
-    color: #00bcd4; }
-  .project ul.meta li.time {
-    margin-left: 2em; }
-    .project ul.meta li.time.running,
-    .project ul.meta li.time span.running i {
-      color: #00bcd4; }
-  .project ul.controls {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; }
-  .project .duration {
-    text-align: center;
-    width: 100%;
-    padding: 1em;
-    margin: auto; }
+  padding: 2em;
+  position: relative;
+  margin-bottom: 2em; }
   .project .top {
-    width: 100%;
-    padding-top: -2em;
-    height: 1em;
-    margin-bottom: 3em; }
-    .project .top i {
-      top: 2px; }
-
-span {
-  position: relative;
-  color: black; }
-  span.running {
-    color: #00bcd4; }
-
-i {
-  position: absolute;
-  top: -5px;
-  left: -28px; }
-
-i.inline {
-  left: -28px;
-  top: -2px;
-  font-size: 22px; }
-
-i.button {
-  top: -5px;
-  left: -28px; }
-
-.bottom {
-  padding: 2em 0 0 0;
-  position: relative; }
-  .bottom button {
-    margin-right: 1em;
-    margin-left: 0; }
-  .bottom i.crop {
-    top: 5px;
-    left: -21px; }
-  .bottom i.crop,
-  .bottom i.delete {
-    color: #d9d9d9;
-    cursor: pointer;
-    transition: all 200ms ease; }
-    .bottom i.crop:hover,
-    .bottom i.delete:hover {
-      color: black; }
-  .bottom i.delete {
-    left: 0; }
-
-.trackers {
-  display: flex;
-  flex-direction: column; }
-
-.tracker {
-  flex-wrap: nowrap;
-  position: relative;
-  width: 100%;
-  padding: 1em 0;
-  border-bottom: 0.5px solid rgba(171, 171, 171, 0.29); }
-  .tracker label {
-    font-weight: 100; }
-  .tracker label.running {
-    color: #00bcd4; }
-  .tracker ul.meta {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; }
-
-button.running,
-button.running {
-  background-color: #00bcd4;
-  color: white; }
-
-button.delete {
-  background-color: #37474f;
-  color: white; }
-
-button span {
-  color: inherit; }
+    margin-bottom: 2em; }
+  .project .dots {
+    cursor: pointer; }
+  .project .popup {
+    position: absolute;
+    padding: 1em;
+    background-color: white;
+    right: 1em; }
+    .project .popup li {
+      padding: .5em 0;
+      cursor: pointer; }
+      .project .popup li:hover {
+        color: #00bcd4; }
+  .project .tracker {
+    padding: .5em 0;
+    border-bottom: 1px solid #eeeeee; }
+  .project .bottom {
+    margin-top: 2em; }
 
 /*# sourceMappingURL=project.css.map */

@@ -35,6 +35,8 @@ ul, li {
 input, button, textarea {
   border: 1px solid $border-color;
   font-size: 1em;
+  margin: 0;
+  position: relative;
 }
 
 input, textarea {
@@ -73,4 +75,23 @@ button {
 
 hr {
   border: .5px solid rgba(171, 171, 171, 0.29);
+}
+
+
+.popup {
+ display: none;
+  width: 150px;
+  border: solid 1px $border-color;
+
+  z-index: 10;
+
+  &.js-active{
+    display: block;
+  }
+}
+
+.drop-shadow{
+  -webkit-box-shadow: 0px 5px 11px -8px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 5px 11px -8px rgba(0,0,0,0.75);
+  box-shadow: 0px 5px 11px -8px rgba(0,0,0,0.75);
 }

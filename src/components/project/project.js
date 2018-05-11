@@ -156,6 +156,16 @@ export default class Project extends Component {
 
     }
 
+    togglePopup(){
+
+
+        if(this.refs.projectMenu.classList.contains('js-active')){
+            this.refs.projectMenu.classList.remove('js-active')
+        }else{
+            this.refs.projectMenu.classList.add('js-active')
+        }
+    }
+
     componentDidMount(){
 
 
@@ -248,15 +258,13 @@ export default class Project extends Component {
 
         return(
             <div className={`project ${trackerRunning() ? 'running' : ''}`} style={doStyle()} id={project.created} ref={(e)=>{if(e){this.project = e}}}>
-                <div className="top" style={{position:'relative'}}>
-                    <h1 className="abs middle left">{project.title}</h1>
-                    <h2 className="abs middle right"><span className={`${trackerRunning() ? 'running' : ''}`}><i className={`material-icons schedule `}>schedule</i>{trackerRunning() ? timeFilter(totalTime) : roundedTime() }</span></h2>
-                </div>
 
+                <ul className="top flex row justify-between align-center">
+                    <li><h1>{project.title}</h1></li>
+                    <li><i className={`material-icons schedule `}>schedule</i>{trackerRunning() ? timeFilter(totalTime) : roundedTime() }</li>
+                </ul>
 
-
-                <hr/>
-                <div className="trackers">
+                <div className="flex column">
                 {project.trackers.map((tracker, i)=>{
                     if(!this.state.minimised) {
                         return <Tracker key={i} index={i} project={project} tracker={tracker}/>
@@ -271,38 +279,48 @@ export default class Project extends Component {
                 {project.trackers.length > 5 &&
                 <button onClick={this.toggleMinimised.bind(this)}>min</button>}
 
-                <div className="bottom">
+                <div className="">
                     {/*<button onClick={()=>{this.addTracker(project.created)}}><span><i className="material-icons button">add</i>Tracker</span></button>*/}
-                    {/*<span onClick={()=>{this.handleRemove(project.created)}} title="Delete Project"><i className="material-icons delete">delete</i></span>*/}
+
                     {/*<span className="abs middle right" title={project.fullWidth ? 'Minimise' : 'Maximise'} onClick={()=>{this.toggleFullWidth(project)}}><i className="material-icons crop">{project.fullWidth ? 'crop_3_2' : 'crop_7_5'}</i></span>*/}
+
+
+
                 </div>
+
+
+                {/*<ul className="menu">*/}
+                    {/*<li> <span onClick={()=>{this.handleRemove(project.created)}} title="Delete Project"><i className="material-icons delete">delete</i></span></li>*/}
+                {/*</ul>*/}
+
+
                     {/*<hr/>*/}
                 {/*<div className="circle" onClick={()=>{this.addTracker(project.created)}}><i className="material-icons abs middle">add</i></div>*/}
 
 
-                <ul className="controls">
+                <ul className="bottom flex row justify-between align-center">
                     {!this.ticker ?
                         <li>
                             <button title="Start Tracking" onClick={() => {
                                 this.start(project.created, project.trackers[project.trackers.length - 1].created)
-                            }}><span><i className="material-icons button">play_arrow</i>Start</span>
+                            }}><i className="material-icons abs middle left">play_arrow</i>Start
                             </button>
                         </li>
                         :
                         <li>
                             <button title="Stop Tracking" className="running" onClick={() => {
                                 this.stop(project.created, project.trackers[project.trackers.length - 1].created)
-                            }}><span><i className="material-icons button">stop</i>Stop</span>
+                            }}><i className="material-icons abs middle left">stop</i>Stop
                             </button>
                         </li>
                     }
 
-                    <li>
-                        <button disabled={project.trackers[project.trackers.length - 1].time > 0} title="Reset" onClick={() => {
-                            this.reset(project.created, project.trackers[project.trackers.length - 1].created)
-                        }}><span><i className="material-icons button">restore</i>Reset</span>
-                        </button>
-                    </li>
+                    {/*<li>*/}
+                        {/*<button disabled={project.trackers[project.trackers.length - 1].time > 0} title="Reset" onClick={() => {*/}
+                            {/*this.reset(project.created, project.trackers[project.trackers.length - 1].created)*/}
+                        {/*}}><span><i className="material-icons button">restore</i>Reset</span>*/}
+                        {/*</button>*/}
+                    {/*</li>*/}
 
 
                     {/*<li>*/}
@@ -312,6 +330,18 @@ export default class Project extends Component {
                     {/*</button>*/}
                     {/*</li>*/}
 
+                    <li onClick={this.togglePopup.bind(this)}><i className="material-icons dots">more_horiz</i></li>
+
+
+
+                </ul>
+
+
+                <ul className="popup drop-shadow flex column" onMouseLeave={this.togglePopup.bind(this)} ref="projectMenu">
+                    <li onClick={()=>{this.handleRemove(project.created)}}>Delete Project</li>
+                    <li>Export</li>
+                    <li><hr/></li>
+                    <li onClick={()=>{this.addTracker(project.created)}}>Add Tracker</li>
                 </ul>
 
 

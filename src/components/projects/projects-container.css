@@ -3,7 +3,8 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-start; }
+  align-items: flex-start;
+  padding-bottom: 20em; }
 
 .header {
   padding: 1.6em;

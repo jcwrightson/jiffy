@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import ProjectsContainer from './components/projects/projects-container'
 import { connect } from 'react-redux'
+
+import './css/flexable.css'
 import './sass/styles.css'
+
 
 import store from './store'
 import {getHiddenProp, isToday} from "./functions";
