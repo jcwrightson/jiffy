@@ -23,6 +23,16 @@ export default class Session extends Component {
         this.onUnload = this.onUnload.bind(this); // if you need to bind callback to this
     }
 
+    addTodayTracker(projects){
+        projects.map(project =>{
+            if (project.trackers.filter(tracker => {
+                return isToday(tracker)
+            }).length === 0){
+                store.dispatch({type: 'ADD_TRACKER', payload: {project: project.created}})
+            }
+        })
+    }
+
     onUnload() {
 
         store.dispatch({type: 'STOP_ALL'})
@@ -51,14 +61,7 @@ export default class Session extends Component {
             document.addEventListener(evtname, ()=>{
                 if (!isHidden()) {
 
-                    console.log('here')
-                    this.props.projects.map(project =>{
-                        if (project.trackers.filter(tracker => {
-                                return isToday(tracker)
-                            }).length === 0){
-                            store.dispatch({type: 'ADD_TRACKER', payload: {project: project.created}})
-                        }
-                    })
+                    this.addTodayTracker(this.props.projects)
 
                 }else {
                     localStorage.setItem('tracker', JSON.stringify(this.props.projects))
@@ -70,13 +73,7 @@ export default class Session extends Component {
 
     componentWillReceiveProps(props){
         if(props !== this.props){
-            props.projects.map(project =>{
-                if (project.trackers.filter(tracker => {
-                    return isToday(tracker)
-                }).length === 0){
-                    store.dispatch({type: 'ADD_TRACKER', payload: {project: project.created}})
-                }
-            })
+            this.addTodayTracker(props.projects)
         }
     }
 

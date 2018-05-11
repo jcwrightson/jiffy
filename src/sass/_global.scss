@@ -80,8 +80,8 @@ hr {
 
 .popup {
  display: none;
-  width: 150px;
-  border: solid 1px $border-color;
+  width: 180px;
+  border: solid 1px lighten($border-color, 20%);
 
   z-index: 5;
 

@@ -17,7 +17,7 @@ export default class Project extends Component {
             style : {
                 opacity : 0
             },
-            minimised : false
+            minimised : true
         }
 
         this.start = this.start.bind(this)
@@ -25,29 +25,6 @@ export default class Project extends Component {
         this.midnight = false
 
     }
-
-    // start(project, tracker){
-    //
-    //     if(!this.props.project.running){
-    //
-    //         store.dispatch({type: 'TOGGLE_RUNNING', payload: {project: project, tracker: tracker}})
-    //
-    //         this.ticker = setInterval(()=>{
-    //
-    //             store.dispatch({type:'UPDATE_TRACKER', payload: {project: project, tracker: tracker, time: 1000}})
-    //
-    //
-    //         }, 1000)
-    //     }
-    //
-    // }
-    //
-    // stop(project, tracker){
-    //     clearInterval(this.ticker)
-    //
-    //     store.dispatch({type: 'TOGGLE_RUNNING', payload: {project: project, tracker: tracker}})
-    //
-    // }
 
     start(project, tracker){
 
@@ -138,7 +115,6 @@ export default class Project extends Component {
     }
 
     handleExport(project){
-        // console.log(JSON.stringify(project))
 
         this.props.toggleModal('exportModal', {export: true, project: project})
     }
@@ -205,12 +181,12 @@ export default class Project extends Component {
         const { project } = this.props
 
         const totalTime = project.trackers.reduce((total, tracker) =>{
-            // console.log(total, tracker.time)
             return total + tracker.time
         }, 0)
 
         const roundedTime = () =>{
-           Math.round(totalTime)
+
+            Math.round(totalTime)
 
             const date = new Date(totalTime);
 
@@ -269,10 +245,15 @@ export default class Project extends Component {
         return(
             <div className={`project ${trackerRunning() ? 'running' : ''}`} style={doStyle()} id={project.created} ref={(e)=>{if(e){this.project = e}}}>
 
-                <ul className="top flex row justify-between align-center">
-                    <li><h1>{project.title}</h1></li>
-                    <li><i className={`material-icons schedule `}>schedule</i>{trackerRunning() ? timeFilter(totalTime) : roundedTime() }</li>
-                </ul>
+
+                <div className="top flex row justify-between align-center">
+                    <div><h1>{project.title}</h1></div>
+
+                    <ul className="flex row justify-end align-center">
+                        <li><i className={`material-icons schedule `}>schedule</i></li>
+                        <li><h2>{trackerRunning() ? timeFilter(totalTime) : roundedTime() }</h2></li>
+                    </ul>
+                </div>
 
                 <div className="flex column">
                 {project.trackers.map((tracker, i)=>{
@@ -286,8 +267,21 @@ export default class Project extends Component {
                 })}
                 </div>
 
-                {project.trackers.length > 5 &&
-                <button onClick={this.toggleMinimised.bind(this)}>min</button>}
+                {project.trackers.length > 1 &&
+
+                    <div className="expand flex row justify-around">
+                    {this.state.minimised ?
+                        <i onClick={this.toggleMinimised.bind(this)} title="Expand" className="material-icons">
+                            keyboard_arrow_down
+                        </i>
+                        :
+                        <i onClick={this.toggleMinimised.bind(this)} title="collapse" className="material-icons">
+                            keyboard_arrow_up
+                        </i>
+                    }
+                    </div>
+                }
+
 
                 <div className="">
                     {/*<button onClick={()=>{this.addTracker(project.created)}}><span><i className="material-icons button">add</i>Tracker</span></button>*/}
@@ -299,12 +293,6 @@ export default class Project extends Component {
                 </div>
 
 
-                {/*<ul className="menu">*/}
-                    {/*<li> <span onClick={()=>{this.handleRemove(project.created)}} title="Delete Project"><i className="material-icons delete">delete</i></span></li>*/}
-                {/*</ul>*/}
-
-
-                    {/*<hr/>*/}
                 {/*<div className="circle" onClick={()=>{this.addTracker(project.created)}}><i className="material-icons abs middle">add</i></div>*/}
 
 
@@ -313,32 +301,20 @@ export default class Project extends Component {
                         <li>
                             <button title="Start Tracking" onClick={() => {
                                 this.start(project.created, project.trackers[project.trackers.length - 1].created)
-                            }}><i className="material-icons abs middle left">play_arrow</i>Start
+                            }}><i className="material-icons abs middle left">play_arrow</i>
+                                <span>Start</span>
                             </button>
                         </li>
                         :
                         <li>
                             <button title="Stop Tracking" className="running" onClick={() => {
                                 this.stop(project.created, project.trackers[project.trackers.length - 1].created)
-                            }}><i className="material-icons abs middle left">stop</i>Stop
+                            }}><i className="material-icons abs middle left">stop</i>
+                                <span>Stop</span>
                             </button>
                         </li>
                     }
 
-                    {/*<li>*/}
-                        {/*<button disabled={project.trackers[project.trackers.length - 1].time > 0} title="Reset" onClick={() => {*/}
-                            {/*this.reset(project.created, project.trackers[project.trackers.length - 1].created)*/}
-                        {/*}}><span><i className="material-icons button">restore</i>Reset</span>*/}
-                        {/*</button>*/}
-                    {/*</li>*/}
-
-
-                    {/*<li>*/}
-                    {/*<button title="Reset" onClick={() => {*/}
-                    {/*this.handleRemove(project.created, tracker.created)*/}
-                    {/*}}><span><i className="material-icons button">delete</i>Delete</span>*/}
-                    {/*</button>*/}
-                    {/*</li>*/}
 
                     <li onClick={this.togglePopup.bind(this)}><i className="material-icons dots">more_horiz</i></li>
 

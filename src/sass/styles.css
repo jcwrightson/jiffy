@@ -65,8 +65,8 @@ hr {
 
 .popup {
   display: none;
-  width: 150px;
-  border: solid 1px #a1a1a1;
+  width: 180px;
+  border: solid 1px #d4d4d4;
   z-index: 5; }
   .popup.js-active {
     display: block; }

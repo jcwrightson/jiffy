@@ -1,2 +1,1 @@
-### React Boilerplate
-React Boilerplate with Redux, Logger, Thunk, Routing and Material UI good to go...
+### Time Tracker

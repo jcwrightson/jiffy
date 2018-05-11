@@ -10,7 +10,23 @@
 
   .top{
     margin-bottom:2em;
+
+    li{
+      line-height: 0;
+
+      i{
+        padding-right: 5px;
+        padding-bottom: 2px;
+      }
+    }
   }
+
+  &.running {
+    .top {
+      color: $primary-color;
+    }
+  }
+
 
   .dots{
     cursor: pointer;
@@ -40,9 +56,41 @@
   .tracker{
     padding: .5em 0;
     border-bottom: 1px solid lighten($border-color, 30%);
+
+   .running {
+      color: $primary-color;
+    }
+
   }
 
+  .expand {
+    i {
+      font-size: 30px;
+      margin-top: .5em;
+      cursor: pointer;
+
+      &:hover{
+        color: $primary-color;
+      }
+    }
+  }
   .bottom{
     margin-top: 2em;
   }
+
+  button i {
+    margin-left: 1em;
+  }
+
+  button span {
+    margin-left: 1.2em;
+    line-height: 0;
+  }
+
+}
+
+
+button.running {
+  background-color: $primary-color;
+  color: white;
 }
