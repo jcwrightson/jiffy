@@ -20,86 +20,86 @@ export default class Project extends Component {
             }
         }
 
-        this.start = this.start.bind(this)
-        this.stop = this.stop.bind(this)
-        this.reset = this.reset.bind(this)
+        // this.start = this.start.bind(this)
+        // this.stop = this.stop.bind(this)
+        // this.reset = this.reset.bind(this)
         this.midnight = false
 
     }
 
-    start(project, tracker){
+    // start(project, tracker){
+    //
+    //
+    //
+    //     if(!this.props.tracker.running){
+    //
+    //         store.dispatch({type: 'TOGGLE_RUNNING', payload: {project: project, tracker: tracker}})
+    //
+    //
+    //         this.ticker = setInterval(()=>{
+    //
+    //             const time = new Date(Date.now())
+    //
+    //
+    //             if((time.getHours() + time.getMinutes()) === 0 && !this.midnight){
+    //
+    //                 clearInterval(this.ticker)
+    //                 this.midnight = true
+    //
+    //                 setTimeout(()=>{
+    //                     this.midnight = false
+    //                 }, 60000)
+    //
+    //
+    //
+    //                 store.dispatch({type: 'TOGGLE_RUNNING', payload: {project: project, tracker: tracker}})
+    //
+    //                 tracker = Date.now()
+    //                 store.dispatch({type:'ADD_TRACKER', payload: {project:project, created: tracker}})
+    //                 this.start(project, tracker)
+    //
+    //             }else {
+    //
+    //                 store.dispatch({type: 'UPDATE_TRACKER', payload: {project: project, tracker: tracker, time: 1000}})
+    //             }
+    //
+    //
+    //         }, 1000)
+    //     }
+    //
+    // }
+    //
+    // stop(project, tracker){
+    //     clearInterval(this.ticker)
+    //     this.ticker = null
+    //
+    //     store.dispatch({type: 'TOGGLE_RUNNING', payload: {project: project, tracker: tracker}})
+    //
+    // }
 
+    // reset(project, tracker){
+    //     if(this.props.tracker.running) {
+    //         this.stop(project, tracker)
+    //     }
+    //
+    //     store.dispatch({type:'RESET_TRACKER', payload: {project: project, tracker: tracker}})
+    // }
+    //
+    // transEnd(){
+    //     console.log('ended')
+    // }
+    //
+    // handleRemove(project, tracker){
+    //
+    //     if(this.ticker) {
+    //         this.stop(tracker)
+    //     }
+    //
+    //     store.dispatch({type:'REMOVE_TRACKER', payload: {project: project, tracker:tracker}})
+    //
+    //
 
-
-        if(!this.props.tracker.running){
-
-            store.dispatch({type: 'TOGGLE_RUNNING', payload: {project: project, tracker: tracker}})
-
-
-            this.ticker = setInterval(()=>{
-
-                const time = new Date(Date.now())
-
-
-                if((time.getHours() + time.getMinutes()) === 0 && !this.midnight){
-
-                    clearInterval(this.ticker)
-                    this.midnight = true
-
-                    setTimeout(()=>{
-                        this.midnight = false
-                    }, 60000)
-
-
-
-                    store.dispatch({type: 'TOGGLE_RUNNING', payload: {project: project, tracker: tracker}})
-
-                    tracker = Date.now()
-                    store.dispatch({type:'ADD_TRACKER', payload: {project:project, created: tracker}})
-                    this.start(project, tracker)
-
-                }else {
-
-                    store.dispatch({type: 'UPDATE_TRACKER', payload: {project: project, tracker: tracker, time: 1000}})
-                }
-
-
-            }, 1000)
-        }
-
-    }
-
-    stop(project, tracker){
-        clearInterval(this.ticker)
-        this.ticker = null
-
-        store.dispatch({type: 'TOGGLE_RUNNING', payload: {project: project, tracker: tracker}})
-
-    }
-
-    reset(project, tracker){
-        if(this.props.tracker.running) {
-            this.stop(project, tracker)
-        }
-
-        store.dispatch({type:'RESET_TRACKER', payload: {project: project, tracker: tracker}})
-    }
-
-    transEnd(){
-        console.log('ended')
-    }
-
-    handleRemove(project, tracker){
-
-        if(this.ticker) {
-            this.stop(tracker)
-        }
-
-        store.dispatch({type:'REMOVE_TRACKER', payload: {project: project, tracker:tracker}})
-
-
-
-    }
+    // }
 
 
     DateTimeFilter(stamp){
@@ -134,6 +134,7 @@ export default class Project extends Component {
                 <ul className="meta">
                     <li><label className={`${tracker.running && isToday(tracker) ? 'running': ''}`}>{isToday(tracker) ? 'Today' : this.DateTimeFilter(tracker.created)}</label></li>
                     <li className="time"><label><span className={`${tracker.running && isToday(tracker) ? 'running': ''}`} >{timeFilter(tracker.time)}</span></label></li>
+                    {/*<li onClick={()=>{this.handleRemove(project, tracker)}}>x</li>*/}
                 </ul>
             </div>
         )

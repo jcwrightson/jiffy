@@ -104,9 +104,9 @@ export function projects(state=[], action){
             const stateCopy = [...state]
 
             stateCopy.map(project => {
-                if(project.created === action.payload.project){
+                if(project.created === action.payload.project.created){
                     project.trackers = project.trackers.filter(tracker=>{
-                        return tracker.created !== action.payload.tracker
+                        return tracker.created !== action.payload.tracker.created
                     })
                 }
             })
