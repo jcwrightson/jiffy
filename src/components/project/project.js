@@ -162,6 +162,10 @@ export default class Project extends Component {
 
     }
 
+    filterBlank(){
+        store.dispatch({type: 'FILTER_BLANK'})
+    }
+
     togglePopup(){
 
 
@@ -348,6 +352,7 @@ export default class Project extends Component {
                     <li onClick={()=>{this.handleExport(project)}}>Export</li>
                     <li><hr/></li>
                     <li onClick={()=>{this.addTracker(project.created)}}>Add Tracker</li>
+                    <li onClick={()=>{this.filterBlank()}} >Filter Blank</li>
                 </ul>
 
 
