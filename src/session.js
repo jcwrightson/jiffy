@@ -8,8 +8,7 @@ import './sass/styles.css'
 
 
 import store from './store'
-import {getHiddenProp, isToday} from "./functions";
-import {projects} from "./components/projects/projects.reducer";
+import {getHiddenProp, isToday} from "./functions"
 
 
 @connect((store)=>{
@@ -27,6 +26,7 @@ export default class Session extends Component {
     onUnload() {
 
         store.dispatch({type: 'STOP_ALL'})
+        store.dispatch({type: 'FILTER_BLANK'})
         localStorage.setItem('tracker', JSON.stringify(this.props.projects))
     }
 
@@ -50,6 +50,8 @@ export default class Session extends Component {
             const evtname = visProp.replace(/[H|h]idden/,'') + 'visibilitychange';
             document.addEventListener(evtname, ()=>{
                 if (!isHidden()) {
+
+                    console.log('here')
                     this.props.projects.map(project =>{
                         if (project.trackers.filter(tracker => {
                                 return isToday(tracker)
@@ -63,7 +65,22 @@ export default class Session extends Component {
                 }
             });
         }
+
     }
+
+    componentWillReceiveProps(props){
+        if(props !== this.props){
+            props.projects.map(project =>{
+                if (project.trackers.filter(tracker => {
+                    return isToday(tracker)
+                }).length === 0){
+                    store.dispatch({type: 'ADD_TRACKER', payload: {project: project.created}})
+                }
+            })
+        }
+    }
+
+
 
     componentWillUnmount() {
         window.removeEventListener("beforeunload", this.onUnload)

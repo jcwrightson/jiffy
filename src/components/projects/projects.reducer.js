@@ -77,6 +77,20 @@ export function projects(state=[], action){
 
         }
 
+        case 'FILTER_BLANK' : {
+            const stateCopy = [...state]
+
+            stateCopy.map(project => {
+
+                project.trackers = project.trackers.filter(tracker => {
+                    return tracker.time > 0
+                })
+
+            })
+
+            return [...stateCopy]
+        }
+
         case 'UPDATE_TRACKER' : {
             const stateCopy = [...state]
 
