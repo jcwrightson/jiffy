@@ -2,7 +2,7 @@
 
 
 .project{
-  flex-basis: 100%;
+  flex-basis: 48%;
   background-color: white;
   padding: 2em;
   position: relative;
@@ -20,6 +20,8 @@
     position: absolute;
     padding: 1em;
     background-color: white;
+
+    margin-top: -2em;
 
     right:1em;
 

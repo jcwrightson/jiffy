@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import store from "../../store";
-import './project-modal.css'
+import '../project/project-modal.css'
 
 export default class ProjectModal extends Component {
 
@@ -24,7 +24,7 @@ export default class ProjectModal extends Component {
         if(this.state.title) {
             store.dispatch({type: 'NEW_PROJECT', payload: this.state})
 
-            this.props.toggleModal(e)
+            this.props.toggleModal('projectModal')
 
 
             this.setState({
@@ -43,7 +43,7 @@ export default class ProjectModal extends Component {
         e.preventDefault()
 
         if(e.target.classList.contains('modal')){
-            this.props.toggleModal()
+            this.props.toggleModal('projectModal')
         }
 
     }

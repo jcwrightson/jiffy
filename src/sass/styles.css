@@ -67,7 +67,7 @@ hr {
   display: none;
   width: 150px;
   border: solid 1px #a1a1a1;
-  z-index: 10; }
+  z-index: 5; }
   .popup.js-active {
     display: block; }
 

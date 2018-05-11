@@ -2,7 +2,7 @@ export function projects(state=[], action){
     switch(action.type){
         case 'NEW_PROJECT' : {
             // const stateCopy = [...state]
-            // console.log(action.payload)
+            console.log(action.payload)
 
             return [{
                 created: Date.now(),
@@ -18,6 +18,13 @@ export function projects(state=[], action){
                     }
                 ]
             }, ...state]
+        }
+
+        case 'IMPORT_PROJECT' : {
+            // const stateCopy = [...state]
+            console.log(action.payload)
+
+            return [...state, {...action.payload}]
         }
 
         case 'BOOTSTRAP':{

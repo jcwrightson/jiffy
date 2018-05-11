@@ -137,6 +137,12 @@ export default class Project extends Component {
 
     }
 
+    handleExport(project){
+        // console.log(JSON.stringify(project))
+
+        this.props.toggleModal('exportModal', {export: true, project: project})
+    }
+
     deleteProject(created){
         store.dispatch({type:'REMOVE_PROJECT', payload: created})
     }
@@ -338,8 +344,8 @@ export default class Project extends Component {
 
 
                 <ul className="popup drop-shadow flex column" onMouseLeave={this.togglePopup.bind(this)} ref="projectMenu">
-                    <li onClick={()=>{this.handleRemove(project.created)}}>Delete Project</li>
-                    <li>Export</li>
+                    <li onClick={()=>{this.handleRemove(project.created)}}>{`Delete ${project.title}`}</li>
+                    <li onClick={()=>{this.handleExport(project)}}>Export</li>
                     <li><hr/></li>
                     <li onClick={()=>{this.addTracker(project.created)}}>Add Tracker</li>
                 </ul>

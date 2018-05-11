@@ -19,3 +19,14 @@
 .projects {
   padding-top: 8em;
 }
+
+
+.top-nav{
+  button{
+    margin-right: 1em;
+
+    &:last-of-type{
+      margin-right: 0;
+    }
+  }
+}
