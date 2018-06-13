@@ -4,7 +4,7 @@ import store from '../../store'
 
 import { copyToClipboard } from "../../functions";
 
-export default class ExportModal extends Component{
+export default class ImportExportModal extends Component{
     constructor(props){
         super(props)
 
@@ -20,7 +20,6 @@ export default class ExportModal extends Component{
             this.props.toggleModal('exportModal')
 
             this.setState({
-                project : '',
                 copied: false
             })
 
@@ -52,6 +51,10 @@ export default class ExportModal extends Component{
         if(props.state.project){
             this.setState({
                 project: JSON.stringify(props.state.project)
+            })
+        }else {
+            this.setState({
+                project: 'Paste JSON here'
             })
         }
 
