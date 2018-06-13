@@ -1,6 +1,5 @@
 {
   "name": "react-time-tracker",
-  "homepage": "https://tracker.iamweb.io",
   "version": "0.1.0",
   "private": false,
   "dependencies": {
