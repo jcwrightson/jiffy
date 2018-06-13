@@ -7,7 +7,7 @@ import './projects-container.css'
 
 
 import ProjectModal from '../modals/project_modal'
-import ExportModal from '../modals/export'
+import ImportExportModal from '../modals/import-export'
 
 
 @connect((store)=>{
@@ -70,7 +70,7 @@ export default class ProjectsContainer extends Component {
                 <div>
                 <section className="header">
                     <ProjectModal visible={this.state.projectModal} toggleModal={this.toggleModal.bind(this)}/>
-                    <ExportModal visible={this.state.exportModal} toggleModal={this.toggleModal.bind(this)} state={this.state.modals.exportModal.state}/>
+                    <ImportExportModal visible={this.state.exportModal} toggleModal={this.toggleModal.bind(this)} state={this.state.modals.exportModal.state}/>
 
                     <div className="container-fluid">
                         <div className="flex row justify-between align-center">
