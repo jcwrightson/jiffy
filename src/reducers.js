@@ -1,2 +1,2 @@
 export * from './session.reducer'
-export * from './components/projects/projects.reducer'
+export * from './reducers/Projects.reducer'

@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
-import ReactDOM from 'react-dom'
-import store from '../../store'
+import store from '../store'
 
-import { copyToClipboard } from "../../functions";
+import { copyToClipboard } from "../functions";
 
 export default class ImportExportModal extends Component{
     constructor(props){
