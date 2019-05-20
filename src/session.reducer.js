@@ -1,3 +1,3 @@
-export function session(state={}, action){
+export default function session(state={}, action){
  return {...state}
 }

@@ -69,7 +69,7 @@ export function projects(state=[], action){
         case 'REMOVE_PROJECT' : {
             const stateCopy = [...state]
 
-            let filtered = stateCopy.filter((item, i)=>{
+            const filtered = stateCopy.filter((item, i)=>{
                 return item.created !== action.payload
             })
 
@@ -98,7 +98,7 @@ export function projects(state=[], action){
                 if(project.created === action.payload.project){
                     return project.trackers.map(tracker => {
                         if(tracker.created === action.payload.tracker){
-                            tracker.time = tracker.time+action.payload.time
+                            tracker.time +=action.payload.time
                         }
                     })
                 }

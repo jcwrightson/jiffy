@@ -1,9 +1,9 @@
 import React, { Component } from "react"
-import Tracker from "./Tracker"
+import Tracker from "./Tracker.jsx"
 
 import { timeFilter } from "../functions"
 
-import store from "../store"
+import {store} from "../store"
 
 export default class Project extends Component {
   constructor(props) {

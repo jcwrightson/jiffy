@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { dayOfWeekfromNum, timeFilter, isToday } from "../functions"
-import store from "../store"
+import {store} from "../store"
 
 export default class Project extends Component {
   constructor(props) {

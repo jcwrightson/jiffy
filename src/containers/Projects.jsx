@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import store from "../store"
+import {store} from "../store"
 
-import Project from "../components/Project"
+import Project from "../components/Project.jsx"
 
 import ProjectModal from "../modals/ProjectModal"
 import ImportExportModal from "../modals/ImportExport"

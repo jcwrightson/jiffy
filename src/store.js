@@ -1,21 +1,17 @@
-import { applyMiddleware, createStore } from 'redux'
-import { combineReducers } from 'redux'
-import createHistory from 'history/createBrowserHistory'
+import { applyMiddleware, createStore, combineReducers } from "redux"
+import { createBrowserHistory } from "history"
 
-import { logger } from 'redux-logger'
-import thunk from 'redux-thunk'
+import { logger } from "redux-logger"
+import thunk from "redux-thunk"
 
+import { routerMiddleware, connectRouter } from "connected-react-router"
 
-import { routerReducer, routerMiddleware } from 'react-router-redux'
+import * as reducers from "./reducers"
 
-import * as reducers from './reducers'
+export const history = createBrowserHistory()
 
+const App = combineReducers({ ...reducers, routing: connectRouter(history) })
 
-const history = createHistory()
+const middleware = applyMiddleware(thunk, logger, routerMiddleware(history))
 
-const App = combineReducers({...reducers, routing : routerReducer})
-
-const middleware = applyMiddleware(thunk,logger, routerMiddleware(history))
-
-
-export default createStore(App, middleware)
+export const store = createStore(App, middleware)
