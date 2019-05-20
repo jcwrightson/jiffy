@@ -2,13 +2,13 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import {store} from "../store"
 
-import Project from "../components/Project.jsx"
+import Project from "../components/_Project.component"
 
-import ProjectModal from "../modals/ProjectModal"
-import ImportExportModal from "../modals/ImportExport"
+import ProjectModal from "../modals/Project.modal"
+import ImportExportModal from "../modals/ImportExport.modal"
 
 
-class renderProjects extends Component {
+class renderTasks extends Component {
   constructor(props) {
     super(props)
 
@@ -53,7 +53,7 @@ class renderProjects extends Component {
   }
 
   render() {
-    const { projects } = this.props
+    const { tasks } = this.props
 
     return (
       <div>
@@ -97,7 +97,7 @@ class renderProjects extends Component {
         <section className="projects">
           <div className="container-fluid">
             <div className="projects-container">
-              {projects.map((project, i) => {
+              {tasks.map((project, i) => {
                 return (
                   <Project
                     key={i}
@@ -118,9 +118,9 @@ class renderProjects extends Component {
 
 const mapStateToProps = ( state ) => {
 	return {
-		projects: state.projects
+		tasks: state.tasks
 	}
 }
 
-const ProjectsContainer = connect(mapStateToProps)(renderProjects)
-export default ProjectsContainer
+const TasksContainer = connect(mapStateToProps)(renderTasks)
+export default TasksContainer

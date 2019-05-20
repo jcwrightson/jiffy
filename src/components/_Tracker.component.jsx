@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { dayOfWeekfromNum, timeFilter, isToday } from "../functions"
+import { dayOfWeekfromNum, timeFilter, isToday } from "../lib/functions"
 import {store} from "../store"
 
 export default class Project extends Component {
@@ -30,17 +30,10 @@ export default class Project extends Component {
 
   DateTimeFilter(stamp) {
     const date = new Date(stamp)
-    // const hours = date.getHours() - 1
     const day = date.getDay()
     const dayOfMonth = date.getDate()
     const month = date.getMonth() + 1
     const year = date.getFullYear()
-    // const minutes = "0" + date.getMinutes()
-
-    // const seconds = "0" + date.getSeconds()
-
-    // const formattedTime =
-    //   hours + ":" + minutes.substr(-2) + ":" + seconds.substr(-2)
     const dateTime = `${
       dayOfWeekfromNum(day).short
     } ${dayOfMonth}/${month}/${year}`

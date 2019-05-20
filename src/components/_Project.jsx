@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import Tracker from "./Tracker.jsx"
+import Tracker from "./_Tracker.jsx"
 
 import { timeFilter } from "../functions"
 

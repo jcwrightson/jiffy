@@ -26,6 +26,10 @@ p {
   user-select: text;
 }
 
+a, a:hover, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
 ul, li {
   margin: 0;
   padding: 0;

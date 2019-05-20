@@ -6,7 +6,7 @@ import thunk from "redux-thunk"
 
 import { routerMiddleware, connectRouter } from "connected-react-router"
 
-import * as reducers from "./reducers"
+import * as reducers from "./reducers/"
 
 export const history = createBrowserHistory()
 
