@@ -28,6 +28,28 @@ export function tasks(
 					})
 				]
 			})
+		case "EDIT_TASK":
+			return Object.assign({}, state, {
+				list: [
+					...state.list.map(task => {
+						if (task.uid === action.payload.uid) {
+							return { ...task, ...action.payload.body }
+						}
+						return task
+					})
+				]
+			})
+		case "TOGGLE_EDIT":
+			return Object.assign({}, state, {
+				list: [
+					...state.list.map(task => {
+						if (task.uid === action.payload) {
+							return { ...task, editing: !task.editing }
+						}
+						return task
+					})
+				]
+			})
 		case "STOP_ALL":
 			return Object.assign({}, state, {
 				list: [

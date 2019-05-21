@@ -10,12 +10,34 @@ const Task = ({
 	createTracker,
 	createTask,
 	removeTask,
+	editTask,
+	toggleEdit,
 	toggleRunning
 }) => {
 	return (
-		<article className={`task ${task.running ? "running" : ""}`}>
+		<article className={`task ${task.running ? "running" : ""}`} onClick={(e)=>{if(task.editing){toggleEdit(e, task.uid)}}}>
 			<div className='flex row justify-between'>
-				<h2>{task.title}</h2>
+				{task.editing ? (
+					<input
+						ref={(e)=>{if(e){e.select()}}}
+						type='text'
+						value={task.title}
+						onChange={e => editTask(e, task.uid)}
+						onKeyDown={e => toggleEdit(e, task.uid)}
+						onClick={e => {
+							e.stopPropagation()
+						}}
+					/>
+				) : (
+					<h2
+						className='editable'
+						onClick={e => {
+							e.stopPropagation()
+							toggleEdit(e, task.uid)
+						}}>
+						{task.title}
+					</h2>
+				)}
 				<button
 					className='svg delete'
 					title='Delete'

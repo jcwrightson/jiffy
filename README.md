@@ -1,5 +1,14 @@
-# Shaka Player React Demo
+# React Time Tracking
+
+A client side only time tracking app that makes use of LocalStorage.
+
+# Features
+
+- Create Projects
+- Create Tasks
+- Track Time
+
+# Development
 
 -   Install dependencies: `npm i`
--   Start the server: `npm run start:server`
--   Start the client: `npm start`
+-   Start the app: `npm start`

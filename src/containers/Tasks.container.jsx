@@ -13,7 +13,9 @@ const renderTasks = ({
 	createTask,
 	createTracker,
 	toggleRunning,
-	removeTask
+	removeTask,
+	editTask,
+	toggleEdit
 }) => {
 	return (
 		<main className='container'>
@@ -30,6 +32,8 @@ const renderTasks = ({
 								createTask={createTask}
 								createTracker={createTracker}
 								removeTask={removeTask}
+								editTask={editTask}
+								toggleEdit={toggleEdit}
 								toggleRunning={toggleRunning}
 							/>
 						)
@@ -63,6 +67,20 @@ const mapDispatchToProps = dispatch => {
 				type: "TOGGLE_RUNNING",
 				payload: { task: taskUID, tracker: trackerUID }
 			})
+		},
+		editTask: (e, uid) => {
+			store.dispatch({
+				type: "EDIT_TASK",
+				payload: { uid: uid, body: { title: e.target.value } }
+			})
+		},
+		toggleEdit: (e, uid) => {
+			if(e.key === 'Enter' || e.type === 'click'){
+				store.dispatch({
+					type: 'TOGGLE_EDIT',
+					payload: uid
+				})
+			}
 		}
 	}
 }

@@ -9,6 +9,7 @@ export function createProject(title) {
 				uid: uuidv4(),
 				created: Date.now(),
 				title: title || "New Project",
+				editing: false,
 				status: {
 					active: true,
 					completed: false,

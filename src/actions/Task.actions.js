@@ -19,7 +19,8 @@ export function createTask(projectUID, title, blurb) {
 					title: title || 'New Task',
 					blurb: blurb || '',
 					time: 0,
-					running: false
+					running: false,
+					editing: false
 				}
 			})
 			dispatch(createTracker(projectUID, taskUID))

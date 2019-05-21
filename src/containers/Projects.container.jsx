@@ -6,6 +6,7 @@ import { withRouter, Link } from "react-router-dom"
 import { removeProject, createProject } from "../actions/Project.actions"
 
 import Project from "../components/Project.component"
+import { store } from "../store"
 
 const renderProjects = ({
 	projects,
@@ -13,6 +14,8 @@ const renderProjects = ({
 	trackers,
 	removeProject,
 	createProject,
+	editProject,
+	toggleEdit,
 	push
 }) => {
 	return (
@@ -28,6 +31,8 @@ const renderProjects = ({
 						removeProject={removeProject}
 						createProject={createProject}
 						push={push}
+						editProject={editProject}
+						toggleEdit={toggleEdit}
 						{...project}
 					/>
 				)
@@ -54,6 +59,20 @@ const mapDispatchToProps = dispatch => {
 		},
 		push: path => {
 			dispatch(push(path))
+		},
+		editProject: (e, uid) => {
+			store.dispatch({
+				type: "EDIT_PROJECT",
+				payload: { uid: uid, body: { title: e.target.value } }
+			})
+		},
+		toggleEdit: (e, uid) => {
+			if(e.key === 'Enter' || e.type === 'click'){
+				store.dispatch({
+					type: 'TOGGLE_EDIT',
+					payload: uid
+				})
+			}
 		}
 	}
 }

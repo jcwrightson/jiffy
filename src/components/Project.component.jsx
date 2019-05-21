@@ -10,21 +10,52 @@ const hasRunningTask = tasks => {
 
 const Project = ({
 	uid,
+	editing,
 	trackers,
 	tasks,
 	title,
 	removeProject,
 	createProject,
+	editProject,
+	toggleEdit,
 	push
 }) => {
 	return (
 		<div
 			className={`project ${hasRunningTask(tasks) ? "running" : ""}`}
-			onClick={() => {
-				push(`projects/${uid}`)
+			onClick={e => {
+				if (!editing) {
+					push(`projects/${uid}`)
+				} else {
+					toggleEdit(e, uid)
+				}
 			}}>
 			<div className='flex row justify-between'>
-				<h2>{title}</h2>
+				{editing ? (
+					<input
+						ref={e => {
+							if (e) {
+								e.select()
+							}
+						}}
+						type='text'
+						value={title}
+						onChange={e => editProject(e, uid)}
+						onKeyDown={e => toggleEdit(e, uid)}
+						onClick={e => {
+							e.stopPropagation()
+						}}
+					/>
+				) : (
+					<h2
+						className='editable'
+						onClick={e => {
+							e.stopPropagation()
+							toggleEdit(e, uid)
+						}}>
+						{title}
+					</h2>
+				)}
 
 				<button
 					className='svg delete'
