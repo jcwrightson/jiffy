@@ -8,7 +8,6 @@ import TasksContainer from "./containers/Tasks.container"
 import { history, store } from "./store"
 
 import NavBar from "./layouts/NavBar"
-// import "./lib/flexable.css"
 import "./sass/styles.scss"
 
 import { isToday } from "./lib/functions"
