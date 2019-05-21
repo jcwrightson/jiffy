@@ -11,6 +11,10 @@ class renderHome extends Component {
 	render() {
 		return (
 			<main>
+				<div className="container title">
+					<h1>Projects</h1>
+					<hr />
+				</div>
 				<ProjectsContainer />
 			</main>
 		)

@@ -1,19 +1,25 @@
-.project {
-  flex-basis: 100%;
-  background-color: white;
-  padding: 2em;
-  position: relative;
-  margin-bottom: 2em;
+.projects, .tasks{
   display: flex;
-  flex-direction: column;
-
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.project {
+ .aggregate{
+    margin-bottom: 1rem;
+    padding: .5rem 0;
+    font-size: 1.1rem;
+    font-weight: 300;
+    svg{
+      height: 22px;
+    }
+  }
   .popup {
     position: absolute;
     padding: 1em;
     background-color: white;
-
     margin-top: -2em;
-
     right: 1em;
 
     li {
@@ -32,21 +38,37 @@
 }
 
 .task, .project{
+  flex-basis: 45%;
   border-radius: 6px;
-  background-color: #555;
-  color: #fff;
+  background-color: #fff;
+  background-color: white;
+  padding: 2em;
   position: relative;
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 12px -10px rgba(0,0,0,0.2);
 
-  box-shadow: 0 0 25px 0 rgba(0,0,0,0.2);
+  button{
+    width: auto;
+  }
   
 
   button.delete{
     position: absolute;
-    top:0;
-    right:0;
+    top:6px;
+    right:6px;
+    padding: 2px;
+    border-radius: 3px;
+    background-color: #aaa;
+    transition: all 120ms ease;
 
     &:hover{
       background-color: #000;
+    }
+
+    svg{
+      padding: 4px;
     }
   }
 
@@ -58,18 +80,23 @@
     all:unset;
     font-size: 1.5rem;
     font-weight: 300;
-    width: auto;
+    width: 100%;
   }
 
   input{
-    background-color: #aaaaaa;
+    background-color: #f2f2f2;
     color: #000;
   }
 }
-
+.trackers{
+  padding: 1rem 0;
+}
 .tracker{
+  &:nth-of-type(even){
+    background-color: #fafafa;
+  }
 	.meta{
-		padding: 2rem 0;
+    padding: .2rem 0;    
 	}
 }
 

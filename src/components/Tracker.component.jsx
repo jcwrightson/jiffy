@@ -1,8 +1,9 @@
-import React, { Component } from "react"
+import React, { useEffect } from "react"
 import { store } from "../store"
 import { connect } from "react-redux"
 import { dayOfWeekfromNum, timeFilter, isToday } from "../lib/functions"
 
+// Lets keep track of all running intervals globally
 window.__tracker__ = {}
 
 const DateTimeFilter = stamp => {
@@ -27,9 +28,8 @@ const ticker = (updateTracker, tracker, createTracker, start) => {
 			window.__tracker__[tracker.uid].midnight = false
 		}, 60000)
 
-		toggleRunning(task.uid, tracker.uid)
 		createTracker(tracker.project, tracker.task)
-		start()
+		toggleRunning(task.uid, tracker.uid)
 	} else {
 		updateTracker(tracker.uid, 1000)
 	}
@@ -50,18 +50,29 @@ const renderTracker = ({
 		}
 	}
 	const start = () => {
-		window.__tracker__[tracker.uid].tick = setInterval(() => {
-			ticker(updateTracker, tracker, createTracker, start)
-		}, 1000)
+		if (!window.__tracker__[tracker.uid].tick) {
+			window.__tracker__[tracker.uid].tick = setInterval(() => {
+				ticker(updateTracker, tracker, createTracker, start)
+			}, 1000)
+		}
 	}
 
 	const stop = () => {
 		clearInterval(window.__tracker__[tracker.uid].tick)
 	}
 
+	useEffect(() => {
+		if (task.running && isToday(tracker.created)) {
+			start()
+		}
+		if (!task.running) {
+			stop()
+		}
+	}, [task])
+
 	return (
 		<div className='tracker'>
-			<ul className='meta flex row justify-between'>
+			<ul className='meta flex-row'>
 				<li>
 					{isToday(tracker.created) ? "Today" : DateTimeFilter(tracker.created)}
 				</li>
@@ -75,19 +86,15 @@ const renderTracker = ({
 						window.__tracker__[tracker.uid] = null
 					}}>
 					Delete
-				</button> */}
-        <button
-							onClick={() => {
-								if (!tracker.running) {
-									start()
-									toggleRunning(task.uid, tracker.uid)
-								} else {
-									stop()
-									toggleRunning(task.uid, tracker.uid)
-								}
-							}}>
-							{tracker.running ? "Stop" : "Start"}
-						</button>
+        </button> */}
+
+				{/* <button
+						className='secondary'
+						onClick={() => {
+							toggleRunning(task.uid, tracker.uid)
+						}}>
+						{tracker.running ? "Stop" : "Start"}
+					</button> */}
 			</div>
 		</div>
 	)
@@ -99,7 +106,10 @@ const mapDispatchToProps = dispatch => {
 			dispatch({ type: "REMOVE_TRACKER", payload: uid })
 		},
 		toggleRunning: (taskUID, trackerUID) => {
-			dispatch({ type: "TOGGLE_RUNNING", payload: {task: taskUID, tracker: trackerUID} })
+			dispatch({
+				type: "TOGGLE_RUNNING",
+				payload: { task: taskUID, tracker: trackerUID }
+			})
 		},
 		updateTracker: uid => {
 			dispatch({ type: "UPDATE_TRACKER", payload: { uid: uid, time: 1000 } })

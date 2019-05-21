@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
+import { Link } from "react-router-dom"
 import { createTracker, removeTask, createTask } from "../actions"
 import { store } from "../store"
 
@@ -7,6 +8,7 @@ import Task from "../components/Task.component"
 import { push } from "connected-react-router"
 
 const renderTasks = ({
+	projects,
 	tasks,
 	trackers,
 	match,
@@ -17,8 +19,18 @@ const renderTasks = ({
 	handleEdit,
 	toggleEdit
 }) => {
+	const thisProject = projects.filter(
+		project => project.uid === match.params.uid
+	)[0]
+
 	return (
 		<main>
+			<div className='container title'>
+				<Link to='/'>
+					<h1>{thisProject.title}</h1>
+				</Link>
+				<hr />
+			</div>
 			<div className='tasks container'>
 				{tasks
 					.filter(task => task.project === match.params.uid)
@@ -75,9 +87,9 @@ const mapDispatchToProps = dispatch => {
 			})
 		},
 		toggleEdit: (e, uid) => {
-			if(e.key === 'Enter' || e.type === 'click'){
+			if (e.key === "Enter" || e.type === "click") {
 				store.dispatch({
-					type: 'TOGGLE_EDIT',
+					type: "TOGGLE_EDIT",
 					payload: uid
 				})
 			}

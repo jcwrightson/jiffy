@@ -56,9 +56,19 @@
 
 .running{
   color: $primary-color !important;
-  background-color: #333 !important;
+  // background-color: #333 !important;
 }
 
 .drop-shadow{
   box-shadow: 0px 5px 10px -10px rgba(0,0,0,0.5);
+}
+
+
+label.svg{
+  display: flex;
+  align-items: center;
+
+  svg{
+    padding: 4px; 
+  }
 }

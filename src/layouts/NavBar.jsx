@@ -11,6 +11,7 @@ const renderNavBar = ({ createProject, createTask, location, history }) => {
 
 				<div className='top-nav flex-row '>
 					<button
+						disabled
 						className=''
 						onClick={() => {
 							// this.handleImport()

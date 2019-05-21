@@ -2,7 +2,6 @@
   box-sizing: border-box;
   user-select: none;
   outline: none;
-  //transition: all 200ms ease-in-out;
 }
 
 body {
@@ -19,6 +18,23 @@ section {
 
 main{
   margin-top: $offset-top;
+  margin-bottom: 4rem;
+
+  .container.title{
+    padding: 2rem;
+
+    h1{
+      font-weight: 400;
+    }
+
+    .flex-row{
+      justify-content: flex-start;
+
+      svg{
+        margin-right: 1rem;
+      }
+    }
+  }
 }
 
 .container {
@@ -56,7 +72,7 @@ input, textarea {
 }
 
 button {
-  padding: .8em 2em;
+  padding: .6em 2em;
   text-transform: uppercase;
   border: none;
   font-size: .8em;
@@ -67,6 +83,11 @@ button {
 
   &.primary{
     background-color: $primary-color;
+    color: white;
+  }
+
+  &.secondary{
+    background-color: $secondary-color;
     color: white;
   }
 }

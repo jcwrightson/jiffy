@@ -61,19 +61,20 @@ const Task = ({
 				</button>
 			</div>
 
-			{/* <div className='flex row'> */}
-			{/* <button
-				onClick={() => {
-					createTracker(task.project, task.uid)
-				}}>
-				Add Tracker
-			</button> */}
-
-			{/* </div> */}
 			<div className='trackers'>
 				{trackers.map(tracker => {
 					return <Tracker tracker={tracker} task={task} key={tracker.uid} />
 				})}
+			</div>
+			<div>
+				<button
+					className='secondary'
+					onClick={() => {
+						toggleRunning(task.uid, trackers[0].uid)
+					}}>
+					{task.running ? "Stop" : "Start"}
+				</button>
+				{/* <button onClick={()=>createTracker(task.project, task.uid)}>Add Tracker</button> */}
 			</div>
 		</article>
 	)
