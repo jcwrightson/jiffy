@@ -1,6 +1,6 @@
 import React, { Memo } from "react"
 import { connect } from "react-redux"
-import { withRouter } from "react-router-dom"
+import { withRouter, Link } from "react-router-dom"
 import { timeFilter, roundedTime, getAggregate } from "../lib/functions"
 import { store } from "../store"
 
@@ -16,7 +16,7 @@ const Project = ({
 	title,
 	removeProject,
 	createProject,
-	editProject,
+	handleEdit,
 	toggleEdit,
 	push
 }) => {
@@ -24,26 +24,21 @@ const Project = ({
 		<div
 			className={`project ${hasRunningTask(tasks) ? "running" : ""}`}
 			onClick={e => {
-				if (!editing) {
-					push(`projects/${uid}`)
-				} else {
+				if (editing) {
 					toggleEdit(e, uid)
-				}
+        }
 			}}>
 			<div className='flex row justify-between'>
 				{editing ? (
 					<input
-						ref={e => {
-							if (e) {
-								e.select()
-							}
-						}}
 						type='text'
 						value={title}
-						onChange={e => editProject(e, uid)}
+						onChange={e => handleEdit(e, uid)}
 						onKeyDown={e => toggleEdit(e, uid)}
 						onClick={e => {
-							e.stopPropagation()
+							e.preventDefault
+              e.target.select()
+              e.stopPropagation()
 						}}
 					/>
 				) : (
@@ -74,7 +69,7 @@ const Project = ({
 				</button>
 			</div>
 			<p>{roundedTime(getAggregate(trackers, "time"))}</p>
-			<p>Tasks: {tasks.length}</p>
+			<p><Link to={`/projects/${uid}`}>View Tasks({tasks.length})</Link></p>
 		</div>
 	)
 }

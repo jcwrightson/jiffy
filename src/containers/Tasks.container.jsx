@@ -14,12 +14,12 @@ const renderTasks = ({
 	createTracker,
 	toggleRunning,
 	removeTask,
-	editTask,
+	handleEdit,
 	toggleEdit
 }) => {
 	return (
-		<main className='container'>
-			<div className='tasks'>
+		<main>
+			<div className='tasks container'>
 				{tasks
 					.filter(task => task.project === match.params.uid)
 					.map(task => {
@@ -32,7 +32,7 @@ const renderTasks = ({
 								createTask={createTask}
 								createTracker={createTracker}
 								removeTask={removeTask}
-								editTask={editTask}
+								handleEdit={handleEdit}
 								toggleEdit={toggleEdit}
 								toggleRunning={toggleRunning}
 							/>
@@ -68,7 +68,7 @@ const mapDispatchToProps = dispatch => {
 				payload: { task: taskUID, tracker: trackerUID }
 			})
 		},
-		editTask: (e, uid) => {
+		handleEdit: (e, uid) => {
 			store.dispatch({
 				type: "EDIT_TASK",
 				payload: { uid: uid, body: { title: e.target.value } }

@@ -4,9 +4,8 @@ import { connect } from "react-redux"
 import { createProject, createTask } from "../actions"
 
 const renderNavBar = ({ createProject, createTask, location, history }) => {
-	console.log(location.pathname.replace('/projects/', ''))
 	return (
-		<nav>
+		<nav className="fixed top drop-shadow">
 			<div className='container flex-row'>
 				<Link to={"/"}><h1>Time Tracking</h1></Link>
 
@@ -19,7 +18,7 @@ const renderNavBar = ({ createProject, createTask, location, history }) => {
 						Import
 					</button>
 					<button
-						className='add'
+						className='primary'
 						onClick={() => {
 							{location.pathname === '/' ? createProject() : createTask(location.pathname.replace('/projects/', ''))}
 						}}>

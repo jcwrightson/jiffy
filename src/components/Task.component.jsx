@@ -10,21 +10,28 @@ const Task = ({
 	createTracker,
 	createTask,
 	removeTask,
-	editTask,
+	handleEdit,
 	toggleEdit,
 	toggleRunning
 }) => {
 	return (
-		<article className={`task ${task.running ? "running" : ""}`} onClick={(e)=>{if(task.editing){toggleEdit(e, task.uid)}}}>
+		<article
+			className={`task ${task.running ? "running" : ""}`}
+			onClick={e => {
+				if (task.editing) {
+					toggleEdit(e, task.uid)
+				}
+			}}>
 			<div className='flex row justify-between'>
 				{task.editing ? (
 					<input
-						ref={(e)=>{if(e){e.select()}}}
 						type='text'
 						value={task.title}
-						onChange={e => editTask(e, task.uid)}
+						onChange={e => handleEdit(e, task.uid)}
 						onKeyDown={e => toggleEdit(e, task.uid)}
 						onClick={e => {
+							e.preventDefault
+							e.target.select()
 							e.stopPropagation()
 						}}
 					/>

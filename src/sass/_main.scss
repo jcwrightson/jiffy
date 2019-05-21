@@ -1,13 +1,3 @@
-.projects-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-
-  padding-bottom: 20em;
-}
-
 .project {
   flex-basis: 100%;
   background-color: white;
@@ -16,7 +6,6 @@
   margin-bottom: 2em;
   display: flex;
   flex-direction: column;
-  cursor: pointer;
 
   .popup {
     position: absolute;
@@ -37,10 +26,6 @@
     }
   }
 }
-
-.tasks{
-  margin: 2rem 0;
-}
 .task {
   padding: 3rem;
   margin-bottom: 3rem;
@@ -53,7 +38,6 @@
   position: relative;
 
   box-shadow: 0 0 25px 0 rgba(0,0,0,0.2);
-
   
 
   button.delete{
@@ -67,9 +51,9 @@
   }
 
   .editable{
-    cursor: text;
+    cursor: text !important;
   }
-  
+
   input, .editable{
     all:unset;
     font-size: 1.5rem;

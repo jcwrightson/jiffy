@@ -10,7 +10,7 @@ class renderHome extends Component {
 
 	render() {
 		return (
-			<main className='home container'>
+			<main>
 				<ProjectsContainer />
 			</main>
 		)

@@ -9,11 +9,16 @@ body {
   margin: 0;
   padding: 0;
   background-color: #d1dddd;
+  background-color: #e6f1f1;
   overflow-y: scroll;
 }
+
 section {
   width: 100%;
+}
 
+main{
+  margin-top: $offset-top;
 }
 
 .container {
@@ -59,6 +64,11 @@ button {
   border-radius: 2px;
   transition: all 100ms ease;
   background-color: #e8e8e8;
+
+  &.primary{
+    background-color: $primary-color;
+    color: white;
+  }
 }
 
 .circle {
@@ -88,11 +98,6 @@ hr {
   }
 }
 
-.drop-shadow{
-  -webkit-box-shadow: 0px 5px 11px -8px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 5px 11px -8px rgba(0,0,0,0.75);
-  box-shadow: 0px 5px 11px -8px rgba(0,0,0,0.75);
-}
 
 nav{
   width: 100%;

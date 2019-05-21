@@ -14,12 +14,12 @@ const renderProjects = ({
 	trackers,
 	removeProject,
 	createProject,
-	editProject,
+	handleEdit,
 	toggleEdit,
 	push
 }) => {
 	return (
-		<div className='projects-container'>
+		<div className='projects container'>
 			{projects.map(project => {
 				return (
 					<Project
@@ -31,7 +31,7 @@ const renderProjects = ({
 						removeProject={removeProject}
 						createProject={createProject}
 						push={push}
-						editProject={editProject}
+						handleEdit={handleEdit}
 						toggleEdit={toggleEdit}
 						{...project}
 					/>
@@ -60,7 +60,7 @@ const mapDispatchToProps = dispatch => {
 		push: path => {
 			dispatch(push(path))
 		},
-		editProject: (e, uid) => {
+		handleEdit: (e, uid) => {
 			store.dispatch({
 				type: "EDIT_PROJECT",
 				payload: { uid: uid, body: { title: e.target.value } }
