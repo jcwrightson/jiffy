@@ -8,27 +8,6 @@
   padding-bottom: 20em;
 }
 
-.header {
-  padding: 1.6em;
-
-  position: fixed;
-  z-index: 10;
-}
-
-.projects {
-  padding-top: 8em;
-}
-
-.top-nav {
-  button {
-    margin-right: 1em;
-
-    &:last-of-type {
-      margin-right: 0;
-    }
-  }
-}
-
 .project {
   flex-basis: 100%;
   background-color: white;
@@ -38,16 +17,6 @@
   display: flex;
   flex-direction: column;
   cursor: pointer;
-
-  &.running {
-    .top {
-      color: $primary-color;
-    }
-  }
-
-  .dots {
-    cursor: pointer;
-  }
 
   .popup {
     position: absolute;
@@ -67,44 +36,6 @@
       }
     }
   }
-
-  .tracker {
-    padding: 0.5em 0;
-    border-bottom: 1px solid lighten($border-color, 30%);
-
-    .running {
-      color: $primary-color;
-    }
-  }
-
-  .expand {
-    i {
-      font-size: 30px;
-      margin-top: 0.5em;
-      cursor: pointer;
-
-      &:hover {
-        color: $primary-color;
-      }
-    }
-  }
-  .bottom {
-    margin-top: 2em;
-  }
-
-  button i {
-    margin-left: 1em;
-  }
-
-  button span {
-    margin-left: 1.2em;
-    line-height: 0;
-  }
-}
-
-button.running {
-  background-color: $primary-color;
-  color: white;
 }
 
 .tasks{
@@ -134,4 +65,9 @@ button.running {
   }
 }
 
+.tracker{
+	.meta{
+		padding: 2rem 0;
+	}
+}
 

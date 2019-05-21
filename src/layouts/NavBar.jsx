@@ -7,10 +7,10 @@ const renderNavBar = ({ createProject, createTask, location, history }) => {
 	console.log(location.pathname.replace('/projects/', ''))
 	return (
 		<nav>
-			<div className='container flex row justify-between align-center'>
+			<div className='container flex-row'>
 				<Link to={"/"}><h1>Time Tracking</h1></Link>
 
-				<div className='top-nav flex row justify-end'>
+				<div className='top-nav flex-row '>
 					<button
 						className=''
 						onClick={() => {

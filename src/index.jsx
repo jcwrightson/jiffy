@@ -8,7 +8,7 @@ import TasksContainer from "./containers/Tasks.container"
 import { history, store } from "./store"
 
 import NavBar from "./layouts/NavBar"
-import "./lib/flexable.css"
+// import "./lib/flexable.css"
 import "./sass/styles.scss"
 
 import { isToday } from "./lib/functions"
@@ -42,7 +42,7 @@ const initApp = store => {
 				.filter(tracker => tracker.task === task.uid)
 				.filter(tracker => isToday(tracker.created)).length
 			if (length === 0) {
-				store.dispatch(createTracker(task.uid))
+				store.dispatch(createTracker(task.project, task.uid))
 			}
 		})
 	}

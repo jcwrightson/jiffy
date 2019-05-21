@@ -36,6 +36,20 @@ section {
   }
 }
 
+.flex-row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-column{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center
+}
+
 button.add {
   background-color: #607d8b;
   color: white;
