@@ -2,11 +2,12 @@
 	"name": "react-time-tracker",
 	"version": "1.0.0",
 	"description": "",
-	"main": "index.js",
+  "main": "index.js",
+  "homepage": "https://madebywrightson.com/tracker",
 	"scripts": {
 		"precommit": "lint-staged",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "webpack-dev-server --mode development",
+		"start": "webpack-dev-server --mode development --config webpack.config.dev.js",
 		"build": "webpack --mode production",
 		"lint": "eslint src/ --fix",
 		"pretty": "pretty-quick --staged"
