@@ -1,4 +1,4 @@
-export function newProjects(
+export function projects(
 	state = {
 		list: []
 	},
@@ -7,7 +7,7 @@ export function newProjects(
 	switch (action.type) {
 		case "CREATE_PROJECT":
 			return Object.assign({}, state, {
-				list: [action.payload, ...state.list]
+				list: [...state.list, action.payload]
 			})
 		case "LOAD_PROJECTS":
 			return Object.assign({}, state, {

@@ -2,7 +2,7 @@ import { uuidv4 } from "../lib/functions"
 
 export function createTracker(projectUID, taskUID) {
 
-	return (dispatch, getState) => {
+	return (dispatch) => {
 		
 			dispatch({
 				type: "CREATE_TRACKER",
@@ -15,5 +15,11 @@ export function createTracker(projectUID, taskUID) {
 					running: false
 				}
 			})
+	}
+}
+
+export function removeTracker(uid){
+	return (dispatch) => {
+		dispatch({type:'REMOVE_TRACKER', payload: uid})
 	}
 }

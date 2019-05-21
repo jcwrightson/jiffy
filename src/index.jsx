@@ -3,18 +3,25 @@ import ReactDOM from "react-dom"
 import { Provider } from "react-redux"
 import { Route, Router, Switch } from "react-router"
 import Home from "./layouts/Home"
-import ProjectContainer from "./containers/Project.container"
+import TasksContainer from "./containers/Tasks.container"
 
 import { history, store } from "./store"
 
-const initApp = (store) => {
+import NavBar from "./layouts/NavBar"
+import "./lib/flexable.css"
+import "./sass/styles.scss"
+
+import { isToday } from "./lib/functions"
+import { createTracker, removeTracker } from "./actions"
+
+const initApp = store => {
 	// localStorage.removeItem("tracker-2")
 
 	window.addEventListener("beforeunload", () => {
-		store.dispatch({type: "STOP_ALL"})
+		store.dispatch({ type: "STOP_ALL" })
 		const save = {
-			projects: store.getState().newProjects.list,
-			tasks: store.getState().newTasks.list,
+			projects: store.getState().projects.list,
+			tasks: store.getState().tasks.list,
 			trackers: store.getState().trackers.list
 		}
 
@@ -27,6 +34,25 @@ const initApp = (store) => {
 		store.dispatch({ type: "LOAD_TASKS", payload: savedData.tasks })
 		store.dispatch({ type: "LOAD_TRACKERS", payload: savedData.trackers })
 	}
+
+	//Add today's trackers
+	if (savedData && savedData.tasks) {
+		savedData.tasks.map(task => {
+			const length = savedData.trackers
+				.filter(tracker => tracker.task === task.uid)
+				.filter(tracker => isToday(tracker.created)).length
+			if (length === 0) {
+				store.dispatch(createTracker(task.uid))
+			}
+		})
+	}
+
+	// Remove obsolete trackers
+	if (savedData && savedData.trackers) {
+		savedData.trackers
+			.filter(tracker => !isToday(tracker.created) && tracker.time === 0)
+			.map(tracker => store.dispatch(removeTracker(tracker.uid)))
+	}
 }
 
 initApp(store)
@@ -34,9 +60,10 @@ initApp(store)
 ReactDOM.render(
 	<Provider store={store}>
 		<Router history={history}>
+			<NavBar />
 			<Switch>
 				<Route exact path='/' component={Home} />
-				<Route exact path='/projects/:uid' component={ProjectContainer} />
+				<Route path='/projects/:uid' component={TasksContainer} />
 			</Switch>
 		</Router>
 	</Provider>,

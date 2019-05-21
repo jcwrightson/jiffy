@@ -30,24 +30,14 @@
 }
 
 .project {
-  flex-basis: 48%;
+  flex-basis: 100%;
   background-color: white;
   padding: 2em;
   position: relative;
   margin-bottom: 2em;
-
-  .top {
-    margin-bottom: 2em;
-
-    li {
-      line-height: 0;
-
-      i {
-        padding-right: 5px;
-        padding-bottom: 2px;
-      }
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
 
   &.running {
     .top {
@@ -116,3 +106,32 @@ button.running {
   background-color: $primary-color;
   color: white;
 }
+
+.tasks{
+  margin: 2rem 0;
+}
+.task {
+  padding: 3rem;
+  margin-bottom: 3rem;
+}
+
+.task, .project{
+  border-radius: 6px;
+  background-color: #555;
+  color: #fff;
+  position: relative;
+
+  box-shadow: 0 0 25px 0 rgba(0,0,0,0.2);
+
+  button.delete{
+    position: absolute;
+    top:0;
+    right:0;
+
+    &:hover{
+      background-color: #000;
+    }
+  }
+}
+
+

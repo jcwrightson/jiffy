@@ -8,7 +8,7 @@ const isValidProjectUID = (UID, projects) => {
 export function createTask(projectUID, title, blurb) {
 
 	return (dispatch, getState) => {
-		if (isValidProjectUID(projectUID, getState().newProjects.list)) {
+		if (isValidProjectUID(projectUID, getState().projects.list)) {
 			const taskUID = uuidv4()
 			dispatch({
 				type: "CREATE_TASK",
@@ -19,11 +19,7 @@ export function createTask(projectUID, title, blurb) {
 					title: title || 'New Task',
 					blurb: blurb || '',
 					time: 0,
-					status: {
-						active: true,
-						completed: false,
-						running: false
-					},
+					running: false
 				}
 			})
 			dispatch(createTracker(projectUID, taskUID))

@@ -1,7 +1,7 @@
 import { uuidv4 } from "../lib/functions"
 import { removeTask } from "./Task.actions";
 
-export function createProject({ title }) {
+export function createProject(title) {
 	return (dispatch, getState) => {
 		dispatch({
 			type: "CREATE_PROJECT",
@@ -9,7 +9,6 @@ export function createProject({ title }) {
 				uid: uuidv4(),
 				created: Date.now(),
 				title: title || "New Project",
-				tasks: 0,
 				status: {
 					active: true,
 					completed: false,
@@ -23,7 +22,7 @@ export function createProject({ title }) {
 
 export function removeProject(uid) {
 	return(dispatch, getState) => {
-		const tasks = getState().newTasks.list.filter(task => task.project === uid)
+		const tasks = getState().tasks.list.filter(task => task.project === uid)
 
 		tasks.map(task => {
 			dispatch(removeTask(task.uid))

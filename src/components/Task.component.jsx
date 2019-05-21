@@ -1,62 +1,53 @@
 import React, { Component } from "react"
 import Tracker from "./Tracker.component"
-import { timeFilter } from "../functions"
+import { timeFilter } from "../lib/functions"
 import { store } from "../store"
 import { connect } from "react-redux"
-import { createTracker } from "../actions/Tracker.actions"
-import { removeTask } from "../actions/Task.actions"
 
-class renderTask extends Component {
-	constructor(props) {
-		super(props)
-	}
-
-	render() {
-		const { task, trackers, addTracker, removeTask } = this.props
-		return (
-			<div>
-				TASK {task.uid}{" "}
+const Task = ({
+	task,
+	trackers,
+	createTracker,
+	createTask,
+	removeTask,
+	toggleRunning
+}) => {
+	return (
+		<article className={`task ${task.running ? "running" : ""}`}>
+			<div className='flex row justify-between'>
+				<h2>{task.title}</h2>
 				<button
-					onClick={() => {
-						addTracker(task.project, task.uid)
-					}}>
-					ADD TRACKER
-				</button>{" "}
-				<button
+					className='svg delete'
+					title='Delete'
 					onClick={() => {
 						removeTask(task.uid)
 					}}>
-					REMOVE TASK
+					<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'>
+						<path
+							id='ic_clear_24px'
+							d='M19,6.41,17.59,5,12,10.59,6.41,5,5,6.41,10.59,12,5,17.59,6.41,19,12,13.41,17.59,19,19,17.59,13.41,12Z'
+							transform='translate(-5 -5)'
+						/>
+					</svg>
 				</button>
-				<div>
-					{trackers.list
-						.filter(tracker => tracker.task === task.uid)
-						.map(tracker => {
-							return <Tracker tracker={tracker} task={task} key={tracker.uid} />
-						})}
-				</div>
 			</div>
-		)
-	}
-}
 
-const mapStateToProps = state => {
-	return {
-		trackers: state.trackers
-	}
-}
+			{/* <div className='flex row'> */}
+			{/* <button
+				onClick={() => {
+					createTracker(task.project, task.uid)
+				}}>
+				Add Tracker
+			</button> */}
 
-const mapDispatchToProps = dispatch => {
-	return {
-		addTracker: (projectUID, taskUID) => {
-			dispatch(createTracker(projectUID, taskUID))
-		},
-		removeTask: uid => {
-			dispatch(removeTask(uid))
-		}
-	}
+			{/* </div> */}
+			<div className='trackers'>
+				{trackers.map(tracker => {
+					return <Tracker tracker={tracker} task={task} key={tracker.uid} />
+				})}
+			</div>
+		</article>
+	)
 }
-
-const Task = connect(mapStateToProps, mapDispatchToProps)(renderTask)
 
 export default Task

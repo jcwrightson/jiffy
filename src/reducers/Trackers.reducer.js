@@ -17,7 +17,7 @@ export function trackers(
 			return Object.assign({}, state, {
 				list: [
 					...state.list.map(tracker => {
-						if (tracker.uid === action.payload) {
+						if (tracker.uid === action.payload.tracker) {
 							tracker.running = !tracker.running
 						}
 						return { ...tracker }
@@ -45,7 +45,7 @@ export function trackers(
 				list: [
 					...state.list.map(tracker => {
 						tracker.running = false
-						return {...tracker}
+						return { ...tracker }
 					})
 				]
 			})

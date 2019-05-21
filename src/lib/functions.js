@@ -30,9 +30,7 @@ export function getHiddenProp() {
 }
 
 export function isToday(timeStamp) {
-	return (
-		moment().format("YYMMDD") === moment(timeStamp).format("YYMMDD")
-	)
+	return moment().format("YYMMDD") === moment(timeStamp).format("YYMMDD")
 }
 export function dayOfWeekfromNum(day) {
 	switch (day) {
@@ -116,4 +114,41 @@ export const uuidv4 = () => {
 			(crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
 		).toString(16)
 	)
+}
+
+export const getAggregate = (arr, value) => {
+	return arr.reduce((agg, elem) => {
+		return agg + elem[value]
+	}, 0)
+}
+
+export const roundedTime = raw => {
+	Math.round(raw)
+	const date = new Date(raw)
+	const days = date.getDate() - 1
+	let hours = days * 24 + date.getHours() - 1
+	let minutes = date.getMinutes()
+
+	if (minutes < 30 && minutes > 15) {
+		minutes = 30
+	} else {
+		if (minutes > 30 && minutes < 45) {
+			minutes = 45
+		} else {
+			if (minutes > 45) {
+				hours++
+				minutes = 0
+			}
+		}
+	}
+
+	let timeStr = ""
+	if (hours > 0) {
+		timeStr = `${hours}h `
+	}
+
+	if (minutes > 0) {
+		timeStr = `${timeStr}${minutes}min`
+	}
+	return timeStr
 }

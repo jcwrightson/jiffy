@@ -17,16 +17,7 @@ const DateTimeFilter = stamp => {
 	return dateTime
 }
 
-const TrackerMarkup = ({ created, time }) => {
-	return (
-		<ul>
-			<li>{isToday(created) ? "Today" : DateTimeFilter(created)}</li>
-			<li>{timeFilter(time)}</li>
-		</ul>
-	)
-}
-
-const ticker = (updateTracker, tracker) => {
+const ticker = (updateTracker, tracker, createTracker, start) => {
 	const time = new Date(Date.now())
 	if (time.getHours() + time.getMinutes() === 0 && !midnight) {
 		clearInterval(window.__tracker__[tracker.uid].tick)
@@ -36,14 +27,9 @@ const ticker = (updateTracker, tracker) => {
 			window.__tracker__[tracker.uid].midnight = false
 		}, 60000)
 
-		toggleRunning(tracker.uid)
-
-		// tracker = Date.now()
-		// store.dispatch({
-		// 	type: "ADD_TRACKER",
-		// 	payload: { task: task, created: tracker }
-		// })
-		// start(task, tracker)
+		toggleRunning(task.uid, tracker.uid)
+		createTracker(tracker.project, tracker.task)
+		start()
 	} else {
 		updateTracker(tracker.uid, 1000)
 	}
@@ -54,19 +40,19 @@ const renderTracker = ({
 	tracker,
 	deleteTracker,
 	toggleRunning,
-	updateTracker
+	updateTracker,
+	createTracker
 }) => {
-
-  if(!window.__tracker__[tracker.uid]){
-    window.__tracker__[tracker.uid] = {
-      tick: null,
-      midnight: null
-    }
-  }
+	if (!window.__tracker__[tracker.uid]) {
+		window.__tracker__[tracker.uid] = {
+			tick: null,
+			midnight: null
+		}
+	}
 	const start = () => {
-			window.__tracker__[tracker.uid].tick = setInterval(() => {
-				ticker(updateTracker, tracker)
-			}, 1000)
+		window.__tracker__[tracker.uid].tick = setInterval(() => {
+			ticker(updateTracker, tracker, createTracker, start)
+		}, 1000)
 	}
 
 	const stop = () => {
@@ -74,28 +60,35 @@ const renderTracker = ({
 	}
 
 	return (
-		<div>
-			<TrackerMarkup {...tracker} />
-			<button
-				onClick={() => {
-					if (!tracker.running) {
-						start()
-						toggleRunning(tracker.uid)
-					} else {
+		<div className='tracker'>
+			<ul className='meta flex row justify-between'>
+				<li>
+					{isToday(tracker.created) ? "Today" : DateTimeFilter(tracker.created)}
+				</li>
+				<li>{timeFilter(tracker.time)}</li>
+			</ul>
+			<div className='flex row justify-end'>
+				{/* <button
+					onClick={() => {
 						stop()
-						toggleRunning(tracker.uid)
-					}
-				}}>
-				{tracker.running ? "Stop" : "Start"}
-			</button>
-			<button
-				onClick={() => {
-          stop()
-          deleteTracker(tracker.uid)
-          window.__tracker__[tracker.uid] = null
-				}}>
-				Delete
-			</button>
+						deleteTracker(tracker.uid)
+						window.__tracker__[tracker.uid] = null
+					}}>
+					Delete
+				</button> */}
+        <button
+							onClick={() => {
+								if (!tracker.running) {
+									start()
+									toggleRunning(task.uid, tracker.uid)
+								} else {
+									stop()
+									toggleRunning(task.uid, tracker.uid)
+								}
+							}}>
+							{tracker.running ? "Stop" : "Start"}
+						</button>
+			</div>
 		</div>
 	)
 }
@@ -105,11 +98,14 @@ const mapDispatchToProps = dispatch => {
 		deleteTracker: uid => {
 			dispatch({ type: "REMOVE_TRACKER", payload: uid })
 		},
-		toggleRunning: uid => {
-			dispatch({ type: "TOGGLE_RUNNING", payload: uid })
+		toggleRunning: (taskUID, trackerUID) => {
+			dispatch({ type: "TOGGLE_RUNNING", payload: {task: taskUID, tracker: trackerUID} })
 		},
 		updateTracker: uid => {
 			dispatch({ type: "UPDATE_TRACKER", payload: { uid: uid, time: 1000 } })
+		},
+		createTracker: (projectUID, taskUID) => {
+			dispatch(createTracker(projectUID, taskUID))
 		}
 	}
 }

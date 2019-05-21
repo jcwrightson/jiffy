@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
-@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-
 
 body {
   font-size: 100%;
@@ -10,11 +8,15 @@ body {
 h1 {
   margin: 0;
   font-weight: 300;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 h2 {
   margin: 0;
   font-weight: 300;
 
+}
+
+button{
+  font-size: .9rem !important;
 }
