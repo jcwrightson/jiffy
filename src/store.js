@@ -8,9 +8,7 @@ import { routerMiddleware, connectRouter } from "connected-react-router"
 
 import * as reducers from "./reducers/"
 
-export const history = createBrowserHistory({
-	basename: process.env.PUBLIC_URL || '/'
-});
+export const history = createBrowserHistory()
 
 const App = combineReducers({ ...reducers, routing: connectRouter(history) })
 

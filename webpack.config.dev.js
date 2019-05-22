@@ -50,7 +50,7 @@ module.exports = {
 	devtool: "cheap-module-source-map",
 	devServer: {
 		port: 3030,
-		contentBase: path.join(__dirname, "dist"),
+		contentBase: path.join(__dirname, "public"),
 		compress: true,
 		historyApiFallback: true
 	}
