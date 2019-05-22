@@ -7,7 +7,7 @@ const renderNavBar = ({ createProject, createTask, location, history }) => {
 	return (
 		<nav className="fixed top drop-shadow">
 			<div className='container flex-row'>
-				<Link to={"/"}><h1>Time Tracking</h1></Link>
+				<Link to={"/"}><h1>Jiffy</h1></Link>
 
 				<div className='top-nav flex-row '>
 					<button

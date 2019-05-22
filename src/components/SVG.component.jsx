@@ -1,7 +1,7 @@
 import React from "react"
 
-const SVG = ({ path }) => {
-	return <span dangerouslySetInnerHTML={{ __html: path }} />
+const SVG = ({ file }) => {
+	return <span className="svg" dangerouslySetInnerHTML={{ __html: file }} />
 }
 
 export default SVG

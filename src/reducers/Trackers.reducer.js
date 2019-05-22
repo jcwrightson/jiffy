@@ -24,7 +24,6 @@ export function trackers(
 								interval: action.payload.interval,
 								running: true
 							}
-
 						}
 						return { ...tracker }
 					})
@@ -45,12 +44,15 @@ export function trackers(
 					})
 				]
 			})
-		case "UPDATE_TRACKER":
+		case "UPDATE_TRACKER_TIME":
 			return Object.assign({}, state, {
 				list: [
 					...state.list.map(tracker => {
 						if (tracker.uid === action.payload.uid) {
-							tracker.time += action.payload.time
+							return {
+								...tracker,
+								time: tracker.time + action.payload.time
+							}
 						}
 
 						return { ...tracker }
@@ -65,8 +67,7 @@ export function trackers(
 			return Object.assign({}, state, {
 				list: [
 					...state.list.map(tracker => {
-						tracker.running = false
-						return { ...tracker }
+						return { ...tracker, running: false }
 					})
 				]
 			})

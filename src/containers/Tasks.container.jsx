@@ -35,7 +35,7 @@ const renderTasks = ({
 				</Link>
 				<hr />
 			</div>
-			<div className='tasks container'>
+			<div className='tasks container list'>
 				{tasks
 					.filter(task => task.project === match.params.uid)
 					.map(task => {

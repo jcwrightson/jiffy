@@ -19,7 +19,7 @@ const renderProjects = ({
 	toggleEditProject
 }) => {
 	return (
-		<div className='projects container'>
+		<div className='projects container list'>
 			{projects.map(project => {
 				return (
 					<Project

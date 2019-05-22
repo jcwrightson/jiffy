@@ -22,9 +22,9 @@ export function removeTracker(uid) {
 	}
 }
 
-export function updateTracker(uid, time) {
+export function updateTrackerTime(uid, time) {
 	return dispatch => {
-		dispatch({ type: "UPDATE_TRACKER", payload: { uid, time } })
+		dispatch({ type: "UPDATE_TRACKER_TIME", payload: { uid, time } })
 	}
 }
 
@@ -32,7 +32,7 @@ export function startTracker(uid) {
 	return dispatch => {
 
 		const interval = setInterval(() => {
-			dispatch(updateTracker(uid, 1000))
+			dispatch(updateTrackerTime(uid, 1000))
 		}, 1000)
 
 		dispatch({ type: "START_TRACKER", payload: { interval, uid } })

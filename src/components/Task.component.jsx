@@ -1,8 +1,8 @@
-import React, { Component } from "react"
-import Tracker from "./Tracker.component"
-import { timeFilter } from "../lib/functions"
-import { store } from "../store"
-import { connect } from "react-redux"
+import React from "react"
+import { timeFilter, getAggregate } from "../lib/functions"
+import SVG from "./SVG.component"
+import icMore from "../assets/ic_more_vert_24px.svg"
+import icUpdate from "../assets/ic_update_24px.svg"
 
 const Task = ({
 	task,
@@ -16,28 +16,34 @@ const Task = ({
 	stopTask
 }) => {
 	return (
-		<article
-			className={`task ${task.running ? "running" : ""}`}
-			onClick={e => {
-				if (task.editing) {
-					toggleEditTask(e, task.uid)
-				}
-			}}>
-			<div className='flex row justify-between'>
+		<article className={`task ${task.running ? "running" : ""}`}>
+			<div className='flex-row title'>
 				{task.editing ? (
-					<input
-						type='text'
-						value={task.title}
-						onChange={e => handleEditTask(e, task.uid)}
-						onKeyDown={e => toggleEditTask(e, task.uid)}
-						onClick={e => {
-							e.preventDefault
-							e.target.select()
-							e.stopPropagation()
-						}}
-					/>
+					<React.Fragment>
+						<input
+							type='text'
+							value={task.title}
+							onChange={e => handleEditTask(e, task.uid)}
+							onKeyDown={e => toggleEditTask(e, task.uid)}
+							onClick={e => {
+								e.target.select()
+								e.stopPropagation()
+							}}
+						/>
+						<button
+							type='button'
+							onClick={e => {
+								if (task.editing) {
+									toggleEditTask(e, task.uid)
+								}
+							}}>
+							Cancel
+						</button>
+					</React.Fragment>
 				) : (
+					// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 					<h2
+						type='button'
 						className='editable'
 						onClick={e => {
 							e.stopPropagation()
@@ -46,37 +52,40 @@ const Task = ({
 						{task.title}
 					</h2>
 				)}
-				<button
-					className='svg delete'
-					title='Delete'
-					onClick={() => {
-						removeTask(task.uid)
-					}}>
-					<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'>
-						<path
-							id='ic_clear_24px'
-							d='M19,6.41,17.59,5,12,10.59,6.41,5,5,6.41,10.59,12,5,17.59,6.41,19,12,13.41,17.59,19,19,17.59,13.41,12Z'
-							transform='translate(-5 -5)'
-						/>
-					</svg>
-				</button>
 			</div>
 
-			<div className='trackers'>
-				{trackers.map(tracker => {
-					return <Tracker tracker={tracker} task={task} key={tracker.uid} />
-				})}
-			</div>
-			<div>
-				<button
-					className='secondary'
-					onClick={() => {
-						task.running ?
-						stopTask(task.uid) : startTask(task.uid)
-					}}>
-					{task.running ? "Stop" : "Start"}
-				</button>
-				{/* <button onClick={()=>createTracker(task.project, task.uid)}>Add Tracker</button> */}
+			<div className='flex-row controls'>
+				<div className='time flex-row'>
+					<SVG file={icUpdate} />
+					{timeFilter(getAggregate(trackers, "time"))}
+				</div>
+
+			
+					<button
+						type='button'
+						className='toggleRunning'
+						onClick={() =>
+							task.running ? stopTask(task.uid) : startTask(task.uid)
+						}>
+						{task.running ? "Stop" : "Start"}
+					</button>
+	
+
+				<div className='dots'>
+					<SVG file={icMore} />
+					<ul className='menu drop-shadow'>
+						<li>
+							<button
+								type='button'
+								title='Delete'
+								onClick={() => {
+									removeTask(task.uid)
+								}}>
+								Delete Task
+							</button>
+						</li>
+					</ul>
+				</div>
 			</div>
 		</article>
 	)
