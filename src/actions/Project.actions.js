@@ -1,12 +1,12 @@
 import { uuidv4 } from "../lib/functions"
 import { removeTask } from "./Task.actions"
 
-export function createProject(title) {
+export function createProject(title, uid) {
 	return (dispatch, getState) => {
 		dispatch({
 			type: "CREATE_PROJECT",
 			payload: {
-				uid: uuidv4(),
+				uid: uid || uuidv4(),
 				created: Date.now(),
 				title: title || "New Project",
 				editing: false,
@@ -32,11 +32,31 @@ export function removeProject(uid) {
 	}
 }
 
-export function handleEdit(e, uid) {
+export function toggleEditProject(e, uid) {
+	return dispatch => {
+		if (e.key === "Enter" || e.type === "click") {
+			dispatch({
+				type: "TOGGLE_EDIT_PROJECT",
+				payload: uid
+			})
+		}
+	}
+}
+
+export function handleEditProject(e, uid) {
 	return dispatch => {
 		dispatch({
 			type: "EDIT_PROJECT",
 			payload: { uid: uid, body: { title: e.target.value } }
+		})
+	}
+}
+
+export function queryProjects(value){
+	return dispatch => {
+		dispatch({
+			type: "QUERY_PROJECTS",
+			payload: value
 		})
 	}
 }

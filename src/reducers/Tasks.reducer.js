@@ -17,12 +17,23 @@ export function tasks(
 			return Object.assign({}, state, {
 				list: [...state.list.filter(task => task.uid !== action.payload)]
 			})
-		case "TOGGLE_RUNNING":
+		case "START_TASK":
 			return Object.assign({}, state, {
 				list: [
 					...state.list.map(task => {
-						if (task.uid === action.payload.task) {
-							task.running = !task.running
+						if (task.uid === action.payload) {
+							task.running = true
+						}
+						return { ...task }
+					})
+				]
+			})
+			case "STOP_TASK":
+			return Object.assign({}, state, {
+				list: [
+					...state.list.map(task => {
+						if (task.uid === action.payload) {
+							task.running = false
 						}
 						return { ...task }
 					})
@@ -39,7 +50,7 @@ export function tasks(
 					})
 				]
 			})
-		case "TOGGLE_EDIT":
+		case "TOGGLE_EDIT_TASK":
 			return Object.assign({}, state, {
 				list: [
 					...state.list.map(task => {

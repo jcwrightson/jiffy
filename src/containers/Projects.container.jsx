@@ -15,8 +15,8 @@ const renderProjects = ({
 	trackers,
 	removeProject,
 	createProject,
-	handleEdit,
-	toggleEdit
+	handleEditProject,
+	toggleEditProject
 }) => {
 	return (
 		<div className='projects container'>
@@ -30,8 +30,8 @@ const renderProjects = ({
 						key={project.uid}
 						removeProject={removeProject}
 						createProject={createProject}
-						handleEdit={handleEdit}
-						toggleEdit={toggleEdit}
+						handleEditProject={handleEditProject}
+						toggleEditProject={toggleEditProject}
 						{...project}
 					/>
 				)

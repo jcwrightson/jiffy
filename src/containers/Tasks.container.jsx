@@ -17,10 +17,11 @@ const renderTasks = ({
 	match,
 	createTask,
 	createTracker,
-	toggleRunning,
 	removeTask,
-	handleEdit,
-	toggleEdit
+	handleEditTask,
+	toggleEditTask,
+	startTask,
+	stopTask
 }) => {
 	const thisProject = projects.filter(
 		project => project.uid === match.params.uid
@@ -47,9 +48,10 @@ const renderTasks = ({
 								createTask={createTask}
 								createTracker={createTracker}
 								removeTask={removeTask}
-								handleEdit={handleEdit}
-								toggleEdit={toggleEdit}
-								toggleRunning={toggleRunning}
+								handleEditTask={handleEditTask}
+								toggleEditTask={toggleEditTask}
+								startTask={startTask}
+								stopTask={stopTask}
 							/>
 						)
 					})}

@@ -152,3 +152,15 @@ export const roundedTime = raw => {
 	}
 	return timeStr
 }
+
+export const DateTimeFilter = stamp => {
+	const date = new Date(stamp)
+	const day = date.getDay()
+	const dayOfMonth = date.getDate()
+	const month = date.getMonth() + 1
+	const year = date.getFullYear()
+	const dateTime = `${
+		dayOfWeekfromNum(day).short
+	} ${dayOfMonth}/${month}/${year}`
+	return dateTime
+}

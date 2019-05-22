@@ -10,16 +10,17 @@ const Task = ({
 	createTracker,
 	createTask,
 	removeTask,
-	handleEdit,
-	toggleEdit,
-	toggleRunning
+	handleEditTask,
+	toggleEditTask,
+	startTask,
+	stopTask
 }) => {
 	return (
 		<article
 			className={`task ${task.running ? "running" : ""}`}
 			onClick={e => {
 				if (task.editing) {
-					toggleEdit(e, task.uid)
+					toggleEditTask(e, task.uid)
 				}
 			}}>
 			<div className='flex row justify-between'>
@@ -27,8 +28,8 @@ const Task = ({
 					<input
 						type='text'
 						value={task.title}
-						onChange={e => handleEdit(e, task.uid)}
-						onKeyDown={e => toggleEdit(e, task.uid)}
+						onChange={e => handleEditTask(e, task.uid)}
+						onKeyDown={e => toggleEditTask(e, task.uid)}
 						onClick={e => {
 							e.preventDefault
 							e.target.select()
@@ -40,7 +41,7 @@ const Task = ({
 						className='editable'
 						onClick={e => {
 							e.stopPropagation()
-							toggleEdit(e, task.uid)
+							toggleEditTask(e, task.uid)
 						}}>
 						{task.title}
 					</h2>
@@ -70,7 +71,8 @@ const Task = ({
 				<button
 					className='secondary'
 					onClick={() => {
-						toggleRunning(task.uid, trackers[0].uid)
+						task.running ?
+						stopTask(task.uid) : startTask(task.uid)
 					}}>
 					{task.running ? "Stop" : "Start"}
 				</button>

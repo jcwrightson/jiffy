@@ -17,8 +17,8 @@ const Project = ({
 	title,
 	removeProject,
 	createProject,
-	handleEdit,
-	toggleEdit,
+	handleEditProject,
+	toggleEditProject,
 	push
 }) => {
 	const hasRunningTask = tasks => {
@@ -30,7 +30,7 @@ const Project = ({
 			className={`project ${hasRunningTask(tasks) ? "running" : ""}`}
 			onClick={e => {
 				if (editing) {
-					toggleEdit(e, uid)
+					toggleEditProject(e, uid)
 				}
 			}}>
 			<div className='flex row justify-between'>
@@ -38,8 +38,8 @@ const Project = ({
 					<input
 						type='text'
 						value={title}
-						onChange={e => handleEdit(e, uid)}
-						onKeyDown={e => toggleEdit(e, uid)}
+						onChange={e => handleEditProject(e, uid)}
+						onKeyDown={e => toggleEditProject(e, uid)}
 						onClick={e => {
 							e.preventDefault
 							e.target.select()
@@ -51,7 +51,7 @@ const Project = ({
 						className='editable'
 						onClick={e => {
 							e.stopPropagation()
-							toggleEdit(e, uid)
+							toggleEditProject(e, uid)
 						}}>
 						{title}
 					</h2>

@@ -13,12 +13,23 @@ export function trackers(
 			return Object.assign({}, state, {
 				list: [{ ...action.payload }, ...state.list]
 			})
-		case "TOGGLE_RUNNING":
+		case "START_TRACKER":
 			return Object.assign({}, state, {
 				list: [
 					...state.list.map(tracker => {
-						if (tracker.uid === action.payload.tracker) {
-							tracker.running = !tracker.running
+						if (tracker.uid === action.payload) {
+							tracker.running = true
+						}
+						return { ...tracker }
+					})
+				]
+			})
+		case "STOP_TRACKER":
+			return Object.assign({}, state, {
+				list: [
+					...state.list.map(tracker => {
+						if (tracker.uid === action.payload) {
+							tracker.running = false
 						}
 						return { ...tracker }
 					})
