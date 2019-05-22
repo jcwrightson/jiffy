@@ -1,4 +1,6 @@
+/* eslint-disable no-bitwise */
 import moment from "moment"
+import crypto from "crypto"
 
 export function timeFilter(stamp) {
 	const date = new Date(stamp)
@@ -21,7 +23,7 @@ export function getHiddenProp() {
 	if ("hidden" in document) return "hidden"
 
 	// otherwise loop over all the known prefixes until we find one
-	for (let i = 0; i < prefixes.length; i++) {
+	for (let i = 0; i < prefixes.length; i += 1) {
 		if (`${prefixes[i]}Hidden` in document) return `${prefixes[i]}Hidden`
 	}
 
@@ -97,10 +99,9 @@ export function copyToClipboard(text) {
 		document.body.appendChild(textarea)
 		textarea.select()
 		try {
-			return document.execCommand("copy") // Security exception may be thrown by some browsers.
+			document.execCommand("copy") // Security exception may be thrown by some browsers.
 		} catch (ex) {
 			console.warn("Copy to clipboard failed.", ex)
-			return false
 		} finally {
 			document.body.removeChild(textarea)
 		}
@@ -131,15 +132,11 @@ export const roundedTime = raw => {
 
 	if (minutes < 30 && minutes > 15) {
 		minutes = 30
-	} else {
-		if (minutes > 30 && minutes < 45) {
-			minutes = 45
-		} else {
-			if (minutes > 45) {
-				hours++
-				minutes = 0
-			}
-		}
+	} else if (minutes > 30 && minutes < 45) {
+		minutes = 45
+	} else if (minutes > 45) {
+		hours += 1
+		minutes = 0
 	}
 
 	let timeStr = ""

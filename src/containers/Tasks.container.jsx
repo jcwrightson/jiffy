@@ -1,14 +1,9 @@
-import React, { Component } from "react"
+import React from "react"
 import { connect } from "react-redux"
-import { Link } from "react-router-dom"
-
-import { store } from "../store"
-
 import { bindActionCreators } from "redux"
-import * as actions from "../actions/"
+import * as actions from "../actions"
 
 import Task from "../components/Task.component"
-import { push } from "connected-react-router"
 
 const renderTasks = ({
 	projects,
@@ -29,20 +24,20 @@ const renderTasks = ({
 
 	return (
 		<main>
-			<div className='container title'>
+			{/* <div className='container title'>
 				<Link to='/'>
 					<h1>{thisProject.title}</h1>
 				</Link>
 				<hr />
-			</div>
+			</div> */}
 			<div className='tasks container list'>
 				{tasks
 					.filter(task => task.project === match.params.uid)
 					.map(task => {
 						return (
 							<Task
-								trackers={trackers.filter(tracker => tracker.task === task.uid)}
-								tasks={tasks.filter(task => task.project === match.params.uid)}
+								trackers={trackers.filter(tr => tr.task === task.uid)}
+								tasks={tasks.filter(t => t.project === match.params.uid)}
 								task={task}
 								key={task.uid}
 								createTask={createTask}

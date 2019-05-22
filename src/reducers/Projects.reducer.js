@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 export function projects(
 	state = {
 		query: "",
@@ -41,7 +42,7 @@ export function projects(
 				]
 			})
 
-			case "QUERY_PROJECTS":
+		case "QUERY_PROJECTS":
 			return Object.assign({}, state, {
 				query: action.payload
 			})

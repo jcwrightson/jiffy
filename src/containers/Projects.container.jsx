@@ -1,13 +1,9 @@
 import React from "react"
 import { connect } from "react-redux"
-import { push } from "react-router-redux"
-import { withRouter, Link } from "react-router-dom"
-
 import { bindActionCreators } from "redux"
-import * as actions from "../actions/"
+import * as actions from "../actions"
 
 import Project from "../components/Project.component"
-import { store } from "../store"
 
 const renderProjects = ({
 	projects,

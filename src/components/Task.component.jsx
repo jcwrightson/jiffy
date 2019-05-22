@@ -7,8 +7,6 @@ import icUpdate from "../assets/ic_update_24px.svg"
 const Task = ({
 	task,
 	trackers,
-	createTracker,
-	createTask,
 	removeTask,
 	handleEditTask,
 	toggleEditTask,
@@ -60,16 +58,14 @@ const Task = ({
 					{timeFilter(getAggregate(trackers, "time"))}
 				</div>
 
-			
-					<button
-						type='button'
-						className='toggleRunning'
-						onClick={() =>
-							task.running ? stopTask(task.uid) : startTask(task.uid)
-						}>
-						{task.running ? "Stop" : "Start"}
-					</button>
-	
+				<button
+					type='button'
+					className='toggleRunning'
+					onClick={() =>
+						task.running ? stopTask(task.uid) : startTask(task.uid)
+					}>
+					{task.running ? "Stop" : "Start"}
+				</button>
 
 				<div className='dots'>
 					<SVG file={icMore} />

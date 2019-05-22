@@ -1,16 +1,21 @@
 import React from "react"
-import { Link, withRouter} from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 import { connect } from "react-redux"
-import { createProject, createTask } from "../actions"
 
-const renderNavBar = ({ createProject, createTask, location, history }) => {
+import { bindActionCreators } from "redux"
+import * as actions from "../actions"
+
+const renderNavBar = ({ createProject, createTask, location }) => {
 	return (
-		<nav className="fixed top drop-shadow">
+		<nav className='fixed top drop-shadow'>
 			<div className='container flex-row'>
-				<Link to={"/"}><h1>Jiffy</h1></Link>
+				<Link to='/'>
+					<h1>Jiffy</h1>
+				</Link>
 
 				<div className='top-nav flex-row '>
 					<button
+						type='button'
 						disabled
 						className=''
 						onClick={() => {
@@ -19,11 +24,14 @@ const renderNavBar = ({ createProject, createTask, location, history }) => {
 						Import
 					</button>
 					<button
+						type='button'
 						className='primary'
-						onClick={() => {
-							{location.pathname === '/' ? createProject() : createTask(location.pathname.replace('/projects/', ''))}
-						}}>
-						{location.pathname === '/' ? 'New Project' : 'New Task'}
+						onClick={() =>
+							location.pathname === "/"
+								? createProject()
+								: createTask(location.pathname.replace("/projects/", ""))
+						}>
+						{location.pathname === "/" ? "New Project" : "New Task"}
 					</button>
 				</div>
 			</div>
@@ -33,18 +41,15 @@ const renderNavBar = ({ createProject, createTask, location, history }) => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		createProject: () => {
-			dispatch(createProject())
-		},
-		createTask: (uid) => {
-			dispatch(createTask(uid))
-		}
+		...bindActionCreators(actions, dispatch)
 	}
 }
 
-const NavBar = withRouter(connect(
-	null,
-	mapDispatchToProps
-)(renderNavBar))
+const NavBar = withRouter(
+	connect(
+		null,
+		mapDispatchToProps
+	)(renderNavBar)
+)
 
 export default NavBar

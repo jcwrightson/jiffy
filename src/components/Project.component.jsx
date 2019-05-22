@@ -1,14 +1,10 @@
-import React, { Memo } from "react"
-import { connect } from "react-redux"
-import { withRouter, Link } from "react-router-dom"
+import React from "react"
+import { Link } from "react-router-dom"
 import { timeFilter, roundedTime, getAggregate } from "../lib/functions"
-import { store } from "../store"
 
 import SVG from "./SVG.component"
 import icMore from "../assets/ic_more_vert_24px.svg"
-
 import icUpdate from "../assets/ic_update_24px.svg"
-import icClear from "../assets/ic_clear_24px.svg"
 
 const Project = ({
 	uid,
@@ -17,20 +13,18 @@ const Project = ({
 	tasks,
 	title,
 	removeProject,
-	createProject,
 	handleEditProject,
-	toggleEditProject,
-	push
+	toggleEditProject
 }) => {
-	const hasRunningTask = tasks => {
+	const hasRunningTask = () => {
 		return tasks.filter(task => task.running === true).length > 0
 	}
 
 	return (
-		<article className={`project ${hasRunningTask(tasks) ? "running" : ""}`}>
+		<article className={`project ${hasRunningTask() ? "running" : ""}`}>
 			<div className='flex-row title'>
 				{editing ? (
-					<React.Fragment>
+					<>
 						<input
 							type='text'
 							value={title}
@@ -50,11 +44,10 @@ const Project = ({
 							}}>
 							Cancel
 						</button>
-					</React.Fragment>
+					</>
 				) : (
 					// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 					<h2
-						type='button'
 						className='editable'
 						onClick={e => {
 							e.stopPropagation()
@@ -66,12 +59,18 @@ const Project = ({
 			</div>
 
 			<div className='flex-row controls'>
-				<div className='time flex-row'>
-					{roundedTime(getAggregate(trackers, "time")) && (
+				{hasRunningTask() ? (
+					<div className='time flex-row'>
 						<SVG file={icUpdate} />
-					)}
-					{roundedTime(getAggregate(trackers, "time"))}
-				</div>
+						{timeFilter(getAggregate(trackers, "time"))}
+					</div>
+				) : (
+					<div className='time flex-row'>
+						<SVG file={icUpdate} />
+						{roundedTime(getAggregate(trackers, "time")) ||
+							timeFilter(getAggregate(trackers, "time"))}
+					</div>
+				)}
 
 				<Link to={`/projects/${uid}`}>
 					<button type='button' className='secondary'>

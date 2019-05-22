@@ -30,16 +30,48 @@ export function createTask(projectUID, title, blurb, uid) {
 	}
 }
 
+export function startTask(uid) {
+	return (dispatch, getState) => {
+		dispatch({
+			type: "START_TASK",
+			payload: uid
+		})
+
+		const tracker = getState().trackers.list.filter(tr => tr.task === uid)[0]
+			.uid
+
+		if (tracker) {
+			dispatch(startTracker(tracker))
+		}
+	}
+}
+
+export function stopTask(uid) {
+	return (dispatch, getState) => {
+		dispatch({
+			type: "STOP_TASK",
+			payload: uid
+		})
+
+		const tracker = getState().trackers.list.filter(
+			tracker => tracker.task === uid
+		)[0].uid
+
+		if (tracker) {
+			dispatch(stopTracker(tracker))
+		}
+	}
+}
+
 export function removeTask(uid) {
 	return (dispatch, getState) => {
 		const trackers = getState().trackers.list.filter(
 			tracker => tracker.task === uid
 		)
 
+		dispatch(stopTask(uid))
+
 		trackers.map(tracker => {
-			if (tracker.running) {
-				clearInterval(window.__tracker__[tracker.uid].tick)
-			}
 			dispatch({ type: "REMOVE_TRACKER", payload: tracker.uid })
 		})
 
@@ -62,37 +94,7 @@ export function handleEditTask(e, uid) {
 	return dispatch => {
 		dispatch({
 			type: "EDIT_TASK",
-			payload: { uid: uid, body: { title: e.target.value } }
+			payload: { uid, body: { title: e.target.value } }
 		})
-	}
-}
-
-export function startTask(uid) {
-	return (dispatch, getState) => {
-		dispatch({
-			type: "START_TASK",
-			payload: uid
-		})
-
-		const tracker = getState().trackers.list.filter(tracker => tracker.task === uid)[0].uid
-
-		if(tracker){
-			dispatch(startTracker(tracker))
-		}
-	}
-}
-
-export function stopTask(uid){
-	return (dispatch, getState)=>{
-		dispatch({
-			type: "STOP_TASK",
-			payload: uid
-		})
-
-		const tracker = getState().trackers.list.filter(tracker => tracker.task === uid)[0].uid
-
-		if(tracker){
-			dispatch(stopTracker(tracker))
-		}
 	}
 }

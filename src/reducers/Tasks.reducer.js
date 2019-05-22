@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 export function tasks(
 	state = {
 		list: []
@@ -22,18 +23,18 @@ export function tasks(
 				list: [
 					...state.list.map(task => {
 						if (task.uid === action.payload) {
-							task.running = true
+							return { ...task, running: true }
 						}
 						return { ...task }
 					})
 				]
 			})
-			case "STOP_TASK":
+		case "STOP_TASK":
 			return Object.assign({}, state, {
 				list: [
 					...state.list.map(task => {
 						if (task.uid === action.payload) {
-							task.running = false
+							return { ...task, running: false }
 						}
 						return { ...task }
 					})
@@ -65,8 +66,7 @@ export function tasks(
 			return Object.assign({}, state, {
 				list: [
 					...state.list.map(task => {
-						task.running = false
-						return { ...task }
+						return { ...task, running: false }
 					})
 				]
 			})

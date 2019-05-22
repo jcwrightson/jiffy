@@ -47,12 +47,12 @@ export function handleEditProject(e, uid) {
 	return dispatch => {
 		dispatch({
 			type: "EDIT_PROJECT",
-			payload: { uid: uid, body: { title: e.target.value } }
+			payload: { uid, body: { title: e.target.value } }
 		})
 	}
 }
 
-export function queryProjects(value){
+export function queryProjects(value) {
 	return dispatch => {
 		dispatch({
 			type: "QUERY_PROJECTS",
