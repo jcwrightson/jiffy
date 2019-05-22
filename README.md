@@ -1,4 +1,4 @@
-# React Time Tracking
+# Jiffy
 
 A client side only time tracking app that makes use of LocalStorage.
 

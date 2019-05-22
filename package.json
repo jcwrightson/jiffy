@@ -1,7 +1,8 @@
 {
-	"name": "react-time-tracker",
+	"name": "jiffy",
+	"private": false,
 	"version": "1.0.0",
-	"description": "",
+	"description": "Time tracking app",
 	"main": "index.js",
 	"scripts": {
 		"precommit": "lint-staged",
@@ -20,7 +21,7 @@
 	},
 	"keywords": [],
 	"author": "jcwrightson",
-	"license": "ISC",
+	"license": "MIT",
 	"devDependencies": {
 		"@babel/core": "^7.4.3",
 		"@babel/plugin-proposal-class-properties": "^7.4.0",
