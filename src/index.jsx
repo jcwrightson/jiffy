@@ -14,11 +14,7 @@ import "./sass/styles.scss"
 import { isToday } from "./lib/functions"
 import { createTracker, removeTracker } from "./actions"
 
-const initApp = store => {
-
-	// Lets keep track of all running trackers globally
-	window.__tracker__ = {}
-	
+const initApp = () => {
 	// localStorage.removeItem("tracker-2")
 
 	window.addEventListener("beforeunload", () => {
@@ -39,12 +35,12 @@ const initApp = store => {
 		store.dispatch({ type: "LOAD_TRACKERS", payload: savedData.trackers })
 	}
 
-	//Add today's trackers
+	// Add today's trackers
 	if (savedData && savedData.tasks) {
 		savedData.tasks.map(task => {
-			const length = savedData.trackers
+			const { length } = savedData.trackers
 				.filter(tracker => tracker.task === task.uid)
-				.filter(tracker => isToday(tracker.created)).length
+				.filter(tracker => isToday(tracker.created))
 			if (length === 0) {
 				store.dispatch(createTracker(task.project, task.uid))
 			}
@@ -59,7 +55,7 @@ const initApp = store => {
 	}
 }
 
-initApp(store)
+initApp()
 
 ReactDOM.render(
 	<Provider store={store}>

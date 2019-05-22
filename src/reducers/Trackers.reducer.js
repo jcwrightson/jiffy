@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 export function trackers(
 	state = {
 		list: []
@@ -17,8 +18,13 @@ export function trackers(
 			return Object.assign({}, state, {
 				list: [
 					...state.list.map(tracker => {
-						if (tracker.uid === action.payload) {
-							tracker.running = true
+						if (tracker.uid === action.payload.uid) {
+							return {
+								...tracker,
+								interval: action.payload.interval,
+								running: true
+							}
+
 						}
 						return { ...tracker }
 					})
@@ -28,8 +34,12 @@ export function trackers(
 			return Object.assign({}, state, {
 				list: [
 					...state.list.map(tracker => {
-						if (tracker.uid === action.payload) {
-							tracker.running = false
+						if (tracker.uid === action.payload.uid) {
+							return {
+								...tracker,
+								interval: null,
+								running: false
+							}
 						}
 						return { ...tracker }
 					})

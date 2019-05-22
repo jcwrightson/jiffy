@@ -30,22 +30,24 @@ export function updateTracker(uid, time) {
 
 export function startTracker(uid) {
 	return dispatch => {
-		if (!window.__tracker__[uid]) {
-			window.__tracker__[uid] = {
-				tick: null,
-				midnight: null
-			}
-		}
-		window.__tracker__[uid].tick = setInterval(() => {
+
+		const interval = setInterval(() => {
 			dispatch(updateTracker(uid, 1000))
 		}, 1000)
-		dispatch({ type: "START_TRACKER" })
+
+		dispatch({ type: "START_TRACKER", payload: { interval, uid } })
 	}
 }
 
 export function stopTracker(uid) {
-	clearInterval(window.__tracker__[uid].tick)
-	return dispatch => {
-		dispatch({ type: "STOP_TRACKER" })
+	return (dispatch, getState) => {
+
+		const { interval } = getState().trackers.list.filter(
+			tracker => tracker.uid === uid
+		)[0]
+
+		clearInterval(interval)
+
+		dispatch({ type: "STOP_TRACKER", payload: { uid } })
 	}
 }
