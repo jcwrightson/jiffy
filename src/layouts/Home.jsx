@@ -3,6 +3,8 @@ import ProjectsContainer from "../containers/Projects.container"
 import { connect } from "react-redux"
 import { store } from "../store"
 import { createProject } from "../actions"
+
+import QueryProjects from "../components/QueryProjects.component"
 class renderHome extends Component {
 	constructor(props) {
 		super(props)
@@ -11,10 +13,11 @@ class renderHome extends Component {
 	render() {
 		return (
 			<main>
-				<div className="container title">
+				<div className='container title'>
 					<h1>Projects</h1>
 					<hr />
 				</div>
+				<QueryProjects />
 				<ProjectsContainer />
 			</main>
 		)

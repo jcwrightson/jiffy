@@ -1,5 +1,5 @@
 import { uuidv4 } from "../lib/functions"
-import { removeTask } from "./Task.actions";
+import { removeTask } from "./Task.actions"
 
 export function createProject(title) {
 	return (dispatch, getState) => {
@@ -20,15 +20,23 @@ export function createProject(title) {
 	}
 }
 
-
 export function removeProject(uid) {
-	return(dispatch, getState) => {
+	return (dispatch, getState) => {
 		const tasks = getState().tasks.list.filter(task => task.project === uid)
 
 		tasks.map(task => {
 			dispatch(removeTask(task.uid))
 		})
 
-		dispatch({type: "REMOVE_PROJECT", payload: uid})
+		dispatch({ type: "REMOVE_PROJECT", payload: uid })
+	}
+}
+
+export function handleEdit(e, uid) {
+	return dispatch => {
+		dispatch({
+			type: "EDIT_PROJECT",
+			payload: { uid: uid, body: { title: e.target.value } }
+		})
 	}
 }

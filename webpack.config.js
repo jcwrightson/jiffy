@@ -7,7 +7,7 @@ module.exports = {
 		extensions: [".js", ".jsx"]
 	},
 	mode: "production",
-  bail: true,
+	bail: true,
 	module: {
 		rules: [
 			{
@@ -25,6 +25,10 @@ module.exports = {
 						["@babel/plugin-proposal-class-properties"]
 					]
 				}
+			},
+			{
+				test: /\.svg$/,
+				loader: "svg-inline-loader"
 			},
 			{
 				test: /\.html$/,

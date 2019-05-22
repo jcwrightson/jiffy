@@ -3,7 +3,8 @@ import { connect } from "react-redux"
 import { push } from "react-router-redux"
 import { withRouter, Link } from "react-router-dom"
 
-import { removeProject, createProject } from "../actions/Project.actions"
+import { bindActionCreators } from "redux"
+import * as actions from "../actions/"
 
 import Project from "../components/Project.component"
 import { store } from "../store"
@@ -15,8 +16,7 @@ const renderProjects = ({
 	removeProject,
 	createProject,
 	handleEdit,
-	toggleEdit,
-	push
+	toggleEdit
 }) => {
 	return (
 		<div className='projects container'>
@@ -30,7 +30,6 @@ const renderProjects = ({
 						key={project.uid}
 						removeProject={removeProject}
 						createProject={createProject}
-						push={push}
 						handleEdit={handleEdit}
 						toggleEdit={toggleEdit}
 						{...project}
@@ -51,29 +50,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		removeProject: uid => {
-			dispatch(removeProject(uid))
-		},
-		createProject: () => {
-			dispatch(createProject())
-		},
-		push: path => {
-			dispatch(push(path))
-		},
-		handleEdit: (e, uid) => {
-			store.dispatch({
-				type: "EDIT_PROJECT",
-				payload: { uid: uid, body: { title: e.target.value } }
-			})
-		},
-		toggleEdit: (e, uid) => {
-			if(e.key === 'Enter' || e.type === 'click'){
-				store.dispatch({
-					type: 'TOGGLE_EDIT',
-					payload: uid
-				})
-			}
-		}
+		...bindActionCreators(actions, dispatch)
 	}
 }
 

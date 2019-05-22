@@ -1,8 +1,11 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Link } from "react-router-dom"
-import { createTracker, removeTask, createTask } from "../actions"
+
 import { store } from "../store"
+
+import { bindActionCreators } from "redux"
+import * as actions from "../actions/"
 
 import Task from "../components/Task.component"
 import { push } from "connected-react-router"
@@ -65,37 +68,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		createTask: uid => {
-			dispatch(createTask(uid))
-		},
-		createTracker: (projectUID, taskUID) => {
-			dispatch(createTracker(projectUID, taskUID))
-		},
-		removeTask: uid => {
-			dispatch(removeTask(uid))
-		},
-		toggleRunning: (taskUID, trackerUID) => {
-			dispatch({
-				type: "TOGGLE_RUNNING",
-				payload: { task: taskUID, tracker: trackerUID }
-			})
-		},
-		handleEdit: (e, uid) => {
-			store.dispatch({
-				type: "EDIT_TASK",
-				payload: { uid: uid, body: { title: e.target.value } }
-			})
-		},
-		toggleEdit: (e, uid) => {
-			if (e.key === "Enter" || e.type === "click") {
-				store.dispatch({
-					type: "TOGGLE_EDIT",
-					payload: uid
-				})
-			}
-		}
+		...bindActionCreators(actions, dispatch)
 	}
 }
+
 const TasksContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps

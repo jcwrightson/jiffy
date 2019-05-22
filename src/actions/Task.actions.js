@@ -44,3 +44,13 @@ export function removeTask(uid) {
 		dispatch({type: "REMOVE_TASK", payload: uid})
 	}
 }
+
+
+export function handleEdit(e, uid) {
+	return dispatch => {
+		dispatch({
+			type: "EDIT_TASK",
+			payload: { uid: uid, body: { title: e.target.value } }
+		})
+	}
+}
