@@ -58,14 +58,14 @@ ul, li {
   list-style: none;
 }
 
-input, button, textarea {
+input, button, select, textarea {
   border: 1px solid $border-color;
   font-size: 1em;
   margin: 0;
   position: relative;
 }
 
-input, textarea {
+input, textarea, select {
   width: 100%;
   margin: 1em 0;
   padding: .8em;

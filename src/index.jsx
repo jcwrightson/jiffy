@@ -1,7 +1,8 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import { Provider } from "react-redux"
-import { Route, Router, Switch } from "react-router"
+// import {  } from "react-router"
+import { Router, Route, Switch } from "react-router-dom"
 import Home from "./layouts/Home"
 import TasksContainer from "./containers/Tasks.container"
 
@@ -14,6 +15,10 @@ import { isToday } from "./lib/functions"
 import { createTracker, removeTracker } from "./actions"
 
 const initApp = store => {
+
+	// Lets keep track of all running trackers globally
+	window.__tracker__ = {}
+	
 	// localStorage.removeItem("tracker-2")
 
 	window.addEventListener("beforeunload", () => {

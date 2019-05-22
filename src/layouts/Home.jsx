@@ -5,6 +5,7 @@ import { store } from "../store"
 import { createProject } from "../actions"
 
 import QueryProjects from "../components/QueryProjects.component"
+import QuickTask from "../components/QuickTask"
 class renderHome extends Component {
 	constructor(props) {
 		super(props)
@@ -17,6 +18,7 @@ class renderHome extends Component {
 					<h1>Projects</h1>
 					<hr />
 				</div>
+				<QuickTask/>
 				<QueryProjects />
 				<ProjectsContainer />
 			</main>
