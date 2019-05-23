@@ -6,6 +6,7 @@ import * as actions from "../actions"
 import Task from "../components/Task.component"
 
 const renderTasks = ({
+	uid,
 	projects,
 	tasks,
 	trackers,
@@ -16,11 +17,14 @@ const renderTasks = ({
 	handleEditTask,
 	toggleEditTask,
 	startTask,
-	stopTask
+	stopTask,
+	archiveTask
 }) => {
 	const thisProject = projects.filter(
 		project => project.uid === match.params.uid
 	)[0]
+
+	const projectUID = match.params.uid || uid
 
 	return (
 		<main>
@@ -32,13 +36,13 @@ const renderTasks = ({
 			</div> */}
 			<div className='tasks container list'>
 				{tasks
-					.filter(task => task.project === match.params.uid)
+					.filter(task => task.project === projectUID)
+					.filter(task => !task.archived)
 					.map(task => {
 						return (
 							<Task
 								trackers={trackers.filter(tr => tr.task === task.uid)}
-								tasks={tasks.filter(t => t.project === match.params.uid)}
-								task={task}
+								tasks={tasks.filter(t => t.project === projectUID)}
 								key={task.uid}
 								createTask={createTask}
 								createTracker={createTracker}
@@ -47,6 +51,8 @@ const renderTasks = ({
 								toggleEditTask={toggleEditTask}
 								startTask={startTask}
 								stopTask={stopTask}
+								archiveTask={archiveTask}
+								{...task}
 							/>
 						)
 					})}

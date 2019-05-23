@@ -86,7 +86,13 @@ const Project = ({
 								type='button'
 								title='Delete'
 								onClick={() => {
-									removeProject(uid)
+									/* eslint-disable */
+									if (
+										confirm("Delete this projects and all associated tasks?")
+									) {
+										removeProject(uid)
+									}
+									/* eslint-enable */
 								}}>
 								Delete Project
 							</button>

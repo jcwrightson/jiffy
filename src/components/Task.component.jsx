@@ -5,24 +5,28 @@ import icMore from "../assets/ic_more_vert_24px.svg"
 import icUpdate from "../assets/ic_update_24px.svg"
 
 const Task = ({
-	task,
+	uid,
+	title,
+	running,
+	editing,
 	trackers,
 	removeTask,
 	handleEditTask,
 	toggleEditTask,
 	startTask,
-	stopTask
+	stopTask,
+	archiveTask
 }) => {
 	return (
-		<article className={`task ${task.running ? "running" : ""}`}>
+		<article className={`task ${running ? "running" : ""}`}>
 			<div className='flex-row title'>
-				{task.editing ? (
+				{editing ? (
 					<React.Fragment>
 						<input
 							type='text'
-							value={task.title}
-							onChange={e => handleEditTask(e, task.uid)}
-							onKeyDown={e => toggleEditTask(e, task.uid)}
+							value={title}
+							onChange={e => handleEditTask(e, uid)}
+							onKeyDown={e => toggleEditTask(e, uid)}
 							onClick={e => {
 								e.target.select()
 								e.stopPropagation()
@@ -31,8 +35,8 @@ const Task = ({
 						<button
 							type='button'
 							onClick={e => {
-								if (task.editing) {
-									toggleEditTask(e, task.uid)
+								if (editing) {
+									toggleEditTask(e, uid)
 								}
 							}}>
 							Cancel
@@ -41,13 +45,13 @@ const Task = ({
 				) : (
 					// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
 					<h2
-						type='button'
 						className='editable'
+						title='Rename'
 						onClick={e => {
 							e.stopPropagation()
-							toggleEditTask(e, task.uid)
+							toggleEditTask(e, uid)
 						}}>
-						{task.title}
+						{title}
 					</h2>
 				)}
 			</div>
@@ -61,10 +65,8 @@ const Task = ({
 				<button
 					type='button'
 					className='toggleRunning'
-					onClick={() =>
-						task.running ? stopTask(task.uid) : startTask(task.uid)
-					}>
-					{task.running ? "Stop" : "Start"}
+					onClick={() => (running ? stopTask(uid) : startTask(uid))}>
+					{running ? "Stop" : "Start"}
 				</button>
 
 				<div className='dots'>
@@ -75,9 +77,18 @@ const Task = ({
 								type='button'
 								title='Delete'
 								onClick={() => {
-									removeTask(task.uid)
+									/* eslint-disable */
+									if (confirm("Delete task?")) {
+										removeTask(uid)
+									}
+									/* eslint-enable */
 								}}>
 								Delete Task
+							</button>
+						</li>
+						<li>
+							<button type='button' onClick={() => archiveTask(uid)}>
+								Archive
 							</button>
 						</li>
 					</ul>
