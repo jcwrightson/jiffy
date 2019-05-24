@@ -54,10 +54,6 @@ const Task = ({
 							value={title}
 							onChange={e => handleEditTask(e, uid)}
 							onKeyDown={e => toggleEditTask(e, uid)}
-							onClick={e => {
-								e.target.select()
-								e.stopPropagation()
-							}}
 						/>
 						<button
 							type='button'

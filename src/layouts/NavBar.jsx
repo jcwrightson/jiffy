@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import * as actions from "../actions"
 
-const renderNavBar = ({ createProject, createTask, location }) => {
+const renderNavBar = ({ toggleModal, location }) => {
 	return (
 		<nav className='fixed top drop-shadow'>
 			<div className='container flex-row'>
@@ -38,12 +38,14 @@ const renderNavBar = ({ createProject, createTask, location }) => {
 					<button
 						type='button'
 						className='primary'
-						onClick={() =>
-							location.pathname === "/projects"
-								? createProject()
-								: createTask(location.pathname.replace("/projects/", ""))
-						}>
-						{location.pathname === "/projects" ? "New Project" : "New Task"}
+						onClick={() => toggleModal("createProject")}>
+						New Project
+					</button>
+					<button
+						type='button'
+						className='primary'
+						onClick={() => toggleModal("createTask")}>
+						New Task
 					</button>
 				</div>
 			</div>

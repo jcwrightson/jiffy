@@ -1,3 +1,4 @@
-export * from './Projects.reducer'
-export * from './Tasks.reducer'
-export * from './Trackers.reducer'
+export * from "./Modals.reducer"
+export * from "./Projects.reducer"
+export * from "./Tasks.reducer"
+export * from "./Trackers.reducer"

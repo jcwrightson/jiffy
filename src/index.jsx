@@ -11,6 +11,7 @@ import Projects from "./layouts/Projects"
 import { history, store } from "./store"
 
 import NavBar from "./layouts/NavBar"
+import Modals from "./modals/Modals.container"
 import "./sass/styles.scss"
 
 import houseKeeping from "./lib/houseKeeping"
@@ -27,6 +28,7 @@ ReactDOM.render(
 				<Route exact path='/projects' component={Projects} />
 				<Route path='/projects/:uid' component={TasksContainer} />
 			</Switch>
+			<Modals />
 		</Router>
 	</Provider>,
 	document.getElementById("app")

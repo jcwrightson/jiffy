@@ -8,8 +8,8 @@ export function createProject(title, uid) {
 			payload: {
 				uid: uid || uuidv4(),
 				created: Date.now(),
-				title: title || "New Project",
-				editing: false,
+				title: title || "Unamed Project",
+				editing: !title,
 				status: {
 					active: true,
 					completed: false,

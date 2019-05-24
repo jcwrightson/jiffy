@@ -48,10 +48,6 @@ const Project = ({
 							value={title}
 							onChange={e => handleEditProject(e, uid)}
 							onKeyDown={e => toggleEditProject(e, uid)}
-							onClick={e => {
-								e.target.select()
-								e.stopPropagation()
-							}}
 						/>
 						<button
 							type='button'

@@ -15,12 +15,12 @@ export function createTask(projectUID, title, blurb, uid) {
 					uid: taskUID,
 					project: projectUID,
 					created: Date.now(),
-					title: title || "New Task",
+					title: title || "Unamed Task",
 					blurb: blurb || "",
 					time: 0,
 					started: null,
 					running: false,
-					editing: false,
+					editing: !title,
 					archived: false
 				}
 			})
@@ -65,15 +65,11 @@ export function stopTask(uid) {
 
 export function removeTask(uid) {
 	return (dispatch, getState) => {
-		const trackers = getState().trackers.list.filter(
-			tracker => tracker.task === uid
-		)
-
-		dispatch(stopTask(uid))
-
-		trackers.map(tracker => {
-			dispatch({ type: "REMOVE_TRACKER", payload: tracker.uid })
-		})
+		getState()
+			.trackers.list.filter(tracker => tracker.task === uid)
+			.map(tracker => {
+				return dispatch({ type: "REMOVE_TRACKER", payload: tracker.uid })
+			})
 
 		dispatch({ type: "REMOVE_TASK", payload: uid })
 	}
