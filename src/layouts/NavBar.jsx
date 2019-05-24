@@ -9,9 +9,21 @@ const renderNavBar = ({ createProject, createTask, location }) => {
 	return (
 		<nav className='fixed top drop-shadow'>
 			<div className='container flex-row'>
-				<Link to='/'>
-					<h1>Jiffy</h1>
-				</Link>
+				<div className='flex-row nav'>
+					<Link to='/'>
+						<h1>Jiffy</h1>
+					</Link>
+
+					<h1>|</h1>
+
+					<Link to='/'>
+						<h2>Projects</h2>
+					</Link>
+
+					<Link to='/tasks'>
+						<h2>Tasks</h2>
+					</Link>
+				</div>
 
 				<div className='top-nav flex-row '>
 					<button

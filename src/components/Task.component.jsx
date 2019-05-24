@@ -19,6 +19,30 @@ const Task = ({
 }) => {
 	return (
 		<article className={`task ${running ? "running" : ""}`}>
+			<div className='flex-row dots'>
+				<SVG file={icMore} />
+				<ul className='menu drop-shadow'>
+					<li>
+						<button
+							type='button'
+							onClick={() => {
+								/* eslint-disable */
+								if (confirm("Delete task?")) {
+									removeTask(uid)
+								}
+								/* eslint-enable */
+							}}>
+							Delete Task
+						</button>
+					</li>
+					<li>
+						<button type='button' onClick={() => archiveTask(uid)} disabled>
+							Archive
+						</button>
+					</li>
+				</ul>
+			</div>
+
 			<div className='flex-row title'>
 				{editing ? (
 					<React.Fragment>
@@ -68,31 +92,6 @@ const Task = ({
 					onClick={() => (running ? stopTask(uid) : startTask(uid))}>
 					{running ? "Stop" : "Start"}
 				</button>
-
-				<div className='dots'>
-					<SVG file={icMore} />
-					<ul className='menu drop-shadow'>
-						<li>
-							<button
-								type='button'
-								title='Delete'
-								onClick={() => {
-									/* eslint-disable */
-									if (confirm("Delete task?")) {
-										removeTask(uid)
-									}
-									/* eslint-enable */
-								}}>
-								Delete Task
-							</button>
-						</li>
-						<li>
-							<button type='button' onClick={() => archiveTask(uid)}>
-								Archive
-							</button>
-						</li>
-					</ul>
-				</div>
 			</div>
 		</article>
 	)

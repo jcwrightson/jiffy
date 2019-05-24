@@ -1,5 +1,5 @@
 $app-width: 1000px;
-$offset-top: 6rem;
+$offset-top: 3rem;
 
 //Breakpoints
 $mobile-width: 500px;
@@ -9,8 +9,12 @@ $fhd-width: 1920px;
 
 //Colors
 $border-color: #a1a1a1;
-$primary-color: #00bcd4;
+// $primary-color: #00bcd4;
+$primary-color: #00aad4;
 $secondary-color: #607d8b;
+$compliment-color: #ffe59d;
 
 $project-color: #44888d;
 $task-color: lighten(#44888d, 40%);
+
+$running-color: #ff5722;

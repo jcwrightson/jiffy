@@ -17,11 +17,29 @@ const Project = ({
 	toggleEditProject
 }) => {
 	const hasRunningTask = () => {
-		return tasks.filter(task => task.running === true).length > 0
+		return tasks.filter(task => task.running).length > 0
 	}
 
 	return (
 		<article className={`project ${hasRunningTask() ? "running" : ""}`}>
+			<div className='flex-row dots'>
+				<SVG file={icMore} />
+				<ul className='menu drop-shadow'>
+					<li>
+						<button
+							type='button'
+							onClick={() => {
+								/* eslint-disable */
+								if (confirm("Delete this project and all associated tasks?")) {
+									removeProject(uid)
+								}
+								/* eslint-enable */
+							}}>
+							Delete Project
+						</button>
+					</li>
+				</ul>
+			</div>
 			<div className='flex-row title'>
 				{editing ? (
 					<>
@@ -75,27 +93,6 @@ const Project = ({
 				<Link to={`/projects/${uid}`}>
 					<button type='button'>{tasks.length} Tasks</button>
 				</Link>
-
-				<div className='dots'>
-					<SVG file={icMore} />
-					<ul className='menu drop-shadow'>
-						<li>
-							<button
-								type='button'
-								onClick={() => {
-									/* eslint-disable */
-									if (
-										confirm("Delete this projects and all associated tasks?")
-									) {
-										removeProject(uid)
-									}
-									/* eslint-enable */
-								}}>
-								Delete Project
-							</button>
-						</li>
-					</ul>
-				</div>
 			</div>
 		</article>
 	)

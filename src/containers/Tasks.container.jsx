@@ -11,12 +11,15 @@ const renderTasks = props => {
 		props.uid ||
 		props.projects[0].uid
 
-	// const thisProject = projects.filter(
-	// 	project => project.uid === projectUID
-	// )[0]
+	const thisProject = props.projects.filter(
+		project => project.uid === projectUID
+	)[0]
 
 	return (
 		<main>
+			<header className='title'>
+				<h1>Tasks &mdash; {thisProject.title}</h1>
+			</header>
 			<div className='tasks container list'>
 				{props.tasks
 					.filter(task => task.project === projectUID)

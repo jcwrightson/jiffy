@@ -3,31 +3,28 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import * as actions from "../actions"
 
-import Project from "../components/Project.component"
+import Task from "../components/Task.component"
 
-const renderProjects = props => {
-	// console.log(props.includeArchived)
+const renderTasks = props => {
 	return (
-		<>
+		<main>
 			<header className='title'>
-				<h1>Projects</h1>
+				<h1>All Tasks</h1>
 			</header>
-			<div className='projects container list'>
-				{props.projects.map(project => {
+			<div className='tasks container list'>
+				{props.tasks.map(task => {
 					return (
-						<Project
-							{...project}
+						<Task
+							{...task}
 							{...props}
-							trackers={props.trackers.filter(
-								tracker => tracker.project === project.uid
-							)}
-							tasks={props.tasks.filter(task => task.project === project.uid)}
-							key={project.uid}
+							trackers={props.trackers.filter(tr => tr.task === task.uid)}
+							tasks={props.tasks}
+							key={task.uid}
 						/>
 					)
 				})}
 			</div>
-		</>
+		</main>
 	)
 }
 
@@ -45,9 +42,8 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-const ProjectsContainer = connect(
+const AllTasksContainer = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(renderProjects)
-
-export default ProjectsContainer
+)(renderTasks)
+export default AllTasksContainer

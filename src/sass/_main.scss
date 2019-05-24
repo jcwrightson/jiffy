@@ -1,3 +1,23 @@
+.nav h1,
+.nav h2 {
+	margin-right: 2rem;
+}
+
+.nav h2 {
+	font-size: 1.2rem;
+}
+
+header.title {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 7rem 0;
+	font-size: 1.8rem;
+	background-color: darken($primary-color, 5%);
+	color: #fff;
+	margin-bottom: 4rem;
+}
+
 .tasks.list,
 .projects.list {
 	display: flex;
@@ -18,12 +38,11 @@
 
 		button {
 			width: 140px;
-			margin-right: 1rem;
 		}
 
 		&.running {
 			button.toggleRunning {
-				background-color: $primary-color;
+				background-color: $running-color;
 				color: #fff;
 			}
 		}
@@ -76,7 +95,7 @@
 		flex-direction: column;
 		background-color: #fff;
 		color: #000 !important;
-		right: 1rem;
+		left: 1rem;
 		top: 50%;
 		z-index: 10;
 
