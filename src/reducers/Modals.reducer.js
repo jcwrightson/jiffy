@@ -6,7 +6,7 @@ export function modals(
 			props: {}
 		},
 		createTask: {
-			active: true,
+			active: false,
 			props: {}
 		}
 	},
