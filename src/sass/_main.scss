@@ -13,7 +13,7 @@ header.title {
 	justify-content: center;
 	padding: 7rem 0;
 	font-size: 1.8rem;
-	background-color: darken($primary-color, 5%);
+	background-color:#cbcbcb;
 	color: #fff;
 	margin-bottom: 4rem;
 }
@@ -38,14 +38,28 @@ header.title {
 
 		button {
 			width: 140px;
-		}
+			background-color: unset;
+			color: #000;
 
-		&.running {
-			button.toggleRunning {
-				background-color: $running-color;
+			&.toggleRunning{
+				background-color: #555;
 				color: #fff;
 			}
 		}
+
+		&.running{
+			button{
+				background-color: #333;
+				color: #fff;
+			}
+		}
+
+		// &.running {
+		// 	button.toggleRunning {
+		// 		background-color: $primary-color;
+		// 		// color: #333;
+		// 	}
+		// }
 
 		h2 {
 			width: 100%;
@@ -53,7 +67,7 @@ header.title {
 		}
 
 		.title {
-			flex-basis: 50%;
+			flex-basis: 60%;
 
 			input {
 				margin: 0 1rem 0 0;
@@ -74,14 +88,16 @@ header.title {
 	}
 }
 
+
 .task,
 .project {
 	.dots {
+		
 		padding: 0.5rem;
 		svg {
 			padding: 3px;
 			cursor: pointer;
-			color: #000 !important;
+			// color: #000 !important;
 		}
 		&:hover {
 			.menu {
@@ -113,10 +129,11 @@ header.title {
 
 			padding: 10px;
 			margin: 0 !important;
+			color: #000 !important;
 
 			&:hover {
 				background-color: $secondary-color;
-				color: #fff;
+				color: #fff !important;
 			}
 		}
 	}

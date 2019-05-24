@@ -91,7 +91,13 @@ button {
 	cursor: pointer;
 	border-radius: 2px;
 	transition: all 100ms ease;
-	background-color: #e8e8e8;
+	background-color: #747474;
+	color: #fff;
+
+	&:disabled{
+		background-color: #eef1f1;
+		color: #000;
+	}
 
 	&.primary {
 		background-color: $primary-color;
