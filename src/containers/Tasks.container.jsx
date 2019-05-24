@@ -5,54 +5,29 @@ import * as actions from "../actions"
 
 import Task from "../components/Task.component"
 
-const renderTasks = ({
-	uid,
-	projects,
-	tasks,
-	trackers,
-	match,
-	createTask,
-	createTracker,
-	removeTask,
-	handleEditTask,
-	toggleEditTask,
-	startTask,
-	stopTask,
-	archiveTask
-}) => {
-	const thisProject = projects.filter(
-		project => project.uid === match.params.uid
-	)[0]
+const renderTasks = props => {
+	const projectUID =
+		(props.match && props.match.params && props.match.params.uid) ||
+		props.uid ||
+		props.projects[0].uid
 
-	const projectUID = match.params.uid || uid
+	// const thisProject = projects.filter(
+	// 	project => project.uid === projectUID
+	// )[0]
 
 	return (
 		<main>
-			{/* <div className='container title'>
-				<Link to='/'>
-					<h1>{thisProject.title}</h1>
-				</Link>
-				<hr />
-			</div> */}
 			<div className='tasks container list'>
-				{tasks
+				{props.tasks
 					.filter(task => task.project === projectUID)
-					.filter(task => !task.archived)
 					.map(task => {
 						return (
 							<Task
-								trackers={trackers.filter(tr => tr.task === task.uid)}
-								tasks={tasks.filter(t => t.project === projectUID)}
-								key={task.uid}
-								createTask={createTask}
-								createTracker={createTracker}
-								removeTask={removeTask}
-								handleEditTask={handleEditTask}
-								toggleEditTask={toggleEditTask}
-								startTask={startTask}
-								stopTask={stopTask}
-								archiveTask={archiveTask}
 								{...task}
+								{...props}
+								trackers={props.trackers.filter(tr => tr.task === task.uid)}
+								tasks={props.tasks.filter(t => t.project === projectUID)}
+								key={task.uid}
 							/>
 						)
 					})}

@@ -41,6 +41,17 @@ export function projects(
 					})
 				]
 			})
+		case "TOGGLE_MENU":
+			return Object.assign({}, state, {
+				list: [
+					...state.list.map(project => {
+						if (project.uid === action.payload) {
+							return { ...project, menuActive: !project.menuActive }
+						}
+						return project
+					})
+				]
+			})
 
 		case "QUERY_PROJECTS":
 			return Object.assign({}, state, {

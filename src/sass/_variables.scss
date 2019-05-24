@@ -7,9 +7,10 @@ $tablet-width: 1024px;
 $laptop-width: 1366px;
 $fhd-width: 1920px;
 
-
 //Colors
 $border-color: #a1a1a1;
 $primary-color: #00bcd4;
 $secondary-color: #607d8b;
 
+$project-color: #44888d;
+$task-color: lighten(#44888d, 40%);

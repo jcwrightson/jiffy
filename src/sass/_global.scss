@@ -1,159 +1,165 @@
 * {
-  box-sizing: border-box;
-  user-select: none;
-  outline: none;
+	box-sizing: border-box;
+	user-select: none;
+	outline: none;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  background-color: #d1dddd;
-  background-color: #e6f1f1;
-  overflow-y: scroll;
+	margin: 0;
+	padding: 0;
+	background-color: #d1dddd;
+	background-color: #eef1f1;
+	overflow-y: scroll;
 }
 
 section {
-  width: 100%;
+	width: 100%;
 }
 
-main{
-  margin-top: $offset-top;
-  margin-bottom: 4rem;
+main {
+	margin-top: $offset-top;
+	margin-bottom: 4rem;
 
-  .container.title{
-    padding: 2rem;
+	.container.title {
+		padding: 2rem;
 
-    h1{
-      font-weight: 400;
-    }
+		h1 {
+			font-weight: 400;
+		}
 
-    .flex-row{
-      justify-content: flex-start;
+		.flex-row {
+			justify-content: flex-start;
 
-      svg{
-        margin-right: 1rem;
-      }
-    }
-  }
+			svg {
+				margin-right: 1rem;
+			}
+		}
+	}
 }
 
 .container {
-  max-width: $app-width;
-  width: 100%;
-  margin: auto;
-  position: relative;
+	max-width: $app-width;
+	width: 100%;
+	margin: auto;
+	position: relative;
 }
 
 p {
-  user-select: text;
+	user-select: text;
 }
 
-a, a:hover, a:visited {
-  text-decoration: none;
-  color: inherit;
+a,
+a:hover,
+a:visited {
+	text-decoration: none;
+	color: inherit;
 }
-ul, li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-input, button, select, textarea {
-  border: 1px solid $border-color;
-  font-size: 1em;
-  margin: 0;
-  position: relative;
+ul,
+li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
-input, textarea, select {
-  // width: 100%;
-  margin: 1em 0;
-  padding: .8em;
+input,
+button,
+select,
+textarea {
+	border: 1px solid $border-color;
+	font-size: 1em;
+	margin: 0;
+	position: relative;
+}
+
+input,
+textarea,
+select {
+	// width: 100%;
+	margin: 1em 0;
+	padding: 0.8em;
 }
 
 button {
-  padding: .6em 2em;
-  text-transform: uppercase;
-  border: none;
-  font-size: .8em;
-  cursor: pointer;
-  border-radius: 2px;
-  transition: all 100ms ease;
-  background-color: #e8e8e8;
+	padding: 0.6em 2em;
+	text-transform: uppercase;
+	border: none;
+	font-size: 0.8em;
+	cursor: pointer;
+	border-radius: 2px;
+	transition: all 100ms ease;
+	background-color: #e8e8e8;
 
-  &.primary{
-    background-color: $primary-color;
-    color: white;
-  }
+	&.primary {
+		background-color: $primary-color;
+		color: white;
+	}
 
-  &.secondary{
-    background-color: $secondary-color;
-    color: white;
-  }
+	&.secondary {
+		background-color: $secondary-color;
+		color: white;
+	}
 }
 
 .circle {
-  border-radius: 50%;
-  background-color: #919191;
-  width: 2em;
-  height: 2em;
-  position: relative;
-  cursor: pointer;
-  margin-top: 2em;
+	border-radius: 50%;
+	background-color: #919191;
+	width: 2em;
+	height: 2em;
+	position: relative;
+	cursor: pointer;
+	margin-top: 2em;
 }
 
 hr {
-  border: .5px solid rgba(171, 171, 171, 0.29);
+	border: 0.5px solid rgba(171, 171, 171, 0.29);
 }
-
 
 .popup {
- display: none;
-  width: 180px;
-  border: solid 1px lighten($border-color, 20%);
+	display: none;
+	width: 180px;
+	border: solid 1px lighten($border-color, 20%);
 
-  z-index: 5;
+	z-index: 5;
 
-  &.js-active{
-    display: block;
-  }
+	&.js-active {
+		display: block;
+	}
 }
 
+nav {
+	width: 100%;
+	padding: 1rem 0;
+	background-color: #fff;
+	button {
+		margin: 0;
+	}
 
-nav{
-  width: 100%;
-  padding: 1rem 0;
-  background-color: #fff;
-  button{
-    margin: 0;
-  }
+	.top-nav {
+		button {
+			margin-right: 1em;
 
-  .top-nav {
-    button {
-      margin-right: 1em;
-  
-      &:last-of-type {
-        margin-right: 0;
-      }
-    }
-  }
+			&:last-of-type {
+				margin-right: 0;
+			}
+		}
+	}
 }
 
-span.svg{
-  display: flex;
+span.svg {
+	display: flex;
 }
-svg{
-  height: 18px;
-  fill: currentColor;
+svg {
+	height: 18px;
+	fill: currentColor;
 }
 
-button.svg{
-  background-color: #666;
-  color: #fff;
-  padding: 8px;
-  border-radius: 3px;
-  vertical-align: middle;
-  svg{
-    vertical-align: middle;
-  }
+button.svg {
+	background-color: #666;
+	color: #fff;
+	padding: 8px;
+	border-radius: 3px;
+	vertical-align: middle;
+	svg {
+		vertical-align: middle;
+	}
 }

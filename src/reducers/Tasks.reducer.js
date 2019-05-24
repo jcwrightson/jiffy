@@ -1,6 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 export function tasks(
 	state = {
+		includeArchived: true,
 		list: []
 	},
 	action
@@ -51,12 +52,34 @@ export function tasks(
 					})
 				]
 			})
+		case "TOGGLE_ARCHIVE_TASK":
+			return Object.assign({}, state, {
+				list: [
+					...state.list.map(task => {
+						if (task.uid === action.payload) {
+							return { ...task, archived: !task.archived }
+						}
+						return task
+					})
+				]
+			})
 		case "TOGGLE_EDIT_TASK":
 			return Object.assign({}, state, {
 				list: [
 					...state.list.map(task => {
 						if (task.uid === action.payload) {
 							return { ...task, editing: !task.editing }
+						}
+						return task
+					})
+				]
+			})
+		case "TOGGLE_MENU":
+			return Object.assign({}, state, {
+				list: [
+					...state.list.map(task => {
+						if (task.uid === action.payload) {
+							return { ...task, menuActive: !task.menuActive }
 						}
 						return task
 					})

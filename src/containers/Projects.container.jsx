@@ -5,30 +5,20 @@ import * as actions from "../actions"
 
 import Project from "../components/Project.component"
 
-const renderProjects = ({
-	projects,
-	tasks,
-	trackers,
-	removeProject,
-	createProject,
-	handleEditProject,
-	toggleEditProject
-}) => {
+const renderProjects = props => {
+	// console.log(props.includeArchived)
 	return (
 		<div className='projects container list'>
-			{projects.map(project => {
+			{props.projects.map(project => {
 				return (
 					<Project
-						trackers={trackers.filter(
+						{...project}
+						{...props}
+						trackers={props.trackers.filter(
 							tracker => tracker.project === project.uid
 						)}
-						tasks={tasks.filter(task => task.project === project.uid)}
+						tasks={props.tasks.filter(task => task.project === project.uid)}
 						key={project.uid}
-						removeProject={removeProject}
-						createProject={createProject}
-						handleEditProject={handleEditProject}
-						toggleEditProject={toggleEditProject}
-						{...project}
 					/>
 				)
 			})}

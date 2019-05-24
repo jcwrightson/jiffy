@@ -20,7 +20,8 @@ export function createTask(projectUID, title, blurb, uid) {
 					time: 0,
 					started: null,
 					running: false,
-					editing: false
+					editing: false,
+					archived: false
 				}
 			})
 			dispatch(createTracker(projectUID, taskUID))
@@ -95,6 +96,24 @@ export function handleEditTask(e, uid) {
 		dispatch({
 			type: "EDIT_TASK",
 			payload: { uid, body: { title: e.target.value } }
+		})
+	}
+}
+
+export function archiveTask(uid) {
+	return dispatch => {
+		dispatch({
+			type: "TOGGLE_ARCHIVE_TASK",
+			payload: uid
+		})
+	}
+}
+
+export function toggleMenu(uid) {
+	return dispatch => {
+		dispatch({
+			type: "TOGGLE_MENU",
+			payload: uid
 		})
 	}
 }

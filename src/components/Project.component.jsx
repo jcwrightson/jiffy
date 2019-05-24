@@ -73,9 +73,7 @@ const Project = ({
 				)}
 
 				<Link to={`/projects/${uid}`}>
-					<button type='button' className='secondary'>
-						{tasks.length} Tasks
-					</button>
+					<button type='button'>{tasks.length} Tasks</button>
 				</Link>
 
 				<div className='dots'>
@@ -84,7 +82,6 @@ const Project = ({
 						<li>
 							<button
 								type='button'
-								title='Delete'
 								onClick={() => {
 									/* eslint-disable */
 									if (
