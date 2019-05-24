@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, withRouter } from "react-router-dom"
+import { NavLink, withRouter } from "react-router-dom"
 import { connect } from "react-redux"
 
 import { bindActionCreators } from "redux"
@@ -10,19 +10,19 @@ const renderNavBar = ({ createProject, createTask, location }) => {
 		<nav className='fixed top drop-shadow'>
 			<div className='container flex-row'>
 				<div className='flex-row nav'>
-					<Link to='/'>
-						<h1>Jiffy</h1>
-					</Link>
+					<NavLink to='/'>
+						<h1 className='brand'>Jiffy</h1>
+					</NavLink>
 
 					<h1>|</h1>
 
-					<Link to='/'>
-						<h2>Projects</h2>
-					</Link>
-
-					<Link to='/tasks'>
+					<NavLink to='/tasks' activeClassName='activeLink'>
 						<h2>Tasks</h2>
-					</Link>
+					</NavLink>
+
+					<NavLink to='/projects' activeClassName='activeLink'>
+						<h2>Projects</h2>
+					</NavLink>
 				</div>
 
 				<div className='top-nav flex-row '>
@@ -39,11 +39,11 @@ const renderNavBar = ({ createProject, createTask, location }) => {
 						type='button'
 						className='primary'
 						onClick={() =>
-							location.pathname === "/"
+							location.pathname === "/projects"
 								? createProject()
 								: createTask(location.pathname.replace("/projects/", ""))
 						}>
-						{location.pathname === "/" ? "New Project" : "New Task"}
+						{location.pathname === "/projects" ? "New Project" : "New Task"}
 					</button>
 				</div>
 			</div>

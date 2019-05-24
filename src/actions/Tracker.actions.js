@@ -1,12 +1,12 @@
 import { uuidv4 } from "../lib/functions"
 
-export function createTracker(projectUID, taskUID) {
+export function createTracker(taskUID) {
 	return dispatch => {
 		dispatch({
 			type: "CREATE_TRACKER",
 			payload: {
 				uid: uuidv4(),
-				project: projectUID,
+
 				task: taskUID,
 				created: Date.now(),
 				time: 0,
@@ -30,7 +30,6 @@ export function updateTrackerTime(uid, time) {
 
 export function startTracker(uid) {
 	return dispatch => {
-
 		const interval = setInterval(() => {
 			dispatch(updateTrackerTime(uid, 1000))
 		}, 1000)
@@ -41,7 +40,6 @@ export function startTracker(uid) {
 
 export function stopTracker(uid) {
 	return (dispatch, getState) => {
-
 		const { interval } = getState().trackers.list.filter(
 			tracker => tracker.uid === uid
 		)[0]

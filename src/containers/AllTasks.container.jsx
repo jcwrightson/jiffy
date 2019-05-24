@@ -9,7 +9,7 @@ const renderTasks = props => {
 	return (
 		<main>
 			<header className='title'>
-				<h1>All Tasks</h1>
+				<h1>Tasks</h1>
 			</header>
 			<div className='tasks container list'>
 				{props.tasks.map(task => {

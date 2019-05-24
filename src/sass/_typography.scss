@@ -1,22 +1,25 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
 
 body {
-  font-size: 100%;
-  font-family: 'Roboto', sans-serif;
+	font-size: 100%;
+	font-family: "Roboto", sans-serif;
 }
 
 h1 {
-  margin: 0;
-  font-weight: 300;
-  font-size: 1.5em;
+	margin: 0;
+	font-weight: 300;
+	font-size: 1.5em;
+
+	&.brand {
+		font-weight: 500;
+	}
 }
 
 h2 {
-  margin: 0;
-  font-weight: 300;
-
+	margin: 0;
+	font-weight: 300;
 }
 
-button{
-  font-size: .9rem !important;
+button {
+	font-size: 0.9rem !important;
 }

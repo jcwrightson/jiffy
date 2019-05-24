@@ -94,7 +94,7 @@ button {
 	background-color: #747474;
 	color: #fff;
 
-	&:disabled{
+	&:disabled {
 		background-color: #eef1f1;
 		color: #000;
 	}
@@ -152,6 +152,25 @@ nav {
 				margin-right: 0;
 			}
 		}
+	}
+
+	a,
+	h2 {
+		position: relative;
+	}
+
+	.activeLink {
+		color: $primary-color;
+	}
+
+	.activeLink h2::after {
+		content: "";
+		// position: absolute;
+		// background-color: $primary-color;
+		// height: 2px;
+		// width: 120%;
+		// bottom: -5px;
+		// left:0;
 	}
 }
 

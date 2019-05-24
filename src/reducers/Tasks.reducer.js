@@ -74,6 +74,17 @@ export function tasks(
 					})
 				]
 			})
+		case "SELECT_PROJECT":
+			return Object.assign({}, state, {
+				list: [
+					...state.list.map(task => {
+						if (task.uid === action.payload.uid) {
+							return { ...task, project: action.payload.project }
+						}
+						return task
+					})
+				]
+			})
 		case "TOGGLE_MENU":
 			return Object.assign({}, state, {
 				list: [

@@ -7,15 +7,18 @@ import icUpdate from "../assets/ic_update_24px.svg"
 const Task = ({
 	uid,
 	title,
+	project,
 	running,
 	editing,
+	projects,
 	trackers,
 	removeTask,
 	handleEditTask,
 	toggleEditTask,
 	startTask,
 	stopTask,
-	archiveTask
+	archiveTask,
+	selectProject
 }) => {
 	return (
 		<article className={`task ${running ? "running" : ""}`}>
@@ -81,6 +84,18 @@ const Task = ({
 			</div>
 
 			<div className='flex-row controls'>
+				<select
+					value={project}
+					onChange={e => selectProject(e, uid)}
+					title='In Project'>
+					{projects.map(proj => {
+						return (
+							<option key={proj.uid} value={proj.uid}>
+								{proj.title}
+							</option>
+						)
+					})}
+				</select>
 				<div className='time flex-row'>
 					<SVG file={icUpdate} />
 					{timeFilter(getAggregate(trackers, "time"))}

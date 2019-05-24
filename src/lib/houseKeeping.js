@@ -40,7 +40,7 @@ const houseKeeping = () => {
 				.filter(tracker => tracker.task === task.uid)
 				.filter(tracker => isToday(tracker.created))
 			if (length === 0) {
-				store.dispatch(createTracker(task.project, task.uid))
+				store.dispatch(createTracker(task.uid))
 			}
 		})
 	}

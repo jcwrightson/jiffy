@@ -13,7 +13,7 @@ header.title {
 	justify-content: center;
 	padding: 7rem 0;
 	font-size: 1.8rem;
-	background-color:#cbcbcb;
+	background-color: #cbcbcb;
 	color: #fff;
 	margin-bottom: 4rem;
 }
@@ -41,14 +41,18 @@ header.title {
 			background-color: unset;
 			color: #000;
 
-			&.toggleRunning{
+			&.toggleRunning {
 				background-color: #555;
 				color: #fff;
 			}
 		}
-
-		&.running{
-			button{
+		select {
+			margin: 0;
+			padding: 5px;
+			width: auto;
+		}
+		&.running {
+			button {
 				background-color: #333;
 				color: #fff;
 			}
@@ -67,10 +71,10 @@ header.title {
 		}
 
 		.title {
-			flex-basis: 60%;
+			flex-basis: 50%;
 
 			input {
-				margin: 0 1rem 0 0;
+				margin: 0;
 				width: 100%;
 				padding: 0.5rem;
 			}
@@ -83,17 +87,15 @@ header.title {
 			}
 		}
 		.controls {
-			flex-basis: 25%;
+			flex-basis: 45%;
 		}
 	}
 }
 
-
 .task,
 .project {
 	.dots {
-		
-		padding: 0.5rem;
+		padding: 1rem;
 		svg {
 			padding: 3px;
 			cursor: pointer;

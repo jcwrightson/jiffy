@@ -2,7 +2,7 @@ import { uuidv4 } from "../lib/functions"
 import { removeTask } from "./Task.actions"
 
 export function createProject(title, uid) {
-	return (dispatch, getState) => {
+	return dispatch => {
 		dispatch({
 			type: "CREATE_PROJECT",
 			payload: {
