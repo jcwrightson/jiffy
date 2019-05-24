@@ -59,6 +59,17 @@ export function trackers(
 					})
 				]
 			})
+		case "SELECT_TRACKER_PROJECT":
+			return Object.assign({}, state, {
+				list: [
+					...state.list.map(tracker => {
+						if (tracker.uid === action.payload.uid) {
+							return { ...tracker, project: action.payload.project }
+						}
+						return tracker
+					})
+				]
+			})
 		case "REMOVE_TRACKER":
 			return Object.assign({}, state, {
 				list: [...state.list.filter(tracker => tracker.uid !== action.payload)]

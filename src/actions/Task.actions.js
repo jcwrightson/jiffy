@@ -24,7 +24,7 @@ export function createTask(projectUID, title, blurb, uid) {
 					archived: false
 				}
 			})
-			dispatch(createTracker(taskUID))
+			dispatch(createTracker(taskUID, projectUID))
 		} else {
 			throw new Error("Invalid Project UID")
 		}
@@ -118,7 +118,7 @@ export function toggleMenu(uid) {
 }
 
 export function selectProject(e, uid) {
-	return dispatch => {
+	return (dispatch, getState) => {
 		dispatch({
 			type: "SELECT_PROJECT",
 			payload: {
@@ -126,5 +126,17 @@ export function selectProject(e, uid) {
 				project: e.target.value
 			}
 		})
+
+		getState()
+			.trackers.list.filter(tracker => tracker.task === uid)
+			.map(tracker => {
+				return dispatch({
+					type: "SELECT_TRACKER_PROJECT",
+					payload: {
+						uid: tracker.uid,
+						project: e.target.value
+					}
+				})
+			})
 	}
 }

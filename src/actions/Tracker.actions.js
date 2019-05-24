@@ -1,12 +1,12 @@
 import { uuidv4 } from "../lib/functions"
 
-export function createTracker(taskUID) {
+export function createTracker(taskUID, projectUID) {
 	return dispatch => {
 		dispatch({
 			type: "CREATE_TRACKER",
 			payload: {
 				uid: uuidv4(),
-
+				project: projectUID,
 				task: taskUID,
 				created: Date.now(),
 				time: 0,
@@ -47,5 +47,17 @@ export function stopTracker(uid) {
 		clearInterval(interval)
 
 		dispatch({ type: "STOP_TRACKER", payload: { uid } })
+	}
+}
+
+export function selectTrackerProject(e, uid) {
+	return dispatch => {
+		dispatch({
+			type: "SELECT_TRACKER_PROJECT",
+			payload: {
+				uid,
+				project: e.target.value
+			}
+		})
 	}
 }

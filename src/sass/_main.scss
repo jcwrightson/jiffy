@@ -14,7 +14,7 @@ header.title {
 	padding: 7rem 0;
 	font-size: 1.8rem;
 	background-color: #cbcbcb;
-	color: #fff;
+	color: #333;
 	margin-bottom: 4rem;
 }
 
@@ -51,19 +51,13 @@ header.title {
 			padding: 5px;
 			width: auto;
 		}
+
 		&.running {
 			button {
 				background-color: #333;
 				color: #fff;
 			}
 		}
-
-		// &.running {
-		// 	button.toggleRunning {
-		// 		background-color: $primary-color;
-		// 		// color: #333;
-		// 	}
-		// }
 
 		h2 {
 			width: 100%;
@@ -99,7 +93,6 @@ header.title {
 		svg {
 			padding: 3px;
 			cursor: pointer;
-			// color: #000 !important;
 		}
 		&:hover {
 			.menu {
@@ -128,34 +121,13 @@ header.title {
 		button {
 			all: unset;
 			cursor: pointer;
-
 			padding: 10px;
-			margin: 0 !important;
-			color: #000 !important;
 
 			&:hover {
-				background-color: $secondary-color;
+				background-color: $secondary-color !important;
 				color: #fff !important;
 			}
 		}
-	}
-}
-
-button.delete {
-	position: absolute;
-	top: 6px;
-	right: 6px;
-	padding: 2px;
-	border-radius: 3px;
-	background-color: #aaa;
-	transition: all 120ms ease;
-
-	&:hover {
-		background-color: #000;
-	}
-
-	svg {
-		padding: 4px;
 	}
 }
 
