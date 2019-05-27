@@ -19,7 +19,7 @@ const CreateProject = ({
 				<input
 					type='text'
 					value={title}
-					placeholder='Name'
+					placeholder='What will you be working on?'
 					onChange={e =>
 						updateModalProps("createTask", { title: e.target.value })
 					}
