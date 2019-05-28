@@ -21,7 +21,8 @@ export function createTask(projectUID, title, blurb, uid) {
 					started: null,
 					running: false,
 					editing: !title,
-					archived: false
+					archived: false,
+					completed: false
 				}
 			})
 			dispatch(createTracker(taskUID, projectUID))
@@ -113,6 +114,15 @@ export function toggleMenu(uid) {
 	}
 }
 
+export function toggleCompleted(uid) {
+	return dispatch => {
+		dispatch({
+			type: "TOGGLE_COMPLETED_TASK",
+			payload: uid
+		})
+	}
+}
+
 export function selectProject(e, uid) {
 	return (dispatch, getState) => {
 		dispatch({
@@ -134,5 +144,22 @@ export function selectProject(e, uid) {
 					}
 				})
 			})
+	}
+}
+
+export function toggleShowArchived() {
+	return dispatch => {
+		dispatch({
+			type: "TOGGLE_SHOW_ARCHIVED"
+		})
+	}
+}
+
+export function selectFilterByProject(uid) {
+	return dispatch => {
+		dispatch({
+			type: "FILTER_PROJECT",
+			payload: uid
+		})
 	}
 }

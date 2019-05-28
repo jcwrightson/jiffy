@@ -1,7 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 export function tasks(
 	state = {
-		includeArchived: true,
+		showArchived: false,
+		filterByProject: "all",
 		list: []
 	},
 	action
@@ -63,6 +64,17 @@ export function tasks(
 					})
 				]
 			})
+		case "TOGGLE_COMPLETED_TASK":
+			return Object.assign({}, state, {
+				list: [
+					...state.list.map(task => {
+						if (task.uid === action.payload) {
+							return { ...task, completed: !task.completed }
+						}
+						return task
+					})
+				]
+			})
 		case "TOGGLE_EDIT_TASK":
 			return Object.assign({}, state, {
 				list: [
@@ -103,6 +115,16 @@ export function tasks(
 						return { ...task, running: false }
 					})
 				]
+			})
+		case "TOGGLE_SHOW_ARCHIVED":
+			return Object.assign({}, state, {
+				...state,
+				showArchived: !state.showArchived
+			})
+		case "FILTER_PROJECT":
+			return Object.assign({}, state, {
+				...state,
+				filterByProject: action.payload
 			})
 		default:
 			return state

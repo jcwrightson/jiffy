@@ -10,6 +10,8 @@ const Task = ({
 	project,
 	running,
 	editing,
+	completed,
+	archived,
 	projects,
 	trackers,
 	removeTask,
@@ -18,6 +20,7 @@ const Task = ({
 	startTask,
 	stopTask,
 	archiveTask,
+	toggleCompleted,
 	selectProject
 }) => {
 	return (
@@ -25,6 +28,11 @@ const Task = ({
 			<div className='flex-row dots'>
 				<SVG file={icMore} />
 				<ul className='menu drop-shadow'>
+					<li>
+						<button type='button' onClick={() => toggleCompleted(uid)}>
+							{completed ? "Mark ToDo" : "Mark Completed"}
+						</button>
+					</li>
 					<li>
 						<button
 							type='button'
@@ -39,70 +47,82 @@ const Task = ({
 						</button>
 					</li>
 					<li>
-						<button type='button' onClick={() => archiveTask(uid)} disabled>
-							Archive
+						<button type='button' onClick={() => archiveTask(uid)}>
+							{archived ? "Reinstate" : "Archive"}
 						</button>
 					</li>
 				</ul>
 			</div>
 
 			<div className='flex-row title'>
-				{editing ? (
-					<React.Fragment>
-						<input
-							type='text'
-							value={title}
-							onChange={e => handleEditTask(e, uid)}
-							onKeyDown={e => toggleEditTask(e, uid)}
-						/>
-						<button
-							type='button'
-							onClick={e => {
-								if (editing) {
-									toggleEditTask(e, uid)
-								}
-							}}>
-							Cancel
-						</button>
-					</React.Fragment>
+				{archived ? (
+					<h2>{title}</h2>
 				) : (
-					// eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-					<h2
-						className='editable'
-						title='Rename'
-						onClick={e => {
-							e.stopPropagation()
-							toggleEditTask(e, uid)
-						}}>
-						{title}
-					</h2>
+					<>
+						{editing ? (
+							<React.Fragment>
+								<input
+									type='text'
+									value={title}
+									onChange={e => handleEditTask(e, uid)}
+									onKeyDown={e => toggleEditTask(e, uid)}
+								/>
+								<button
+									type='button'
+									onClick={e => {
+										if (editing) {
+											toggleEditTask(e, uid)
+										}
+									}}>
+									Cancel
+								</button>
+							</React.Fragment>
+						) : (
+							<h2
+								className='editable'
+								title='Rename'
+								onClick={e => {
+									e.stopPropagation()
+									toggleEditTask(e, uid)
+								}}>
+								{title}
+							</h2>
+						)}
+					</>
 				)}
 			</div>
 
 			<div className='flex-row controls'>
-				<select
-					value={project}
-					onChange={e => selectProject(e, uid)}
-					title='In Project'>
-					{projects.map(proj => {
-						return (
-							<option key={proj.uid} value={proj.uid}>
-								{proj.title}
-							</option>
-						)
-					})}
-				</select>
+				{archived ? (
+					<label>
+						{projects.filter(proj => proj.uid === project)[0].title}
+					</label>
+				) : (
+					<select
+						value={project}
+						onChange={e => selectProject(e, uid)}
+						title='In Project'>
+						{projects.map(proj => {
+							return (
+								<option key={proj.uid} value={proj.uid}>
+									{proj.title}
+								</option>
+							)
+						})}
+					</select>
+				)}
 				<div className='time flex-row'>
 					<SVG file={icUpdate} />
 					{timeFilter(getAggregate(trackers, "time"))}
 				</div>
-
-				<button
-					type='button'
-					className='toggleRunning'
-					onClick={() => (running ? stopTask(uid) : startTask(uid))}>
-					{running ? "Stop" : "Start"}
-				</button>
+				{!archived && (
+					<button
+						type='button'
+						className='toggleRunning'
+						onClick={() => (running ? stopTask(uid) : startTask(uid))}>
+						{running ? "Stop" : "Start"}
+					</button>
+				)}
 			</div>
 		</article>
 	)

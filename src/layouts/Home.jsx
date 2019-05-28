@@ -5,6 +5,8 @@ import AllTasksContainer from "../containers/AllTasks.container"
 // import QueryProjects from "../components/QueryProjects.component"
 // import QuickTask from "../components/QuickTask"
 
+import Filter from "../components/Filter.component"
+
 const Home = () => {
 	return (
 		<main>
@@ -14,6 +16,7 @@ const Home = () => {
 			</div>
 
 			{/* <ProjectsContainer includeArchived={false} /> */}
+			{/* <Filter/> */}
 			<AllTasksContainer />
 			{/* <CombinedContainer /> */}
 		</main>
