@@ -11,6 +11,7 @@ const Filter = ({
 }) => {
 	return (
 		<div className='filters container'>
+			<label>Filter</label>
 			<div className='filter flex-row'>
 				<label>
 					<span>Project: </span>

@@ -4,6 +4,8 @@ import SVG from "./SVG.component"
 import icMore from "../assets/ic_more_vert_24px.svg"
 import icUpdate from "../assets/ic_update_24px.svg"
 import icDone from "../assets/ic_done_24px.svg"
+import icPlay from "../assets/ic_play_arrow_24px.svg"
+import icStop from "../assets/ic_stop_24px.svg"
 
 const Task = ({
 	uid,
@@ -122,7 +124,7 @@ const Task = ({
 						type='button'
 						className='toggleRunning'
 						onClick={() => (running ? stopTask(uid) : startTask(uid))}>
-						{running ? "Stop" : "Start"}
+						{running ? <SVG file={icStop} /> : <SVG file={icPlay} />}
 					</button>
 				)}
 			</div>
