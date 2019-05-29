@@ -9,9 +9,7 @@ const renderProjects = props => {
 	// console.log(props.includeArchived)
 	return (
 		<>
-			<header className='title'>
-				<h1>Projects</h1>
-			</header>
+			<header className='title'>{/* <h1>Projects</h1> */}</header>
 			<div className='projects container list'>
 				{props.projects.map(project => {
 					return (

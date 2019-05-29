@@ -9,17 +9,15 @@ import Filter from "../components/Filter.component"
 const renderTasks = props => {
 	return (
 		<main>
-			<header className='title'>
-				<h1>Tasks</h1>
-			</header>
+			<header className='title' />
 
 			<div className='tasks container list'>
 				<Filter
 					projects={props.projects}
 					filterByProject={props.filterByProject}
-					showArchived={props.showArchived}
+					showCompleted={props.showCompleted}
 					selectFilterByProject={props.selectFilterByProject}
-					toggleShowArchived={props.toggleShowArchived}
+					toggleShowCompleted={props.toggleShowCompleted}
 				/>
 				{props.tasks.map(task => {
 					return (
@@ -37,12 +35,14 @@ const renderTasks = props => {
 	)
 }
 
-const filterArchivedTasks = (tasks, showArchived) => {
-	if (!showArchived) {
-		return tasks.filter(task => !task.archived)
+const filterCompletedTasks = (tasks, showCompleted) => {
+	if (showCompleted) {
+		const completed = tasks.filter(task => task.completed)
+		const toDo = tasks.filter(task => !task.completed)
+		return [...completed, ...toDo]
 	}
 
-	return tasks
+	return tasks.filter(task => !task.completed)
 }
 
 const filterTasksByProject = (tasks, project) => {
@@ -56,12 +56,13 @@ const filterTasksByProject = (tasks, project) => {
 const mapStateToProps = state => {
 	return {
 		projects: state.projects.list,
-		tasks: filterArchivedTasks(
+		tasks: filterCompletedTasks(
 			filterTasksByProject(state.tasks.list, state.tasks.filterByProject),
-			state.tasks.showArchived
+			state.tasks.showCompleted
 		),
 		filterByProject: state.tasks.filterByProject,
 		showArchived: state.tasks.showArchived,
+		showCompleted: state.tasks.showCompleted,
 		trackers: state.trackers.list
 	}
 }

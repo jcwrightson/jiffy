@@ -8,7 +8,7 @@ body {
 	margin: 0;
 	padding: 0;
 	// background-color: #fbfbfb;
-	background-color: #eef1f1;
+	background-color: #f1f1f1;
 	overflow-y: scroll;
 }
 
@@ -95,7 +95,7 @@ button {
 	color: #fff;
 
 	&:disabled {
-		background-color: #ccc;
+		background-color: rgb(170, 170, 170) !important;
 		color: #fff;
 		cursor: default;
 	}
@@ -148,6 +148,8 @@ nav {
 	.top-nav {
 		button {
 			margin-right: 1em;
+			background-color: #333;
+			color: #fff;
 
 			&:last-of-type {
 				margin-right: 0;
@@ -161,7 +163,8 @@ nav {
 	}
 
 	.activeLink {
-		color: $primary-color;
+		color: #000;
+		// font-weight: bold !important;
 	}
 
 	.activeLink h2::after {

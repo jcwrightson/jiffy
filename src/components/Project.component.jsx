@@ -14,7 +14,8 @@ const Project = ({
 	title,
 	removeProject,
 	handleEditProject,
-	toggleEditProject
+	toggleEditProject,
+	toggleArchiveProject
 }) => {
 	const hasRunningTask = () => {
 		return tasks.filter(task => task.running).length > 0
@@ -36,6 +37,11 @@ const Project = ({
 								/* eslint-enable */
 							}}>
 							Delete Project
+						</button>
+					</li>
+					<li>
+						<button type='button' onClick={() => toggleArchiveProject(uid)}>
+							Archive Project
 						</button>
 					</li>
 				</ul>

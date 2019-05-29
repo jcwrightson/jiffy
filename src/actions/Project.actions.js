@@ -8,13 +8,10 @@ export function createProject(title, uid) {
 			payload: {
 				uid: uid || uuidv4(),
 				created: Date.now(),
-				title: title || "Unamed Project",
+				title: title || "Default Project",
 				editing: !title,
-				status: {
-					active: true,
-					completed: false,
-					running: false
-				}
+				running: false,
+				archived: false
 			}
 		})
 	}
@@ -40,6 +37,12 @@ export function toggleEditProject(e, uid) {
 				payload: uid
 			})
 		}
+	}
+}
+
+export function toggleArchiveProject(uid) {
+	return dispatch => {
+		dispatch({ type: "TOGGLE_ARCHIVE_PROJECT", payload: uid })
 	}
 }
 

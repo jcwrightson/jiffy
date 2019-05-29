@@ -5,23 +5,22 @@ import React from "react"
 const Filter = ({
 	projects,
 	showArchived,
+	showCompleted,
 	filterByProject,
 	selectFilterByProject,
-	toggleShowArchived
+	toggleShowArchived,
+	toggleShowCompleted
 }) => {
 	return (
-		<div className='filters flex-row'>
-			<div className='flex-row'>
-				<h1>Filter</h1>
-			</div>
-			<div className='flex-row controls'>
+		<div className='filters container'>
+			<div className='filter flex-row'>
 				<label>
 					<span>Project: </span>
 					<select
 						value={filterByProject}
 						title='In Project'
 						onChange={e => selectFilterByProject(e.target.value)}>
-						<option value='all'>All Projects</option>
+						<option value='all'>Any Project</option>
 						{projects.map(proj => {
 							return (
 								<option key={proj.uid} value={proj.uid}>
@@ -35,8 +34,9 @@ const Filter = ({
 				<label>
 					<input
 						type='checkbox'
-						checked={showArchived}
-						onChange={toggleShowArchived}
+						checked={showCompleted}
+						// onChange={toggleShowArchived}
+						onChange={toggleShowCompleted}
 					/>
 					<span>Show Completed</span>
 				</label>

@@ -15,13 +15,11 @@ export function createTask(projectUID, title, blurb, uid) {
 					uid: taskUID,
 					project: projectUID,
 					created: Date.now(),
-					title: title || "Unamed Task",
+					title: title || "Default Task",
 					blurb: blurb || "",
 					time: 0,
-					started: null,
 					running: false,
 					editing: !title,
-					archived: false,
 					completed: false
 				}
 			})
@@ -96,15 +94,6 @@ export function handleEditTask(e, uid) {
 	}
 }
 
-export function archiveTask(uid) {
-	return dispatch => {
-		dispatch({
-			type: "TOGGLE_ARCHIVE_TASK",
-			payload: uid
-		})
-	}
-}
-
 export function toggleMenu(uid) {
 	return dispatch => {
 		dispatch({
@@ -133,6 +122,7 @@ export function selectProject(e, uid) {
 			}
 		})
 
+		// Trackers also contain a project ref, so we need to update this too.
 		getState()
 			.trackers.list.filter(tracker => tracker.task === uid)
 			.map(tracker => {
@@ -147,10 +137,10 @@ export function selectProject(e, uid) {
 	}
 }
 
-export function toggleShowArchived() {
+export function toggleShowCompleted() {
 	return dispatch => {
 		dispatch({
-			type: "TOGGLE_SHOW_ARCHIVED"
+			type: "TOGGLE_SHOW_COMPLETED"
 		})
 	}
 }

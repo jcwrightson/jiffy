@@ -15,6 +15,7 @@ $secondary-color: #607d8b;
 $compliment-color: #ffe59d;
 
 $project-color: #44888d;
-$task-color: lighten(#44888d, 40%);
+$task-color: #00bcd4;
 
-$running-color: darken(#00aad4, 5%);
+$running-color: $primary-color;
+$completed-color: #04c263;

@@ -41,6 +41,17 @@ export function projects(
 					})
 				]
 			})
+		case "TOGGLE_ARCHIVE_PROJECT":
+			return Object.assign({}, state, {
+				list: [
+					...state.list.map(project => {
+						if (project.uid === action.payload) {
+							return { ...project, archived: !project.archived }
+						}
+						return project
+					})
+				]
+			})
 		case "TOGGLE_MENU":
 			return Object.assign({}, state, {
 				list: [

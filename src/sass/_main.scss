@@ -1,3 +1,7 @@
+nav {
+	background-color: $primary-color;
+	color: #fff;
+}
 .nav h1,
 .nav h2 {
 	margin-right: 2rem;
@@ -11,17 +15,18 @@ header.title {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 7rem 0;
+	padding: 2rem 0;
 	font-size: 1.8rem;
-	background-color: #cbcbcb;
+	// background-color: #cfcfcf;
 	color: #333;
-	margin-bottom: 4rem;
+	// margin-bottom: 4rem;
 }
 
 .tasks.list,
 .projects.list {
 	display: flex;
 	flex-direction: column;
+	margin: 3rem auto;
 
 	.task,
 	.project {
@@ -31,10 +36,12 @@ header.title {
 		flex-direction: row;
 		justify-content: space-between;
 		position: relative;
+		border-bottom: 1px solid #e2e2e2;
+		border-right: 1px solid #e2e2e2;
+		margin-bottom: 1rem;
+		border-radius: 12px;
 
-		&:nth-of-type(even) {
-			background-color: #fafafa;
-		}
+		transition: all 120ms ease-in-out;
 
 		button {
 			width: 140px;
@@ -42,30 +49,18 @@ header.title {
 			color: #000;
 
 			&.toggleRunning {
-				background-color: #555;
-				color: #fff;
+				background-color: lighten($primary-color, 45%);
+				color: #000;
 			}
-		}
-		select {
-			margin: 0;
-			padding: 5px;
-			width: auto;
-		}
-
-		&.running {
-			button {
-				background-color: #333;
-				color: #fff;
-			}
-		}
-
-		h2 {
-			width: 100%;
-			cursor: text;
 		}
 
 		.title {
 			flex-basis: 50%;
+
+			h2.editable {
+				width: 100%;
+				cursor: text;
+			}
 
 			input {
 				margin: 0;
@@ -78,6 +73,22 @@ header.title {
 				font-size: 1rem;
 				padding: 5px 10px;
 				min-height: 30px;
+			}
+		}
+
+		&.completed {
+			.title {
+				justify-content: flex-start;
+				h2 {
+					margin-right: 1rem;
+				}
+			}
+		}
+
+		&.running {
+			button.toggleRunning {
+				background-color: $running-color;
+				color: #fff;
 			}
 		}
 		.controls {
@@ -131,7 +142,18 @@ header.title {
 	}
 }
 
+.task,
+.project,
+.filter {
+	select {
+		margin: 0;
+		padding: 5px;
+		width: auto;
+	}
+}
+
 .time {
+	// transition: all 100ms ease-in-out;
 	min-width: 120px;
 	display: flex;
 	justify-content: flex-start;
@@ -147,6 +169,25 @@ header.title {
 
 .task {
 	border-left: 5px solid $task-color;
+
+	&.completed {
+		border-left: 5px solid $completed-color;
+
+		.time {
+			font-size: 110%;
+		}
+
+		// background-color: lighten($completed-color, 45%) !important;
+	}
+
+	&.running {
+		border-left: 5px solid $running-color;
+
+		.time {
+			font-size: 110%;
+			color: $running-color;
+		}
+	}
 }
 
 .modal {
@@ -198,10 +239,20 @@ header.title {
 }
 
 .filters {
-	margin: 2rem 0;
+	label.title {
+		padding: 0.5rem;
+	}
+}
+
+.filter {
+	margin: 0.5rem 0 2rem 0;
 	padding: 1rem 2rem;
-	background-color: #fff;
 	border-radius: 3px;
+	border: 1px dashed #aaa;
+
+	&.flex-row {
+		justify-content: flex-end;
+	}
 
 	input,
 	select {

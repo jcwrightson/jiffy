@@ -3,6 +3,7 @@ import { timeFilter, getAggregate } from "../lib/functions"
 import SVG from "./SVG.component"
 import icMore from "../assets/ic_more_vert_24px.svg"
 import icUpdate from "../assets/ic_update_24px.svg"
+import icDone from "../assets/ic_done_24px.svg"
 
 const Task = ({
 	uid,
@@ -11,7 +12,6 @@ const Task = ({
 	running,
 	editing,
 	completed,
-	archived,
 	projects,
 	trackers,
 	removeTask,
@@ -19,12 +19,14 @@ const Task = ({
 	toggleEditTask,
 	startTask,
 	stopTask,
-	archiveTask,
 	toggleCompleted,
 	selectProject
 }) => {
 	return (
-		<article className={`task ${running ? "running" : ""}`}>
+		<article
+			className={`task ${completed ? "completed" : ""} ${
+				running ? "running" : ""
+			}`}>
 			<div className='flex-row dots'>
 				<SVG file={icMore} />
 				<ul className='menu drop-shadow'>
@@ -46,38 +48,36 @@ const Task = ({
 							Delete Task
 						</button>
 					</li>
-					<li>
-						<button type='button' onClick={() => archiveTask(uid)}>
-							{archived ? "Reinstate" : "Archive"}
-						</button>
-					</li>
 				</ul>
 			</div>
 
-			<div className='flex-row title'>
-				{archived ? (
+			{completed ? (
+				<div className='flex-row title'>
 					<h2>{title}</h2>
-				) : (
-					<>
-						{editing ? (
-							<React.Fragment>
-								<input
-									type='text'
-									value={title}
-									onChange={e => handleEditTask(e, uid)}
-									onKeyDown={e => toggleEditTask(e, uid)}
-								/>
-								<button
-									type='button'
-									onClick={e => {
-										if (editing) {
-											toggleEditTask(e, uid)
-										}
-									}}>
-									Cancel
-								</button>
-							</React.Fragment>
-						) : (
+					{/* <SVG file={icDone} /> */}
+				</div>
+			) : (
+				<>
+					{editing ? (
+						<div className='flex-row title'>
+							<input
+								type='text'
+								value={title}
+								onChange={e => handleEditTask(e, uid)}
+								onKeyDown={e => toggleEditTask(e, uid)}
+							/>
+							<button
+								type='button'
+								onClick={e => {
+									if (editing) {
+										toggleEditTask(e, uid)
+									}
+								}}>
+								Cancel
+							</button>
+						</div>
+					) : (
+						<div className='flex-row title'>
 							<h2
 								className='editable'
 								title='Rename'
@@ -87,13 +87,13 @@ const Task = ({
 								}}>
 								{title}
 							</h2>
-						)}
-					</>
-				)}
-			</div>
+						</div>
+					)}
+				</>
+			)}
 
 			<div className='flex-row controls'>
-				{archived ? (
+				{completed ? (
 					<label>
 						{projects.filter(proj => proj.uid === project)[0].title}
 					</label>
@@ -113,9 +113,11 @@ const Task = ({
 				)}
 				<div className='time flex-row'>
 					<SVG file={icUpdate} />
-					{timeFilter(getAggregate(trackers, "time"))}
+					<span className='ticker'>
+						{timeFilter(getAggregate(trackers, "time"))}
+					</span>
 				</div>
-				{!archived && (
+				{!completed && (
 					<button
 						type='button'
 						className='toggleRunning'

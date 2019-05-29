@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
 import * as actions from "../actions"
 
-const renderNavBar = ({ toggleModal, location }) => {
+const renderNavBar = ({ toggleModal }) => {
 	return (
 		<nav className='fixed top drop-shadow'>
 			<div className='container flex-row'>
