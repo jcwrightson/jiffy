@@ -54,16 +54,23 @@ const renderTimesheet = ({
 
 const filterByProject = (project, collection) => {
 	if (project !== "all") {
-		return collection.filter(itme => itme.project === project)
+		return collection.filter(item => item.project === project)
 	}
 	return collection
+}
+
+const filterNoTime = collection => {
+	return collection.filter(item => item.time > 0)
 }
 
 const mapStateToProps = state => {
 	return {
 		projects: state.projects,
 		tasks: state.tasks,
-		trackers: filterByProject(state.timesheet.project, state.trackers.list),
+		trackers: filterByProject(
+			state.timesheet.project,
+			filterNoTime(state.trackers.list)
+		),
 		timesheet: state.timesheet
 	}
 }
