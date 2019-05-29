@@ -23,6 +23,10 @@ const renderNavBar = ({ toggleModal }) => {
 					<NavLink to='/projects' activeClassName='activeLink'>
 						<h2>Projects</h2>
 					</NavLink>
+
+					<NavLink to='/timesheets' activeClassName='activeLink'>
+						<h2>Timesheets</h2>
+					</NavLink>
 				</div>
 
 				<div className='top-nav flex-row '>

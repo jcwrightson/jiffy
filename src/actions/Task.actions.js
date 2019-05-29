@@ -145,6 +145,15 @@ export function toggleShowCompleted() {
 	}
 }
 
+export function toggleArchiveTask(uid) {
+	return dispatch => {
+		dispatch({
+			type: "TOGGLE_ARCHIVE_TASK",
+			payload: uid
+		})
+	}
+}
+
 export function selectFilterByProject(uid) {
 	return dispatch => {
 		dispatch({

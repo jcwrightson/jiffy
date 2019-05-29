@@ -5,6 +5,7 @@ import {
 	removeTracker,
 	createProject,
 	createTask
+	// toggleArchiveTask
 } from "../actions"
 
 const houseKeeping = () => {
@@ -43,6 +44,10 @@ const houseKeeping = () => {
 				store.dispatch(createTracker(task.uid, task.project))
 			}
 		})
+
+		// savedData.tasks.filter(task => task.archived).map(task => {
+		// 	store.dispatch(toggleArchiveTask(task.uid))
+		// })
 	}
 
 	// Remove obsolete trackers

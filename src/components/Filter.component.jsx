@@ -4,11 +4,9 @@ import React from "react"
 
 const Filter = ({
 	projects,
-	showArchived,
 	showCompleted,
 	filterByProject,
 	selectFilterByProject,
-	toggleShowArchived,
 	toggleShowCompleted
 }) => {
 	return (

@@ -70,6 +70,7 @@ export function trackers(
 					})
 				]
 			})
+
 		case "REMOVE_TRACKER":
 			return Object.assign({}, state, {
 				list: [...state.list.filter(tracker => tracker.uid !== action.payload)]

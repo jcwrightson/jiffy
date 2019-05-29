@@ -3,7 +3,6 @@ import ReactDOM from "react-dom"
 import { Provider } from "react-redux"
 // import {  } from "react-router"
 import { Router, Redirect, Route, Switch } from "react-router-dom"
-import Home from "./layouts/Home"
 import AllTasksContainer from "./containers/AllTasks.container"
 import TasksContainer from "./containers/Tasks.container"
 import Projects from "./layouts/Projects"
@@ -15,6 +14,7 @@ import Modals from "./modals/Modals.container"
 import "./sass/styles.scss"
 
 import houseKeeping from "./lib/houseKeeping"
+import TimesheetContainer from "./containers/Timesheet.container"
 
 houseKeeping()
 
@@ -27,6 +27,7 @@ ReactDOM.render(
 				<Route path='/tasks' component={AllTasksContainer} />
 				<Route exact path='/projects' component={Projects} />
 				<Route path='/projects/:uid' component={TasksContainer} />
+				<Route path='/timesheets' component={TimesheetContainer} />
 			</Switch>
 			<Modals />
 		</Router>

@@ -86,6 +86,17 @@ export function tasks(
 					})
 				]
 			})
+		case "TOGGLE_ARCHIVE_TASK":
+			return Object.assign({}, state, {
+				list: [
+					...state.list.map(task => {
+						if (task.uid === action.payload.uid) {
+							return { ...task, archived: !task.archived }
+						}
+						return task
+					})
+				]
+			})
 		case "TOGGLE_MENU":
 			return Object.assign({}, state, {
 				list: [
