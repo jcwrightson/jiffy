@@ -24,7 +24,7 @@ header.title {
 .projects.list {
 	display: flex;
 	flex-direction: column;
-	margin: 3rem auto;
+	padding: 3rem 0;
 
 	.task,
 	.project {
@@ -267,16 +267,7 @@ header.title {
 }
 
 .filters {
-	label.title {
-		padding: 0.5rem;
-	}
-}
-
-.filter {
-	margin: 0.5rem 0 2rem 0;
-	padding: 1rem 2rem;
-	border-radius: 3px;
-	border: 1px dashed #aaa;
+	padding: 0.9rem 0;
 
 	&.flex-row {
 		justify-content: flex-end;
@@ -285,12 +276,26 @@ header.title {
 	input,
 	select {
 		margin: 0 1rem;
+		padding: 0.4rem;
+		font-size: 0.9rem;
 	}
 
 	label {
 		display: flex;
 		align-items: center;
 	}
+
+	label.title {
+		padding: 0.5rem;
+	}
+}
+
+.sub-nav {
+	position: fixed;
+	top: $offset-top-nav;
+	width: 100%;
+	background-color: #a1c6cf;
+	z-index: 90;
 }
 
 .timesheet {
