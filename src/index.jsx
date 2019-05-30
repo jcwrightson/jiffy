@@ -3,7 +3,6 @@ import ReactDOM from "react-dom"
 import { Provider } from "react-redux"
 // import {  } from "react-router"
 import { Router, Redirect, Route, Switch } from "react-router-dom"
-import AllTasksContainer from "./containers/AllTasks.container"
 import TasksContainer from "./containers/Tasks.container"
 import Projects from "./layouts/Projects"
 
@@ -24,9 +23,8 @@ ReactDOM.render(
 			<NavBar />
 			<Switch>
 				<Route exact path='/' component={() => <Redirect to='/tasks' />} />
-				<Route path='/tasks' component={AllTasksContainer} />
+				<Route path='/tasks' component={TasksContainer} />
 				<Route exact path='/projects' component={Projects} />
-				<Route path='/projects/:uid' component={TasksContainer} />
 				<Route path='/timesheets' component={TimesheetContainer} />
 			</Switch>
 			<Modals />

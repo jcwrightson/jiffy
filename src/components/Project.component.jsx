@@ -15,7 +15,8 @@ const Project = ({
 	removeProject,
 	handleEditProject,
 	toggleEditProject,
-	toggleArchiveProject
+	toggleArchiveProject,
+	selectFilterByProject
 }) => {
 	const hasRunningTask = () => {
 		return tasks.filter(task => task.running).length > 0
@@ -81,19 +82,25 @@ const Project = ({
 			<div className='flex-row controls'>
 				{hasRunningTask() ? (
 					<div className='time flex-row'>
-						<SVG file={icUpdate} />
-						{timeFilter(getAggregate(trackers, "time"))}
+						<SVG file={icUpdate} classList='pulsate-fwd' />
+						<span className='ticker' title='Tracked Time'>
+							{timeFilter(getAggregate(trackers, "time"))}
+						</span>
 					</div>
 				) : (
 					<div className='time flex-row'>
 						<SVG file={icUpdate} />
-						{roundedTime(getAggregate(trackers, "time")) ||
-							timeFilter(getAggregate(trackers, "time"))}
+						<span className='ticker'>
+							{roundedTime(getAggregate(trackers, "time")) ||
+								timeFilter(getAggregate(trackers, "time"))}
+						</span>
 					</div>
 				)}
 
-				<Link to={`/projects/${uid}`}>
-					<button type='button'>{tasks.length} Tasks</button>
+				<Link to='/tasks'>
+					<button type='button' onClick={() => selectFilterByProject(uid)}>
+						{tasks.length} Tasks
+					</button>
 				</Link>
 			</div>
 		</article>

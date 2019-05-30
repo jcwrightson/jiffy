@@ -53,7 +53,7 @@ const Task = ({
 				</ul>
 			</div>
 
-			{completed ? (
+			{completed || running ? (
 				<div className='flex-row title'>
 					<h2>{title}</h2>
 					{/* <SVG file={icDone} /> */}
@@ -80,7 +80,7 @@ const Task = ({
 						</div>
 					) : (
 						<div className='flex-row title'>
-							<h2
+							<h2 // eslint-disable-line jsx-a11y/no-noninteractive-element-interactions
 								className='editable'
 								title='Rename'
 								onClick={e => {
@@ -103,7 +103,8 @@ const Task = ({
 					<select
 						value={project}
 						onChange={e => selectProject(e, uid)}
-						title='In Project'>
+						title='Change Project'
+						disabled={running}>
 						{projects.map(proj => {
 							return (
 								<option key={proj.uid} value={proj.uid}>
@@ -114,8 +115,8 @@ const Task = ({
 					</select>
 				)}
 				<div className='time flex-row'>
-					<SVG file={icUpdate} />
-					<span className='ticker'>
+					<SVG file={icUpdate} classList={`${running ? "pulsate-fwd" : ""}`} />
+					<span className={`ticker ${running ? "" : ""}`} title='Tracked Time'>
 						{timeFilter(getAggregate(trackers, "time"))}
 					</span>
 				</div>
@@ -123,8 +124,13 @@ const Task = ({
 					<button
 						type='button'
 						className='toggleRunning'
+						title={running ? "Stop Tracking" : "Start Tracking"}
 						onClick={() => (running ? stopTask(uid) : startTask(uid))}>
-						{running ? <SVG file={icStop} /> : <SVG file={icPlay} />}
+						{running ? (
+							<SVG file={icStop} classList='stop' />
+						) : (
+							<SVG file={icPlay} classList='play' />
+						)}
 					</button>
 				)}
 			</div>

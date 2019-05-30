@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Mono:400&display=swap'");
 
 body {
 	font-size: 100%;
@@ -22,4 +22,9 @@ h2 {
 
 button {
 	font-size: 0.9rem !important;
+}
+
+.time .ticker {
+	font-family: "Roboto Mono", monospace;
+	font-weight: 400;
 }
