@@ -39,7 +39,7 @@ const filterCompletedTasks = (tasks, showCompleted) => {
 	if (showCompleted) {
 		const completed = tasks.filter(task => task.completed)
 		const toDo = tasks.filter(task => !task.completed)
-		return [...completed, ...toDo]
+		return [...toDo, ...completed]
 	}
 
 	return tasks.filter(task => !task.completed)
