@@ -57,6 +57,9 @@ const Task = ({
 				<div className='flex-row title'>
 					<h2>{title}</h2>
 					{/* <SVG file={icDone} /> */}
+					<label>
+						{projects.filter(proj => proj.uid === project)[0].title}
+					</label>
 				</div>
 			) : (
 				<>
@@ -89,31 +92,26 @@ const Task = ({
 								}}>
 								{title}
 							</h2>
+
+							<select
+								value={project}
+								onChange={e => selectProject(e, uid)}
+								title='Change Project'
+								disabled={running}>
+								{projects.map(proj => {
+									return (
+										<option key={proj.uid} value={proj.uid}>
+											{proj.title}
+										</option>
+									)
+								})}
+							</select>
 						</div>
 					)}
 				</>
 			)}
 
 			<div className='flex-row controls'>
-				{completed ? (
-					<label>
-						{projects.filter(proj => proj.uid === project)[0].title}
-					</label>
-				) : (
-					<select
-						value={project}
-						onChange={e => selectProject(e, uid)}
-						title='Change Project'
-						disabled={running}>
-						{projects.map(proj => {
-							return (
-								<option key={proj.uid} value={proj.uid}>
-									{proj.title}
-								</option>
-							)
-						})}
-					</select>
-				)}
 				<div className='time flex-row'>
 					<SVG file={icUpdate} classList={`${running ? "pulsate-fwd" : ""}`} />
 					<span className={`ticker ${running ? "" : ""}`} title='Tracked Time'>

@@ -12,7 +12,7 @@ import Modals from "./modals/Modals.container"
 import "./sass/styles.scss"
 
 import houseKeeping from "./lib/houseKeeping"
-import TimesheetContainer from "./containers/Timesheet.container"
+import Timesheets from "./layouts/Timesheets"
 
 houseKeeping()
 
@@ -23,7 +23,7 @@ ReactDOM.render(
 				<Route exact path='/' component={() => <Redirect to='/tasks' />} />
 				<Route path='/tasks' component={Tasks} />
 				<Route exact path='/projects' component={Projects} />
-				<Route path='/timesheets' component={TimesheetContainer} />
+				<Route path='/timesheets' component={Timesheets} />
 			</Switch>
 			<Modals />
 		</Router>

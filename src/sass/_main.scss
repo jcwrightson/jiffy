@@ -4,7 +4,7 @@ nav {
 }
 .nav h1,
 .nav h2 {
-	margin-right: 2rem;
+	// margin-right: 2rem;
 }
 
 .nav h2 {
@@ -29,15 +29,14 @@ header.title {
 	.task,
 	.project {
 		background-color: #fff;
-		padding: 0.6rem 1rem;
 		display: flex;
 		flex-direction: row;
-		justify-content: space-evenly;
+		justify-content: space-between;
 		position: relative;
 		border-bottom: 1px solid #e2e2e2;
 		border-right: 1px solid #e2e2e2;
 		margin-bottom: 1rem;
-		border-radius: 20px;
+		border-radius: 6px;
 
 		transition: all 120ms ease-in-out;
 
@@ -48,27 +47,32 @@ header.title {
 			&.toggleRunning {
 				border-radius: 50%;
 				padding: 0;
-				width: 3.2rem;
-				height: 3.2rem;
+				min-width: 3.2rem;
+				min-height: 3.2rem;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				background-color: #f2f2f2;
-				border: 1px solid #d4d4d4;
+				border: 2px solid #ccc;
 
 				&:hover {
-					background-color: $primary-color;
+					background-color: rgb(110, 110, 110);
 					color: #fff;
 				}
 
 				.play svg {
 					padding-left: 3px;
 				}
+
+				.stop svg {
+					width: 16px;
+				}
 			}
 		}
 
 		.title {
-			flex-basis: 50%;
+			flex-basis: 70%;
+			padding: 0.5rem 4rem 0.5rem 2rem;
 
 			h2.editable {
 				width: 100%;
@@ -89,23 +93,41 @@ header.title {
 			}
 		}
 
+		.controls {
+			padding: 0.5rem 1rem 0.5rem 2rem;
+			flex-basis: 30%;
+			// background-color:#333;
+			// color: #fff;
+
+			border-top-right-radius: 6px;
+			border-bottom-right-radius: 6px;
+			position: relative;
+
+			// &::before{
+			// 	content: '';
+			// 	transform: skewX(-6deg);
+			// 	background-color: #ccc;
+			// 	width: 20px;
+			// 	position: absolute;
+			// 	left:-10px;
+			// 	height: 100%;
+
+			// }
+		}
+
 		&.completed {
 			.title {
-				justify-content: flex-start;
+				flex-basis: 85%;
+				// justify-content: flex-start;
 				h2 {
 					margin-right: 1rem;
 				}
 			}
-		}
 
-		&.running {
-			button.toggleRunning {
-				background-color: $running-color;
-				color: #fff;
+			.controls {
+				flex-basis: 15%;
+				padding: 0.5rem !important;
 			}
-		}
-		.controls {
-			flex-basis: 40%;
 		}
 	}
 }
@@ -134,7 +156,7 @@ header.title {
 		flex-direction: column;
 		background-color: #fff;
 		color: #000 !important;
-		left: 1.5rem;
+		left: 0.5rem;
 		top: 70%;
 		z-index: 10;
 
@@ -174,6 +196,7 @@ header.title {
 
 .time {
 	min-width: 100px;
+	flex-basis: 100%;
 	display: flex;
 	justify-content: center;
 }
@@ -230,7 +253,7 @@ header.title {
 
 	.dialogue {
 		background-color: #fff;
-		box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, 0.2);
+		box-shadow: 5px 5px 35px 5px rgba(0, 0, 0, 0.2);
 		min-width: 500px;
 
 		header,
@@ -294,26 +317,34 @@ header.title {
 	position: fixed;
 	top: $offset-top-nav;
 	width: 100%;
-	background-color: #a1c6cf;
+	background-color: #fff;
 	z-index: 90;
 }
 
 .timesheet {
 	.list {
 		background-color: #fafafa;
-		border: 1px solid gray;
+
 		article {
 			justify-content: space-between;
 			padding: 1rem;
 
-			&:nth-of-type(odd) {
+			&:nth-of-type(even) {
 				background-color: #fff;
 			}
 
-			&.totals {
-				padding: 1rem;
-				background-color: rgb(99, 99, 99);
+			&.head {
+				background-color: #000;
 				color: #fff;
+			}
+
+			&.totals {
+				background-color: #666;
+				color: #fff;
+				font-weight: 500;
+			}
+			span {
+				flex-basis: 33%;
 			}
 		}
 	}

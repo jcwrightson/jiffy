@@ -7,7 +7,7 @@ import * as actions from "../actions"
 
 const renderNavBar = ({ toggleModal }) => {
 	return (
-		<nav className='fixed top drop-shadow'>
+		<nav className='fixed top'>
 			<div className='container flex-row'>
 				<div className='flex-row nav'>
 					<NavLink to='/'>

@@ -1,18 +1,7 @@
 import React from "react"
-import { connect } from "react-redux"
-import { bindActionCreators } from "redux"
-import * as actions from "../actions"
 import { timeFilter, DateTimeFilter, getAggregate } from "../lib/functions"
-// import SVG from "./SVG.component"
-import Filter from "../components/Filter.component"
 
-const renderTimesheet = ({
-	projects,
-	tasks,
-	trackers,
-	timesheet,
-	selectTimesheetProject
-}) => {
+const TimesheetContainer = ({ tasks, trackers }) => {
 	const getTaskFromUID = uid => {
 		return tasks.list.filter(task => task.uid === uid)[0]
 	}
@@ -20,15 +9,13 @@ const renderTimesheet = ({
 		<main>
 			<div className='timesheet container'>
 				<header className='title' />
-				<Filter
-					projects={projects.list}
-					filterByProject={timesheet.project}
-					selectFilterByProject={selectTimesheetProject}
-					showCompleted
-					toggleShowCompleted={() => {}}
-				/>
 
 				<div className='list container'>
+					<article className='flex-row head'>
+						<span>Date</span>
+						<span>Task</span>
+						<span>Time</span>
+					</article>
 					{trackers.map(tracker => {
 						return (
 							<article className='flex-row' key={tracker.uid}>
@@ -52,37 +39,4 @@ const renderTimesheet = ({
 	)
 }
 
-const filterByProject = (project, collection) => {
-	if (project !== "all") {
-		return collection.filter(item => item.project === project)
-	}
-	return collection
-}
-
-const filterNoTime = collection => {
-	return collection.filter(item => item.time > 0)
-}
-
-const mapStateToProps = state => {
-	return {
-		projects: state.projects,
-		tasks: state.tasks,
-		trackers: filterByProject(
-			state.timesheet.project,
-			filterNoTime(state.trackers.list)
-		),
-		timesheet: state.timesheet
-	}
-}
-
-const mapDispatchToProps = dispatch => {
-	return {
-		...bindActionCreators(actions, dispatch)
-	}
-}
-
-const TimesheetContainer = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(renderTimesheet)
 export default TimesheetContainer

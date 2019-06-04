@@ -1,12 +1,15 @@
 import React from "react"
-
+import NavBar from "./NavBar"
 import ProjectsContainer from "../containers/Projects.container"
 
-const Projects = () => {
+const Projects = props => {
 	return (
-		<main>
-			<ProjectsContainer includeArchived={false} />
-		</main>
+		<>
+			<NavBar />
+			<main>
+				<ProjectsContainer {...props} />
+			</main>
+		</>
 	)
 }
 
