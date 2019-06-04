@@ -3,6 +3,7 @@ export function tasks(
 	state = {
 		showCompleted: true,
 		filterByProject: "all",
+		activeTab: 0,
 		list: []
 	},
 	action
@@ -74,6 +75,11 @@ export function tasks(
 						return task
 					})
 				]
+			})
+		case "SELECT_ACTIVE_TAB":
+			return Object.assign({}, state, {
+				...state,
+				activeTab: action.payload
 			})
 		case "SELECT_PROJECT":
 			return Object.assign({}, state, {

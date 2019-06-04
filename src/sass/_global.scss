@@ -40,6 +40,7 @@ main {
 .container {
 	max-width: $app-width;
 	width: 100%;
+	padding: 0 2rem;
 	margin: auto;
 	position: relative;
 }
@@ -140,7 +141,7 @@ hr {
 
 nav {
 	width: 100%;
-	padding: 1.2rem 0;
+	padding: 1.5rem 0;
 	background-color: #fff;
 
 	button {
@@ -150,7 +151,7 @@ nav {
 	.top-nav {
 		button {
 			margin-right: 1em;
-			background-color: #333;
+			// background-color: #333;
 			color: #fff;
 
 			&:last-of-type {
@@ -173,7 +174,7 @@ nav {
 		content: "";
 		display: flex;
 		position: absolute;
-		background-color: rgb(255, 255, 255);
+		background-color: $primary-color;
 		height: 2px;
 		width: 100%;
 		bottom: -5px;
@@ -182,7 +183,8 @@ nav {
 
 	.nav {
 		justify-content: space-between;
-		flex-basis: 30%;
+		flex-basis: 35%;
+		min-width: 350px;
 	}
 }
 
@@ -202,5 +204,35 @@ button.svg {
 	vertical-align: middle;
 	svg {
 		vertical-align: middle;
+	}
+}
+
+.tabbed {
+	.control {
+		padding: 2rem 0 0 1rem;
+
+		border-bottom: 1px solid #ccc;
+		margin-bottom: 2rem;
+
+		button {
+			all: unset;
+			cursor: pointer;
+			margin-right: 2rem;
+			&.js-active {
+				color: $primary-color;
+				font-weight: 500;
+			}
+		}
+
+		.tab-select {
+			justify-content: flex-start;
+		}
+	}
+	.tab {
+		display: none;
+
+		&.js-active {
+			display: block;
+		}
 	}
 }

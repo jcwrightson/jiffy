@@ -162,3 +162,12 @@ export function selectFilterByProject(uid) {
 		})
 	}
 }
+
+export function selectActiveTab(id) {
+	return dispatch => {
+		dispatch({
+			type: "SELECT_ACTIVE_TAB",
+			payload: id
+		})
+	}
+}

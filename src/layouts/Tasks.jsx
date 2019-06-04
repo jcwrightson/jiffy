@@ -12,9 +12,9 @@ const renderTasksLayout = props => {
 	return (
 		<>
 			<NavBar />
-			<div className='sub-nav'>
+			{/* <div className='sub-nav'>
 				<Filter {...props} />
-			</div>
+			</div> */}
 
 			<main>
 				<TasksContainer {...props} />
@@ -51,7 +51,8 @@ const mapStateToProps = state => {
 		filterByProject: state.tasks.filterByProject,
 		showArchived: state.tasks.showArchived,
 		showCompleted: state.tasks.showCompleted,
-		trackers: state.trackers.list
+		trackers: state.trackers.list,
+		activeTab: state.tasks.activeTab
 	}
 }
 

@@ -28,14 +28,14 @@ const Filter = ({
 				</select>
 			</label>
 
-			<label>
+			{/* <label>
 				<input
 					type='checkbox'
 					checked={showCompleted}
 					onChange={toggleShowCompleted}
 				/>
 				<span>Show Completed</span>
-			</label>
+			</label> */}
 		</div>
 	)
 }
