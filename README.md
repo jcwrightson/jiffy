@@ -2,6 +2,8 @@
 
 A client side only time tracking app that makes use of LocalStorage.
 
+DEMO: https://jiffy.madebywrightson.com/
+
 # Features
 
 - Create Projects
